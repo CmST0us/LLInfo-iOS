@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Info" representedClassName="Info" parentEntity="Information" syncable="YES" codeGenerationType="class"/>
+    <entity name="Information" representedClassName="Information" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="brief" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="briefImageUrlPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contentHtml" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="urlPath" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OfficalNews" representedClassName="OfficalNews" parentEntity="Information" syncable="YES" codeGenerationType="class"/>
+    <elements>
+        <element name="Info" positionX="-639" positionY="20" width="146" height="43"/>
+        <element name="Information" positionX="-380" positionY="-225" width="128" height="193"/>
+        <element name="OfficalNews" positionX="-128" positionY="18" width="128" height="45"/>
+    </elements>
+</model>
