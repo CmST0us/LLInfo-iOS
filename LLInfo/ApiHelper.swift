@@ -263,8 +263,8 @@ final class ApiHelper {
         return retData
     }
     
-    func getOfficalNews(withId id:String) -> Data? {
-        let requestPath = _baseUrlPath + "/offical/news/item/\(id)"
+    func getOfficialNews(withId id:String) -> Data? {
+        let requestPath = _baseUrlPath + "/official/news/item/\(id)"
         
         let url = URL(string: requestPath)!
         var request = URLRequest(url: url)
@@ -290,8 +290,8 @@ final class ApiHelper {
         return retData
     }
     
-    func getOfficalNewsPage(_ pageNum:Int, _ simpleMode: Bool) -> Data? {
-        var requestPath = _baseUrlPath + "/offical/news/page/\(pageNum)"
+    func getOfficialNewsPage(_ pageNum:Int, _ simpleMode: Bool) -> Data? {
+        var requestPath = _baseUrlPath + "/official/news/page/\(pageNum)"
         if simpleMode {
             requestPath += "?simple=1"
         }
@@ -320,8 +320,8 @@ final class ApiHelper {
         return retData
     }
     
-    func getNewestOfficalNews(_ simpleMode: Bool) -> Data? {
-        var requestPath = _baseUrlPath + "/offical/news/item"
+    func getNewestOfficialNews(_ simpleMode: Bool) -> Data? {
+        var requestPath = _baseUrlPath + "/official/news/item"
         if simpleMode {
             requestPath += "?simple=1"
         }
@@ -350,8 +350,8 @@ final class ApiHelper {
         return retData
     }
     
-    func getOfficalNews(atTimeIntervalRange range: NSRange, _ simpleMode: Bool) -> Data? {
-        var requestPath = _baseUrlPath + "/offical/news/item"
+    func getOfficialNews(atTimeIntervalRange range: NSRange, _ simpleMode: Bool) -> Data? {
+        var requestPath = _baseUrlPath + "/official/news/item"
         
         let afterTime = range.location
         let beforeTime = range.location + range.length
@@ -385,8 +385,8 @@ final class ApiHelper {
         return retData
     }
     
-    func getOfficalNews(beforeTimeInterval: TimeInterval, _ simpleMode: Bool) -> Data? {
-        var requestPath = _baseUrlPath + "/offical/news/item"
+    func getOfficialNews(beforeTimeInterval: TimeInterval, _ simpleMode: Bool) -> Data? {
+        var requestPath = _baseUrlPath + "/official/news/item"
         
         let beforeTime = Int(beforeTimeInterval)
         
@@ -419,8 +419,8 @@ final class ApiHelper {
         return retData
     }
     
-    func getOfficalNews(afterTimeInterval: TimeInterval, _ simpleMode: Bool) -> Data? {
-        var requestPath = _baseUrlPath + "/offical/news/item"
+    func getOfficialNews(afterTimeInterval: TimeInterval, _ simpleMode: Bool) -> Data? {
+        var requestPath = _baseUrlPath + "/official/news/item"
         
         let afterTime = Int(afterTimeInterval)
         

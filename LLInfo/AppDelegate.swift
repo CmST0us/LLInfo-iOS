@@ -10,6 +10,7 @@ import UIKit
 import UserNotifications
 import UserNotificationsUI
 import PushKit
+import Photos
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     struct SettingKey {
         //[TODO] add a switch than user can modify the remote push authorization
         static let remotePushAuthorizationKey = "remotePushAuthorizationKey"
+        static let cameraRollAccessKey = "cameraRollAccessKey"
     }
     
     var window: UIWindow?
@@ -42,10 +44,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func requestCameraRollAccess() {
+        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.notDetermined {
+            PHPhotoLibrary.requestAuthorization({ (state) in
+                if state == PHAuthorizationStatus.authorized {
+                    UserDefaults.standard.set(true, forKey: SettingKey.cameraRollAccessKey)
+                } else {
+                    UserDefaults.standard.set(false, forKey: SettingKey.cameraRollAccessKey)
+                }
+            })
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.setupApiHelper()
         self.requestPushAuthorization()
+        self.requestCameraRollAccess()
         return true
     }
 

@@ -1,5 +1,5 @@
 //
-//  OfficalNewsListTableViewCell.swift
+//  OfficialNewsListTableViewCell.swift
 //  LLInfo
 //
 //  Created by CmST0us on 2018/1/5.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-class OfficalNewsListTableViewCell: UITableViewCell {
+class OfficialNewsListTableViewCell: UITableViewCell {
     @IBOutlet weak var briefImageImageView: UIImageView?
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     struct CellId {
-        static let officalNewsCellNormalId = "offical_news_cell_normal_id"
-        static let officalNewsCellNoImageId = "offical_news_cell_no_image_id"
+        static let OfficialNewsCellNormalId = "official_news_cell_normal_id"
+        static let OfficialNewsCellNoImageId = "official_news_cell_no_image_id"
     }
     
     override func layoutSubviews() {
@@ -32,7 +32,7 @@ class OfficalNewsListTableViewCell: UITableViewCell {
         
     }
     
-    func setupCell(withInfoDataModel model: OfficalNewsDataModel)  {
+    func setupCell(withInfoDataModel model: OfficialNewsDataModel)  {
         self.titleLabel.text = model.title
         self.timeLabel.text = model.formatTime
     }

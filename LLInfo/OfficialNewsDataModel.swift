@@ -1,5 +1,5 @@
 //
-//  OfficalNewsDataModel.swift
+//  OfficialNewsDataModel.swift
 //  LLInfo
 //
 //  Created by CmST0us on 2018/1/6.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class OfficalNewsDataModel: InformationDataModel {
+class OfficialNewsDataModel: InformationDataModel {
     //MARK: - Private Member
     
     //MARK: - Private Method
@@ -37,8 +37,8 @@ class OfficalNewsDataModel: InformationDataModel {
 
 }
 
-extension OfficalNewsDataModel: CoreDataModelBridgeProtocol {
-    static var entityName: String = "OfficalNews"
+extension OfficialNewsDataModel: CoreDataModelBridgeProtocol {
+    static var entityName: String = "OfficialNews"
     
     func copy(to managerObject: NSManagedObject) {
         managerObject.setValue(self.id, forKey: CodingKey.id)
@@ -54,7 +54,7 @@ extension OfficalNewsDataModel: CoreDataModelBridgeProtocol {
     }
 }
 
-extension OfficalNewsDataModel: InformationApiParamProtocol {
+extension OfficialNewsDataModel: InformationApiParamProtocol {
     static func requestPageApiParam(pageNum: Int, simpleMode: Bool) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
@@ -63,14 +63,14 @@ extension OfficalNewsDataModel: InformationApiParamProtocol {
             p.query["simple"] = "1"
         }
         
-        p.path = "/offical/news/page/\(pageNum)"
+        p.path = "/official/news/page/\(pageNum)"
         return p
     }
     
     static func requestNewestInformationApiParam(simpleMode: Bool) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
-        p.path = "/offical/news/item"
+        p.path = "/official/news/item"
         if simpleMode == true {
             p.query["simple"] = "1"
         }
@@ -80,7 +80,7 @@ extension OfficalNewsDataModel: InformationApiParamProtocol {
     static func requestInfomationApiParam(atTimeIntervalRange range: NSRange, simpleMode: Bool) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
-        p.path = "/offical/news/item"
+        p.path = "/official/news/item"
         if simpleMode == true {
             p.query["simple"] = "1"
         }
@@ -96,7 +96,7 @@ extension OfficalNewsDataModel: InformationApiParamProtocol {
     static func requestInfomationApiParam(beforeTimeInterval: TimeInterval, simpleMode: Bool) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
-        p.path = "/offical/news/item"
+        p.path = "/official/news/item"
         
         if simpleMode == true {
             p.query["simple"] = "1"
@@ -109,7 +109,7 @@ extension OfficalNewsDataModel: InformationApiParamProtocol {
     static func requestInfomationApiParam(afterTimeInterval: TimeInterval, simpleMode: Bool) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
-        p.path = "/offical/news/item"
+        p.path = "/official/news/item"
         
         if simpleMode == true {
             p.query["simple"] = "1"
@@ -124,7 +124,7 @@ extension OfficalNewsDataModel: InformationApiParamProtocol {
     static func requestInfomationApiParam(withId id: String) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
-        p.path = "/offical/news/item/\(id)"
+        p.path = "/official/news/item/\(id)"
         return p
     }
     

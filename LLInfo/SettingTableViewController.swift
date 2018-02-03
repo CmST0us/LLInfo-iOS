@@ -39,7 +39,27 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             alert.addAction(alertCleanAction)
             self.present(alert, animated: true, completion: nil)
             break
-            
+        case (0, 1):
+            //del core data
+            let alert = UIAlertController(title: "清理情报缓存", message: "是否确定删除情报缓存", preferredStyle: .alert)
+            let alertCancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let alertCleanAction = UIAlertAction(title: "清理", style: .default, handler: { (action) in
+                do {
+                    InformationCacheHelper.shared.removeAll(inEntity: InfoDataModel.entityName)
+                    InformationCacheHelper.shared.removeAll(inEntity: OfficialNewsDataModel.entityName)
+                    try CoreDataHelper.shared.saveContext()
+                    let finishAlert = UIAlertController(title: "清理情报缓存", message: "清理成功", preferredStyle: .alert)
+                    let cancel = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+                    finishAlert.addAction(cancel)
+                    self.present(finishAlert, animated: true, completion: nil)
+                } catch {
+                    self.showErrorAlert(title: "错误", message: error.localizedDescription)
+                }
+            })
+            alert.addAction(alertCancelAction)
+            alert.addAction(alertCleanAction)
+            self.present(alert, animated: true, completion: nil)
+            break
         case (1, 1):
             //about
             let about = UIAlertController(title: "关于", message: "本App仅抓取网站情报数据，并不对情报真实性做甄别\n如果本App侵犯了您的权益，请在使用反馈中邮件联系我们，谢谢\n@eki", preferredStyle: .alert)

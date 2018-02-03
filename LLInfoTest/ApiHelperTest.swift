@@ -159,9 +159,9 @@ class ApiHelperTest: XCTestCase {
         XCTFail()
     }
     
-    func testGetOfficalNewsWithPage() {
+    func testGetOfficialNewsWithPage() {
         do {
-            let param = OfficalNewsDataModel.requestPageApiParam(pageNum: 1, simpleMode: true)
+            let param = OfficialNewsDataModel.requestPageApiParam(pageNum: 1, simpleMode: true)
             let data = try ApiHelper.shared.request(withParam: param)
             if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
                 for o in dict {
@@ -176,7 +176,7 @@ class ApiHelperTest: XCTestCase {
         }
         
         do {
-            let param = OfficalNewsDataModel.requestPageApiParam(pageNum: 1, simpleMode: false)
+            let param = OfficialNewsDataModel.requestPageApiParam(pageNum: 1, simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
             if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
                 for o in dict {
@@ -193,9 +193,9 @@ class ApiHelperTest: XCTestCase {
         XCTFail()
     }
     
-    func testGetOfficalNewsWithId() {
+    func testGetOfficialNewsWithId() {
         do {
-            let param = OfficalNewsDataModel.requestInfomationApiParam(withId: "")
+            let param = OfficialNewsDataModel.requestInfomationApiParam(withId: "")
             let data = try ApiHelper.shared.request(withParam: param)
             if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data), dict.count == 1 {
                 for o in dict {
@@ -211,9 +211,9 @@ class ApiHelperTest: XCTestCase {
         XCTFail()
     }
     
-    func testGetOfficalNewsNewest() {
+    func testGetOfficialNewsNewest() {
         do {
-            let param = OfficalNewsDataModel.requestNewestInfoApiParam(simpleMode: false)
+            let param = OfficialNewsDataModel.requestNewestInfoApiParam(simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
             if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
                 for o in dict {
@@ -230,7 +230,7 @@ class ApiHelperTest: XCTestCase {
             print(error.localizedDescription)
         }
         do {
-            let param = OfficalNewsDataModel.requestNewestInfoApiParam(simpleMode: true)
+            let param = OfficialNewsDataModel.requestNewestInfoApiParam(simpleMode: true)
             let data = try ApiHelper.shared.request(withParam: param)
             if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
                 for o in dict {
@@ -249,9 +249,9 @@ class ApiHelperTest: XCTestCase {
     }
     
     
-    func testGetOfficalNewsBeforTime() {
+    func testGetOfficialNewsBeforTime() {
         do {
-            let param = OfficalNewsDataModel.requestInfomationApiParam(beforeTimeInterval: Date.init(timeIntervalSinceNow: 0).timeIntervalSince1970, simpleMode: false)
+            let param = OfficialNewsDataModel.requestInfomationApiParam(beforeTimeInterval: Date.init(timeIntervalSinceNow: 0).timeIntervalSince1970, simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
             if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
                 for o in dict {
@@ -280,7 +280,7 @@ class ApiHelperTest: XCTestCase {
     }
     
     //[TODO]
-    func testSearchInfoOrOffical() {
+    func testSearchInfoOrOfficial() {
         
     }
     
