@@ -518,7 +518,7 @@
         <!--INFO_TITLE-->
         <scene sceneID="Uzi-hk-MaJ">
             <objects>
-                <viewController id="aYT-rJ-0Kf" customClass="InfoDetailViewController" customModule="LLInfo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aYT-rJ-0Kf" customClass="InformationDetailViewController" customModule="LLInfo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lwd-1e-bAc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

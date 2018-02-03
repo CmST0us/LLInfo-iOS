@@ -45,7 +45,7 @@ class InfoListTableViewController: UITableViewController {
                     infoListDataSet.add(o)
                 }
             }
-            sortDataOrderSet()
+            self.sortDataOrderSet()
         } catch let e as ApiRequestError {
             self.showErrorAlert(title: "错误", message: e.message)
         } catch {
@@ -229,7 +229,7 @@ class InfoListTableViewController: UITableViewController {
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataModelOfSelectCell = infoListDataSet[indexPath.row]
-        let dest = destinationViewController as! InfoDetailViewController
+        let dest = destinationViewController as! InformationDetailViewController
         dest.setup(withInformationDataModel: dataModelOfSelectCell as! InfoDataModel)
     }
     // MARK: - Navigation

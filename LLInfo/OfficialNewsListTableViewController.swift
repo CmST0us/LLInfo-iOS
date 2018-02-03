@@ -42,7 +42,7 @@ class OfficialNewsListTableViewController: UITableViewController {
                     officialNewsDataModelSet.add(o)
                 }
             }
-            sortDataOrderSet()
+            self.sortDataOrderSet()
         } catch let e as ApiRequestError {
             self.showErrorAlert(title: "错误", message: e.message)
         } catch {
@@ -223,7 +223,7 @@ class OfficialNewsListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataModelOfSelectCell = officialNewsDataModelSet[indexPath.section]
-        let dest = destinationViewController as! InfoDetailViewController
+        let dest = destinationViewController as! InformationDetailViewController
         dest.setup(withInformationDataModel: dataModelOfSelectCell as! OfficialNewsDataModel)
     }
     // MARK: - Navigation

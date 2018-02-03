@@ -9,12 +9,11 @@
 import UIKit
 import WebKit
 
-class InfoDetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate{
+class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate{
     //MARK: - Data Model
     var informationDataModel: InformationDataModel? = nil
     //MARK: - Outlet
     var wkView: WKWebView!
-    
     
     //MARK: - Private Method
     private func setupWebView() {
@@ -71,29 +70,6 @@ class InfoDetailViewController: UIViewController, WKUIDelegate, WKNavigationDele
         } catch {
             
         }
-        
-        
-        
-//        if let _ = model.contentHtml {
-//            self.informationDataModel = model
-//        } else {
-//            let param = T.requestInfomationApiParam(withId: model.id)
-//            do {
-//                let data = try ApiHelper.shared.request(withParam: param)
-//                if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
-//                    let m: T = T(dictionary: dicts[0])
-//                    if let contentHtml = m.contentHtml {
-//                        let _ = InformationCacheHelper.shared.updata(information: m, usingId: m.id, updateValuesAndKeys: [T.CodingKey.contentHtml: contentHtml])
-//                        self.informationDataModel = m
-//                        try CoreDataHelper.shared.saveContext()
-//                    }
-//                }
-//            } catch let e as ApiRequestError{
-//                self.showErrorAlert(title: "错误", message: e.message)
-//            } catch {
-//                self.showErrorAlert(title: "错误", message: error.localizedDescription)
-//            }
-//        }
     }
     
     //MARK: - View life cycle
@@ -119,13 +95,12 @@ class InfoDetailViewController: UIViewController, WKUIDelegate, WKNavigationDele
     }
     */
     
-    //MARK: - UIWebViewDelegate
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        print("Finish Load!")
-    }
-    
     //MARK: - WebView Nav Delegate
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        decisionHandler(.cancel)
+        if navigationResponse.isForMainFrame == true {
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
     }
 }
