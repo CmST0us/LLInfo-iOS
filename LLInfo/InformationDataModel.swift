@@ -12,7 +12,6 @@ import CoreData
 class InformationDataModel: NSObject {
     //MARK: - Private Member
     
-    
     //MARK: - Private Method
     
     //MARK: - Public Member

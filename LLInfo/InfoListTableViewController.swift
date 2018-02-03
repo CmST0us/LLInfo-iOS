@@ -199,7 +199,6 @@ class InfoListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         let dataCount = infoListDataSet.count
         if dataCount != 0 {
             tableView.separatorStyle = .singleLine
@@ -247,6 +246,12 @@ class InfoListTableViewController: UITableViewController {
             }
         }
     }
-    
+}
 
+//MARK: - storyboard instance
+extension InfoListTableViewController {
+    static func storyboardInstance() -> InfoListTableViewController {
+        let storyboard = UIStoryboard(name: "InformationList", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(self)) as! InfoListTableViewController
+    }
 }

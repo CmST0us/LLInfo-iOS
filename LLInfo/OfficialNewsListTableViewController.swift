@@ -242,6 +242,12 @@ class OfficialNewsListTableViewController: UITableViewController {
             }
         }
     }
+}
 
-
+//MARK: - storyboard instance
+extension OfficialNewsListTableViewController {
+    static func storyboardInstance() -> OfficialNewsListTableViewController {
+        let storyboard = UIStoryboard(name: "InformationList", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(self)) as! OfficialNewsListTableViewController
+    }
 }
