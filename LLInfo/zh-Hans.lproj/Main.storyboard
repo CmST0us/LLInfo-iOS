@@ -9,12 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--收藏-->
         <scene sceneID="Bc7-E1-hOk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wSQ-oq-CXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="XqV-QJ-bRF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="Ldx-Eh-dYd"/>
+                    <tabBarItem key="tabBarItem" title="收藏" image="tabbar_favorite" id="Ldx-Eh-dYd"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DIw-BM-xRv">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,6 +25,7 @@
                         </textAttributes>
                     </navigationBar>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wSQ-oq-CXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-184" y="840"/>
         </scene>
@@ -69,4 +69,7 @@
             <point key="canvasLocation" x="-691" y="1129"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tabbar_favorite" width="26" height="24"/>
+    </resources>
 </document>

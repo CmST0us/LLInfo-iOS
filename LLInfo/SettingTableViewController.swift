@@ -8,6 +8,9 @@
 
 import UIKit
 import MessageUI
+import MJRefresh
+import SDWebImage
+
 class SettingTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
     override func viewDidLoad() {

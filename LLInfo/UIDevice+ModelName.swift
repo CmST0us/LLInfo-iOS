@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 public extension UIDevice {
     
     var modelName: String {

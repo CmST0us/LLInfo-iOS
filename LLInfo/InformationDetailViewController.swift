@@ -20,6 +20,7 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
         wkView = WKWebView()
         wkView.contentMode = .scaleAspectFit
         wkView.translatesAutoresizingMaskIntoConstraints = false
+    
         self.view.addSubview(wkView)
         
         NSLayoutConstraint(item: wkView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0).isActive = true
@@ -41,6 +42,7 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
         }
     }
     
+    
     /// setup InformationDetailViewController with model
     /// this method will request server if network is reachable. Or it will fetch database. When it download data from server it will update data in database
     /// - Parameter model: model is subclass of InformationDataModel, InformationApiParamProtocol, CoreDataModelBridgeProtocol
@@ -52,6 +54,7 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
             if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
                 let m = T(dictionary: dicts[0])
                 self.informationDataModel = m
+                print(m.id)
                 if let contentHtml = m.contentHtml {
                     let _ = InformationCacheHelper.shared.updata(information: m, usingId: m.id, updateValuesAndKeys: [T.CodingKey.contentHtml: contentHtml])
                     try CoreDataHelper.shared.saveContext()
@@ -78,23 +81,13 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
         self.setupWebView()
         self.loadHtml()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     //MARK: - WebView Nav Delegate
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         if navigationResponse.isForMainFrame == true {
@@ -104,3 +97,4 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
         }
     }
 }
+
