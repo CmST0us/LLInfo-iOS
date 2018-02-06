@@ -9,19 +9,5 @@
 #ifndef Header_Bridge_h
 #define Header_Bridge_h
 
-#import "UIScrollView+MJRefresh.h"
-#import "UIScrollView+MJExtension.h"
-#import "UIView+MJExtension.h"
-
-#import "MJRefreshNormalHeader.h"
-#import "MJRefreshGifHeader.h"
-
-#import "MJRefreshBackNormalFooter.h"
-#import "MJRefreshBackGifFooter.h"
-#import "MJRefreshAutoNormalFooter.h"
-#import "MJRefreshAutoGifFooter.h"
-
-
-#import "UIImageView+WebCache.h"
 
 #endif /* Header_Bridge_h */

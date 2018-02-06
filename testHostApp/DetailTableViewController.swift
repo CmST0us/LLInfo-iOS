@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import MJRefresh
+import SDWebImage
 
 class DetailTableViewController: UITableViewController {
 
     var dataDictionary: Dictionary<String, Any>! = nil
-    
+
     private lazy var keysAndValues: [[Any]] = {
         var a = [[Any]]()
         for (key, value) in dataDictionary {
@@ -19,6 +21,10 @@ class DetailTableViewController: UITableViewController {
         }
         return a
     }()
+    
+    @IBAction func addFavorite(_ sender: Any) {
+        UserDataHelper.shared.addFavorite(url: dataDictionary["url"] as! String, informationEntityName: InfoDataModel.entityName)
+    }
     
     @IBAction func addNew(_ sender: Any) {
         for i in 0 ..< keysAndValues.count {
@@ -42,7 +48,7 @@ class DetailTableViewController: UITableViewController {
         }
         InformationCacheHelper.shared.insertInformationIfNotExist(InfoDataModel(dictionary: dataDictionary))
         do {
-            try CoreDataHelper.shared.saveContext()
+            try InformationCoreDataHelper.shared.saveContext()
             let a = UIAlertController(title: "保存", message: "成功", preferredStyle: .alert)
             let c = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             a.addAction(c)
@@ -77,7 +83,7 @@ class DetailTableViewController: UITableViewController {
         }
         
         let m = InfoDataModel(dictionary: dataDictionary)
-        if InformationCacheHelper.shared.update(information: m, usingUrlPath: m.urlPath!, valuesAndKeys: dataDictionary) == false {
+        if InformationCacheHelper.shared.update(information: m, usingUrlPath: m.urlPath!, updateValuesAndKeys: dataDictionary) == false {
             let a = UIAlertController(title: "错误", message: "保存失败", preferredStyle: .alert)
             let c = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             a.addAction(c)
@@ -85,7 +91,7 @@ class DetailTableViewController: UITableViewController {
         }
         
         do {
-            try CoreDataHelper.shared.saveContext()
+            try InformationCoreDataHelper.shared.saveContext()
             let a = UIAlertController(title: "保存", message: "成功", preferredStyle: .alert)
             let c = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             a.addAction(c)

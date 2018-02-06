@@ -15,7 +15,9 @@ class InformationDataModel: NSObject {
     //MARK: - Private Method
     
     //MARK: - Public Member
-    var dataDictionary: Dictionary<String, Any> = [:]
+    
+    //read only
+    private(set) var dataDictionary: Dictionary<String, Any> = [:]
     
     lazy var timeZone: TimeZone = {
         return TimeZone.current

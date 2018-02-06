@@ -22,15 +22,6 @@ class InfoListTableViewCell: UITableViewCell {
         static let infoListCellId = "info_list_cell_id"
     }
     
-    override func draw(_ rect: CGRect) {
-
-    }
-    
-    override func prepareForReuse() {
-        self.backgroundColor = UIColor.white
-        self.briefImageImageView.image = UIImage(named: "image_placehold")
-        
-    }
     
     private func sourceStringWithIcon(source: String?) -> UIImage? {
         if source == nil {
@@ -54,15 +45,28 @@ class InfoListTableViewCell: UITableViewCell {
         self.titleLabel.text = model.title?.trimmingCharacters(in: .whitespacesAndNewlines)
         self.briefLabel.text = model.brief
     }
-    
+        
+}
+
+// MARK: - View Life cycle method
+extension InfoListTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-
+    
+    override func draw(_ rect: CGRect) {
+        
+    }
+    
+    override func prepareForReuse() {
+        self.backgroundColor = UIColor.white
+        self.briefImageImageView.image = UIImage(named: "image_placehold")
+        
+    }
 }

@@ -8,32 +8,71 @@
 
 import UIKit
 import WebKit
+import SafariServices
+import SnapKit
+import MobileCoreServices
 
-class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigationDelegate{
-    //MARK: - Data Model
+class InformationDetailViewController: UIViewController{
+    
     var informationDataModel: InformationDataModel? = nil
-    //MARK: - Outlet
     var wkView: WKWebView!
     
+    @IBAction func showMore(_ sender: Any) {
+        let moreSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let openInformationSourceUrlAction = UIAlertAction(title: "打开来源", style: .default) { (alertAction) in
+            if let urlPath = self.informationDataModel?.urlPath {
+               self.showUrlInSafariViewController(url: URL(string: urlPath))
+            }
+        }
+        
+        let systemShare = UIAlertAction(title: "分享...", style: .default) { (alertAction) in
+            if let urlPath = self.informationDataModel?.urlPath {
+                if let url = URL(string: urlPath) {
+                    let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                    ac.excludedActivityTypes = [.openInIBooks, .print, .copyToPasteboard]
+                    if let popover = ac.popoverPresentationController {
+                        popover.barButtonItem = sender as? UIBarButtonItem
+                        popover.permittedArrowDirections = UIPopoverArrowDirection.up
+                    }
+                    self.present(ac, animated: true, completion: nil)
+                }
+                
+            }
+            
+        }
+        
+        let cancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        moreSheet.addAction(openInformationSourceUrlAction)
+        moreSheet.addAction(systemShare)
+        moreSheet.addAction(cancel)
+        if let popover = moreSheet.popoverPresentationController {
+            popover.barButtonItem = sender as? UIBarButtonItem
+            popover.permittedArrowDirections = UIPopoverArrowDirection.up
+        }
+        self.present(moreSheet, animated: true, completion: nil)
+    }
     //MARK: - Private Method
     private func setupWebView() {
-        wkView = WKWebView()
+        let configure = WKWebViewConfiguration()
+        configure.allowsInlineMediaPlayback = true
+        wkView = WKWebView(frame: .zero, configuration: configure)
         wkView.contentMode = .scaleAspectFit
         wkView.translatesAutoresizingMaskIntoConstraints = false
-    
+        
         self.view.addSubview(wkView)
         
-        NSLayoutConstraint(item: wkView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: wkView, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: wkView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: wkView, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1, constant: 0).isActive = true
+        self.wkView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
 
         self.wkView.uiDelegate = self
         self.wkView.navigationDelegate = self
-        
     }
     
-    func loadHtml() {
+    private func loadHtml() {
         if let model = self.informationDataModel {
             self.title = model.title
             if let html = model.contentHtml {
@@ -42,6 +81,7 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
         }
     }
     
+    // MARK: - Public method
     
     /// setup InformationDetailViewController with model
     /// this method will request server if network is reachable. Or it will fetch database. When it download data from server it will update data in database
@@ -57,7 +97,7 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
                 print(m.id)
                 if let contentHtml = m.contentHtml {
                     let _ = InformationCacheHelper.shared.updata(information: m, usingId: m.id, updateValuesAndKeys: [T.CodingKey.contentHtml: contentHtml])
-                    try CoreDataHelper.shared.saveContext()
+                    try InformationCoreDataHelper.shared.saveContext()
                     return
                 }
             }
@@ -75,26 +115,52 @@ class InformationDetailViewController: UIViewController, WKUIDelegate, WKNavigat
         }
     }
     
-    //MARK: - View life cycle
+    func showUrlInSafariViewController(url: URL?) {
+        if let u = url {
+            let s = SFSafariViewController(url: u)
+            if #available(iOS 11.0, *) {
+                s.dismissButtonStyle = .close
+            } else {
+                // Fallback on earlier versions
+            }
+            self.present(s, animated: true, completion: nil)
+        }
+    }
+}
+
+
+// MARK: - View life cycle method
+extension InformationDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupWebView()
         self.loadHtml()
     }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+}
 
-    //MARK: - WebView Nav Delegate
+// MARK: - WebKit delegate method
+extension InformationDetailViewController: WKUIDelegate, WKNavigationDelegate  {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        if navigationResponse.isForMainFrame == true {
+        if navigationResponse.isForMainFrame {
             decisionHandler(.cancel)
+            self.showUrlInSafariViewController(url: navigationResponse.response.url)
         } else {
             decisionHandler(.allow)
         }
     }
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        
+        if navigationAction.navigationType != .linkActivated {
+            return nil
+        }
+        self.showUrlInSafariViewController(url: navigationAction.request.url)
+        return nil
+        
+    }
 }
-

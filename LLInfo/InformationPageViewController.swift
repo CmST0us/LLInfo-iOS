@@ -19,9 +19,14 @@ class InformationPageViewController: TabmanViewController{
         ]
     }()
     
+    
+}
+
+// MARK: - View life cycle method
+extension InformationPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.dataSource = self
         
         self.bounces = false
@@ -31,12 +36,11 @@ class InformationPageViewController: TabmanViewController{
         ]
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
 
 extension InformationPageViewController: PageboyViewControllerDataSource {

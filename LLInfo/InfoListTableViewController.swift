@@ -9,19 +9,20 @@
 import UIKit
 import SDWebImage
 import MJRefresh
-class InfoListTableViewController: UITableViewController {
-    
+
+final class InfoListTableViewController: UITableViewController {
+    // MARK: - Public Member
     struct SegueId {
         static let infoDetailSegueId = "info_detail_segue_id"
     }
     
-    //MARK: - Private Member
+    // MARK: - Private Member
     private weak var destinationViewController: UIViewController? = nil
     private var infoListDataSet: NSMutableOrderedSet! = nil
     private var footerRefresh: MJRefreshFooter!
     private var headerRefresh: MJRefreshHeader!
     
-    //MARK: - Private Method
+    // MARK: - Private Method
     private func sortDataOrderSet() {
         self.infoListDataSet.sort { (a, b) -> ComparisonResult in
             if let a = a as? InformationDataModel, let b = b as? InformationDataModel {
@@ -73,7 +74,7 @@ class InfoListTableViewController: UITableViewController {
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
                                     self.infoListDataSet.add(m)
                                 }
-                                try CoreDataHelper.shared.saveContext()
+                                try InformationCoreDataHelper.shared.saveContext()
                             }
                         }
                         self.sortDataOrderSet()
@@ -118,7 +119,7 @@ class InfoListTableViewController: UITableViewController {
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
                                     self.infoListDataSet.add(m)
                                 }
-                                try CoreDataHelper.shared.saveContext()
+                                try InformationCoreDataHelper.shared.saveContext()
                             }
                         }
                         self.sortDataOrderSet()
@@ -170,8 +171,10 @@ class InfoListTableViewController: UITableViewController {
             }
         }
     }
-    
-    //MARK: - View Life Cycle
+}
+
+// MARK: - View life cycle method
+extension InfoListTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initData()
@@ -187,17 +190,38 @@ class InfoListTableViewController: UITableViewController {
             self.checkNewVersion()
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+}
+// MARK: - Storyboard method
+extension InfoListTableViewController {
+    class func storyboardInstance() -> InfoListTableViewController {
+        let storyboard = UIStoryboard(name: "InformationList", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(self)) as! InfoListTableViewController
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case SegueId.infoDetailSegueId:
+                destinationViewController = segue.destination
+                break
+            default:
+                break
+            }
+        }
+    }
+}
 
-    // MARK: - Table view data source
-
+// MARK: Table view data souce method
+extension InfoListTableViewController {
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let dataCount = infoListDataSet.count
         if dataCount != 0 {
@@ -207,11 +231,11 @@ class InfoListTableViewController: UITableViewController {
         }
         return dataCount
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InfoListTableViewCell.CellId.infoListCellId, for: indexPath) as! InfoListTableViewCell
-
+        
         let model = infoListDataSet.object(at: indexPath.row) as! InfoDataModel
         cell.setupCell(withInfoDataModel: model)
         
@@ -225,33 +249,10 @@ class InfoListTableViewController: UITableViewController {
         
         return cell
     }
- 
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataModelOfSelectCell = infoListDataSet[indexPath.row]
         let dest = destinationViewController as! InformationDetailViewController
         dest.setup(withInformationDataModel: dataModelOfSelectCell as! InfoDataModel)
-    }
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if let segueIdentifier = segue.identifier {
-            switch segueIdentifier {
-            case SegueId.infoDetailSegueId:
-                destinationViewController = segue.destination
-                break
-            default:
-                break
-            }
-        }
-    }
-}
-
-//MARK: - storyboard instance
-extension InfoListTableViewController {
-    static func storyboardInstance() -> InfoListTableViewController {
-        let storyboard = UIStoryboard(name: "InformationList", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(self)) as! InfoListTableViewController
     }
 }

@@ -20,7 +20,7 @@ class CoreDataTest: XCTestCase {
     
     func testLazyInitPersistentContainer() {
         do {
-            try CoreDataHelper.shared.saveContext()
+            try InformationCoreDataHelper.shared.saveContext()
         } catch {
             XCTFail()
         }

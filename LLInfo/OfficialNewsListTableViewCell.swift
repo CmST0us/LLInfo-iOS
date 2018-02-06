@@ -17,7 +17,11 @@ class OfficialNewsListTableViewCell: UITableViewCell {
         static let OfficialNewsCellNormalId = "official_news_cell_normal_id"
         static let OfficialNewsCellNoImageId = "official_news_cell_no_image_id"
     }
-    
+}
+
+
+// MARK: - View life cycle method
+extension OfficialNewsListTableViewCell {
     override func layoutSubviews() {
         self.layer.borderColor = UIColor.gray.cgColor
         self.layer.borderWidth = 0.3
@@ -27,7 +31,7 @@ class OfficialNewsListTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func prepareForReuse() {
         
     }
@@ -39,8 +43,6 @@ class OfficialNewsListTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
-
 }

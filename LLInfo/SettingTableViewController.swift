@@ -11,18 +11,27 @@ import MessageUI
 import MJRefresh
 import SDWebImage
 
-class SettingTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+class SettingTableViewController: UITableViewController{
+    
+    
+}
 
+// MARK: - View life cycle method
+extension SettingTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+     
     }
+}
 
+
+// MARK: - Table view delegate method
+extension SettingTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.tuple {
@@ -50,7 +59,7 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
                 do {
                     InformationCacheHelper.shared.removeAll(inEntity: InfoDataModel.entityName)
                     InformationCacheHelper.shared.removeAll(inEntity: OfficialNewsDataModel.entityName)
-                    try CoreDataHelper.shared.saveContext()
+                    try InformationCoreDataHelper.shared.saveContext()
                     let finishAlert = UIAlertController(title: "清理情报缓存", message: "清理成功", preferredStyle: .alert)
                     let cancel = UIAlertAction(title: "好的", style: .cancel, handler: nil)
                     finishAlert.addAction(cancel)
@@ -96,10 +105,10 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             let deviceModel = UIDevice.current.modelName
             
             let s = """
-                
-
-
-
+            
+            
+            
+            
             App版本：\(appVersion!)
             系统版本号: \(systemVersion)
             设备型号: \(deviceModel)
@@ -111,7 +120,9 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             break
         }
     }
-    
+}
+
+extension SettingTableViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         self.dismiss(animated: true, completion: nil)
         switch result {
@@ -126,14 +137,4 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         }
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

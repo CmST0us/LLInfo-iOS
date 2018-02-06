@@ -8,6 +8,11 @@
 
 import UIKit
 import CoreData
+
+import MJRefresh
+import SDWebImage
+
+
 class ExplorerTableViewController: UITableViewController {
     
     var destinationViewController: UIViewController! = nil
@@ -25,6 +30,14 @@ class ExplorerTableViewController: UITableViewController {
         return NSMutableOrderedSet()
     }()
     
+    @IBAction func dumpfa(_ sender: Any) {
+        if let s = UserDataHelper.shared.fetchFavorite() {
+            print("count: \(s.count)")
+            for o in s {
+                print("type: \(o.type), url: \(o.url)")
+            }
+        }
+    }
     private func sortDataOrderSet() {
         self.dataOrderSet.sort { (a, b) -> ComparisonResult in
             if let a = a as? InformationDataModel, let b = b as? InformationDataModel {
@@ -42,6 +55,7 @@ class ExplorerTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         headerRefresh = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(self.loadNewData))
         footerRefresh = MJRefreshBackNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.loadOldData))
         
@@ -54,7 +68,7 @@ class ExplorerTableViewController: UITableViewController {
         fetch.resultType = .dictionaryResultType
         let sort = NSSortDescriptor(key: "time", ascending: false)
         fetch.sortDescriptors = [sort]
-        let context = CoreDataHelper.shared.persistentContainer.viewContext
+        let context = InformationCoreDataHelper.shared.persistentContainer.viewContext
         do {
             let res = try context.fetch(fetch) as! [Dictionary<String, Any>]
             for d in res {
@@ -83,7 +97,7 @@ class ExplorerTableViewController: UITableViewController {
                         self.dataOrderSet.add(o)
                     }
                     self.sortDataOrderSet()
-                    try! CoreDataHelper.shared.saveContext()
+                    try! InformationCoreDataHelper.shared.saveContext()
                     DispatchQueue.main.async {
                         self.tableView.mj_header.endRefreshing()
                         self.tableView.reloadData()
@@ -110,7 +124,7 @@ class ExplorerTableViewController: UITableViewController {
                         self.dataOrderSet.add(o)
                     }
                     self.sortDataOrderSet()
-                    try! CoreDataHelper.shared.saveContext()
+                    try! InformationCoreDataHelper.shared.saveContext()
                     DispatchQueue.main.async {
                         self.tableView.mj_footer.endRefreshing()
                         self.tableView.reloadData()
@@ -130,7 +144,7 @@ class ExplorerTableViewController: UITableViewController {
         let a = UIAlertController(title: "清空数据库", message: "确定吗？", preferredStyle: .alert)
         let o = UIAlertAction(title: "确定", style: .default) { (alert) in
             InformationCacheHelper.shared.removeAll(inEntity: "Info")
-            try! CoreDataHelper.shared.saveContext()
+            try! InformationCoreDataHelper.shared.saveContext()
             self.dataOrderSet.removeAllObjects()
             self.tableView.reloadData()
         }
@@ -154,7 +168,7 @@ class ExplorerTableViewController: UITableViewController {
             }
         }
         do {
-            try CoreDataHelper.shared.saveContext()
+            try InformationCoreDataHelper.shared.saveContext()
         } catch {
             let a = UIAlertController(title: "错误", message: "error \(error)", preferredStyle: .alert)
             let c = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -210,7 +224,7 @@ class ExplorerTableViewController: UITableViewController {
         let _ = InformationCacheHelper.shared.removeInformation(byUrlPath: m.urlPath!, information: m)
         dataOrderSet.removeObject(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
-        try! CoreDataHelper.shared.saveContext()
+        try! InformationCoreDataHelper.shared.saveContext()
     }
     // MARK: - Navigation
 

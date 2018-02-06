@@ -10,7 +10,7 @@ import UIKit
 import MJRefresh
 import SDWebImage
 
-class OfficialNewsListTableViewController: UITableViewController {
+final class OfficialNewsListTableViewController: UITableViewController {
     //MARK: - Private Member
     private var footerRefresh: MJRefreshFooter!
     private var headerRefresh: MJRefreshHeader!
@@ -24,14 +24,8 @@ class OfficialNewsListTableViewController: UITableViewController {
         }
         return n
     }()
+    
     private weak var destinationViewController: UIViewController! = nil
-    
-    
-    struct SegueId {
-        static let OfficialNewsDetailSegueId = "official_news_detail_segue_id"
-    }
-    
-
     
     //MARK: - Private Method
     private func initData() {
@@ -85,7 +79,7 @@ class OfficialNewsListTableViewController: UITableViewController {
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
                                     self.officialNewsDataModelSet.add(m)
                                 }
-                                try CoreDataHelper.shared.saveContext()
+                                try InformationCoreDataHelper.shared.saveContext()
                             }
                         }
                         self.sortDataOrderSet()
@@ -130,7 +124,7 @@ class OfficialNewsListTableViewController: UITableViewController {
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
                                     self.officialNewsDataModelSet.add(m)
                                 }
-                                try CoreDataHelper.shared.saveContext()
+                                try InformationCoreDataHelper.shared.saveContext()
                             }
                         }
                         self.sortDataOrderSet()
@@ -155,12 +149,36 @@ class OfficialNewsListTableViewController: UITableViewController {
         }
     }
     //MARK: - Public Member
-    
+    struct SegueId {
+        static let OfficialNewsDetailSegueId = "official_news_detail_segue_id"
+    }
     
     //MARK: - Public Method
     
+}
+
+// MARK: - Storyboard method
+extension OfficialNewsListTableViewController {
+    class func storyboardInstance() -> OfficialNewsListTableViewController {
+        let storyboard = UIStoryboard(name: "InformationList", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(self)) as! OfficialNewsListTableViewController
+    }
     
-    //Mark: - View Life Cycle
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case SegueId.OfficialNewsDetailSegueId:
+                destinationViewController = segue.destination
+                break
+            default:
+                break
+            }
+        }
+    }
+}
+
+// MARK: - View life cycle method
+extension OfficialNewsListTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "新闻"
@@ -174,19 +192,20 @@ class OfficialNewsListTableViewController: UITableViewController {
         
         self.tableView.separatorStyle = .none
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-    // MARK: - Table view data source
-
+// MARK: - Table view data source method
+extension OfficialNewsListTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return self.officialNewsDataModelSet.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
@@ -220,34 +239,10 @@ class OfficialNewsListTableViewController: UITableViewController {
         cell.setupCell(withInfoDataModel: model)
         return cell
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataModelOfSelectCell = officialNewsDataModelSet[indexPath.section]
         let dest = destinationViewController as! InformationDetailViewController
         dest.setup(withInformationDataModel: dataModelOfSelectCell as! OfficialNewsDataModel)
-    }
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if let segueIdentifier = segue.identifier {
-            switch segueIdentifier {
-            case SegueId.OfficialNewsDetailSegueId:
-                destinationViewController = segue.destination
-                break
-            default:
-                break
-            }
-        }
-    }
-}
-
-//MARK: - storyboard instance
-extension OfficialNewsListTableViewController {
-    static func storyboardInstance() -> OfficialNewsListTableViewController {
-        let storyboard = UIStoryboard(name: "InformationList", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: NSStringFromClass(self)) as! OfficialNewsListTableViewController
     }
 }

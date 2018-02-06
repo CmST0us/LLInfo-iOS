@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Info" representedClassName="Info" parentEntity="Information" syncable="YES" codeGenerationType="class"/>
-    <entity name="Information" representedClassName="Information" isAbstract="YES" syncable="YES" codeGenerationType="class">
+    <entity name="Info" representedClassName="Info" parentEntity="Information" syncable="YES"/>
+    <entity name="Information" representedClassName="Information" isAbstract="YES" syncable="YES">
         <attribute name="brief" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="briefImageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contentHtml" optional="YES" attributeType="String" syncable="YES"/>
@@ -10,13 +10,13 @@
         <attribute name="sourceName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="OfficialNews" representedClassName="OfficialNews" parentEntity="Information" syncable="YES" codeGenerationType="class"/>
+    <entity name="OfficialNews" representedClassName="OfficialNews" parentEntity="Information" syncable="YES"/>
     <elements>
-        <element name="Info" positionX="-594" positionY="18" width="146" height="43"/>
-        <element name="Information" positionX="-380" positionY="-225" width="128" height="193"/>
+        <element name="Info" positionX="-594" positionY="18" width="146" height="45"/>
+        <element name="Information" positionX="-380" positionY="-225" width="128" height="195"/>
         <element name="OfficialNews" positionX="-128" positionY="18" width="128" height="45"/>
     </elements>
 </model>

@@ -16,51 +16,17 @@ import Photos
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     struct SettingKey {
-        //[TODO] add a switch than user can modify the remote push authorization
         static let remotePushAuthorizationKey = "remotePushAuthorizationKey"
         static let cameraRollAccessKey = "cameraRollAccessKey"
     }
     
     var window: UIWindow?
-
-    func setupApiHelper() {
-        #if arch(i386) || arch(x86_64)
-            ApiHelper.shared.baseUrlPath = "http://127.0.0.1:3000/api/v1"
-        #else
-            ApiHelper.shared.baseUrlPath = "https://hk.cmst0us.me/api/v1"
-        #endif
-    }
-    
-    func requestPushAuthorization() {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
-            let userDefaults = UserDefaults.standard
-            userDefaults.set(granted, forKey: SettingKey.remotePushAuthorizationKey)
-            if granted {
-                DispatchQueue.main.async {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-        }
-    }
-    
-    func requestCameraRollAccess() {
-        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.notDetermined {
-            PHPhotoLibrary.requestAuthorization({ (state) in
-                if state == PHAuthorizationStatus.authorized {
-                    UserDefaults.standard.set(true, forKey: SettingKey.cameraRollAccessKey)
-                } else {
-                    UserDefaults.standard.set(false, forKey: SettingKey.cameraRollAccessKey)
-                }
-            })
-        }
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
         self.setupApiHelper()
         self.requestPushAuthorization()
-        self.requestCameraRollAccess()
+//        self.requestCameraRollAccess()
         return true
     }
 
@@ -97,7 +63,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+}
 
-
+// MARK: - User method
+extension AppDelegate {
+    
+    func setupApiHelper() {
+        #if arch(i386) || arch(x86_64)
+            ApiHelper.shared.baseUrlPath = "http://127.0.0.1:3000/api/v1"
+        #else
+            ApiHelper.shared.baseUrlPath = "https://hk.cmst0us.me/api/v1"
+        #endif
+    }
+    
+    func requestPushAuthorization() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(granted, forKey: SettingKey.remotePushAuthorizationKey)
+            if granted {
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            }
+        }
+    }
+    
+    func requestCameraRollAccess() {
+        if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.notDetermined {
+            PHPhotoLibrary.requestAuthorization({ (state) in
+                if state == PHAuthorizationStatus.authorized {
+                    UserDefaults.standard.set(true, forKey: SettingKey.cameraRollAccessKey)
+                } else {
+                    UserDefaults.standard.set(false, forKey: SettingKey.cameraRollAccessKey)
+                }
+            })
+        }
+    }
 }
 
