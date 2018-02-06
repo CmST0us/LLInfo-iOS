@@ -73,7 +73,7 @@ extension AppDelegate {
         #if arch(i386) || arch(x86_64)
             ApiHelper.shared.baseUrlPath = "http://127.0.0.1:3000/api/v1"
         #else
-            ApiHelper.shared.baseUrlPath = "https://hk.cmst0us.me/api/v1"
+            ApiHelper.shared.baseUrlPath = "https://www.llinfo.club/api/v1"
         #endif
     }
     
