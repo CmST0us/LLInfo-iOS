@@ -28,7 +28,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = InfoDataModel.requestPageApiParam(pageNum: 1, simpleMode: true)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let i = InfoDataModel(dictionary: o)
                     print(i)
@@ -48,7 +48,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = InfoDataModel.requestPageApiParam(pageNum: 1, simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let i = InfoDataModel(dictionary: o)
                     print(i)
@@ -68,7 +68,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = InfoDataModel.requestPageApiParam(pageNum: 999, simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let i = InfoDataModel(dictionary: o)
                     print(i)
@@ -88,7 +88,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = InfoDataModel.requestNewestInfoApiParam(simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let m = InfoDataModel(dictionary: o)
                     if m.contentHtml == nil {
@@ -105,7 +105,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = InfoDataModel.requestNewestInfoApiParam(simpleMode: true)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let m = InfoDataModel(dictionary: o)
                     if m.contentHtml != nil {
@@ -126,7 +126,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = InfoDataModel.requestInfomationApiParam(beforeTimeInterval: Date.init(timeIntervalSinceNow: 0).timeIntervalSince1970, simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let _ = InfoDataModel(dictionary: o)
                     return
@@ -145,7 +145,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = InfoDataModel.requestInfomationApiParam(withId: "")
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data), dict.count == 1 {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data), dict.count == 1 {
                 for o in dict {
                     let _ = InfoDataModel(dictionary: o)
                     return
@@ -163,7 +163,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = OfficialNewsDataModel.requestPageApiParam(pageNum: 1, simpleMode: true)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let i = InfoDataModel(dictionary: o)
                     print(i)
@@ -178,7 +178,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = OfficialNewsDataModel.requestPageApiParam(pageNum: 1, simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let i = InfoDataModel(dictionary: o)
                     print(i)
@@ -197,7 +197,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = OfficialNewsDataModel.requestInfomationApiParam(withId: "")
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data), dict.count == 1 {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data), dict.count == 1 {
                 for o in dict {
                     let _ = InfoDataModel(dictionary: o)
                     return
@@ -215,7 +215,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = OfficialNewsDataModel.requestNewestInfoApiParam(simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let m = InfoDataModel(dictionary: o)
                     if m.contentHtml == nil {
@@ -232,7 +232,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = OfficialNewsDataModel.requestNewestInfoApiParam(simpleMode: true)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let m = InfoDataModel(dictionary: o)
                     if m.contentHtml != nil {
@@ -253,7 +253,7 @@ class ApiHelperTest: XCTestCase {
         do {
             let param = OfficialNewsDataModel.requestInfomationApiParam(beforeTimeInterval: Date.init(timeIntervalSinceNow: 0).timeIntervalSince1970, simpleMode: false)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 for o in dict {
                     let _ = InfoDataModel(dictionary: o)
                     return
@@ -269,7 +269,7 @@ class ApiHelperTest: XCTestCase {
     
     func testAppNewestVersion() {
         if let data = ApiHelper.shared.getAppNewestVersion() {
-            if let dict = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dict = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 let m = AppVersionUpdateDataModel(dictionary: dict[0])
                 print(m.version!)
                 print(m.message!)

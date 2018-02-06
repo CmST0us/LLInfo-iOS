@@ -17,7 +17,7 @@ final class OfficialNewsListTableViewController: UITableViewController {
     private lazy var officialNewsDataModelSet: NSMutableOrderedSet! = {
         let n = NSMutableOrderedSet()
         let d = ApiHelper.shared.getOfficialNewsPage(1, true)!
-        let dd = DataModelHelper.shared.createDictionaries(withJsonData: d)!
+        let dd = DataModelHelper.shared.payloadDictionaries(withJsonData: d)!
         for obj in dd {
             let o = OfficialNewsDataModel(dictionary: obj)
             n.add(o)
@@ -73,7 +73,7 @@ final class OfficialNewsListTableViewController: UITableViewController {
                         if dataCountBeforAdd == dataCountAfterAdd {
                             let p = OfficialNewsDataModel.requestInfomationApiParam(afterTimeInterval: firstObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
-                            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+                            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {
                                     let m = OfficialNewsDataModel(dictionary: dict)
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
@@ -118,7 +118,7 @@ final class OfficialNewsListTableViewController: UITableViewController {
                         if dataCountBeforAdd == dataCountAfterAdd {
                             let p = OfficialNewsDataModel.requestInfomationApiParam(beforeTimeInterval: lastObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
-                            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+                            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {
                                     let m = OfficialNewsDataModel(dictionary: dict)
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)

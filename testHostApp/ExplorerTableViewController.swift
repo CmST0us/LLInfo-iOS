@@ -158,7 +158,7 @@ class ExplorerTableViewController: UITableViewController {
     @IBAction func getDataFromServer(_ sender: Any) {
         dataOrderSet.removeAllObjects()
         if let d = ApiHelper.shared.getInfoPage(1, true) {
-            if let js = DataModelHelper.shared.createDictionaries(withJsonData: d) {
+            if let js = DataModelHelper.shared.payloadDictionaries(withJsonData: d) {
                 for j in js {
                     let m = InfoDataModel(dictionary: j)
                     dataOrderSet.add(m)

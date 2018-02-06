@@ -23,7 +23,7 @@ class InfoDataModelTest: XCTestCase {
     
     func testInfoDataModelInit() {
         if let d = ApiHelper.shared.getNewestInfo(false) {
-            if let j = DataModelHelper.shared.createDictionaries(withJsonData: d) {
+            if let j = DataModelHelper.shared.payloadDictionaries(withJsonData: d) {
                 XCTAssert(j.count > 0)
                 
                 for o in j {

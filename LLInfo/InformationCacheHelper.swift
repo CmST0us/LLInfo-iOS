@@ -204,7 +204,7 @@ extension InformationCacheHelper {
         let param = T.requestPageApiParam(pageNum: pageNum, simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 var s: Set<T> = Set<T>()
                 for dict in dicts {
                     let m = T(dictionary: dict)
@@ -229,7 +229,7 @@ extension InformationCacheHelper {
         let param = T.requestNewestInformationApiParam(simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 var s: Set<T> = Set<T>()
                 for dict in dicts {
                     let m = T(dictionary: dict)
@@ -253,7 +253,7 @@ extension InformationCacheHelper {
         let param = T.requestInfomationApiParam(beforeTimeInterval: beforeTimeInterval, simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 var s: Set<T> = Set<T>()
                 for dict in dicts {
                     let m = T(dictionary: dict)
@@ -277,7 +277,7 @@ extension InformationCacheHelper {
         let param = T.requestInfomationApiParam(afterTimeInterval: afterTimeInterval, simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 var s: Set<T> = Set<T>()
                 for dict in dicts {
                     let m = T(dictionary: dict)
@@ -301,7 +301,7 @@ extension InformationCacheHelper {
         let param = T.requestInfomationApiParam(withId: id)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 var s: Set<T> = Set<T>()
                 for dict in dicts {
                     let m = T(dictionary: dict)

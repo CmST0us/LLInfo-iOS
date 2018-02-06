@@ -68,7 +68,7 @@ final class InfoListTableViewController: UITableViewController {
                         if dataCountBeforAdd == dataCountAfterAdd {
                             let p = InfoDataModel.requestInfomationApiParam(afterTimeInterval: firstObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
-                            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+                            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {
                                     let m = InfoDataModel(dictionary: dict)
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
@@ -113,7 +113,7 @@ final class InfoListTableViewController: UITableViewController {
                         if dataCountBeforAdd == dataCountAfterAdd {
                             let p = InfoDataModel.requestInfomationApiParam(beforeTimeInterval: lastObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
-                            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+                            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {
                                     let m = InfoDataModel(dictionary: dict)
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
@@ -152,7 +152,7 @@ final class InfoListTableViewController: UITableViewController {
                 let param = AppVersionUpdateDataModel.requestApiParam()
                 do {
                     let data = try ApiHelper.shared.request(withParam: param)
-                    if let d = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+                    if let d = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                         let appVerModel = AppVersionUpdateDataModel(dictionary: d[0])
                         if let nv = appVerModel.version {
                             if appVersion < nv {

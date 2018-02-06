@@ -91,7 +91,7 @@ class InformationDetailViewController: UIViewController{
         do {
             let param = T.requestInfomationApiParam(withId: model.id)
             let data = try ApiHelper.shared.request(withParam: param)
-            if let dicts = DataModelHelper.shared.createDictionaries(withJsonData: data) {
+            if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 let m = T(dictionary: dicts[0])
                 self.informationDataModel = m
                 print(m.id)
@@ -155,12 +155,28 @@ extension InformationDetailViewController: WKUIDelegate, WKNavigationDelegate  {
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        
+
         if navigationAction.navigationType != .linkActivated {
             return nil
         }
         self.showUrlInSafariViewController(url: navigationAction.request.url)
         return nil
+
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .other {
+            decisionHandler(.allow)
+            return
+        }
+        
+        if navigationAction.navigationType == .linkActivated {
+            decisionHandler(.cancel)
+            self.showUrlInSafariViewController(url: navigationAction.request.url)
+            return
+        }
+        decisionHandler(.cancel)
         
     }
+    
 }
