@@ -74,6 +74,9 @@ final class InfoListTableViewController: UITableViewController {
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
                                     self.infoListDataSet.add(m)
                                 }
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.applicationIconBadgeNumber = 0
+                                }
                                 try InformationCoreDataHelper.shared.saveContext()
                             }
                         }

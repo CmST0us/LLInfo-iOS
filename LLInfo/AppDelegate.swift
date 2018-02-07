@@ -15,27 +15,23 @@ import Photos
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    struct SettingKey {
-        static let remotePushAuthorizationKey = "remotePushAuthorizationKey"
-        static let cameraRollAccessKey = "cameraRollAccessKey"
-    }
+//    struct SettingKey {
+//        static let remotePushAuthorizationKey = "remotePushAuthorizationKey"
+//        static let cameraRollAccessKey = "cameraRollAccessKey"
+//    }
+    
+    private let xgAppId = 2200276944
+    private let xgAppKey = "I3X58G3SHJ5A"
     
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         self.setupApiHelper()
-        self.requestPushAuthorization()
-//        self.requestCameraRollAccess()
+        self.setupXinge()
+        
+        self.reportNotification(info: launchOptions)
         return true
-    }
-
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("did register remote notification\ndeviceToken(Base64): \(deviceToken.base64EncodedString())")
-    }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("register remote notification fail\(error)")
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -80,8 +76,8 @@ extension AppDelegate {
     func requestPushAuthorization() {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
-            let userDefaults = UserDefaults.standard
-            userDefaults.set(granted, forKey: SettingKey.remotePushAuthorizationKey)
+//            let userDefaults = UserDefaults.standard
+//            userDefaults.set(granted, forKey: SettingKey.remotePushAuthorizationKey)
             if granted {
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
@@ -94,12 +90,52 @@ extension AppDelegate {
         if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.notDetermined {
             PHPhotoLibrary.requestAuthorization({ (state) in
                 if state == PHAuthorizationStatus.authorized {
-                    UserDefaults.standard.set(true, forKey: SettingKey.cameraRollAccessKey)
+//                    UserDefaults.standard.set(true, forKey: SettingKey.cameraRollAccessKey)
                 } else {
-                    UserDefaults.standard.set(false, forKey: SettingKey.cameraRollAccessKey)
+//                    UserDefaults.standard.set(false, forKey: SettingKey.cameraRollAccessKey)
                 }
             })
         }
+    }
+}
+
+
+// MARK: - 信鸽推送相关方法
+extension AppDelegate {
+    
+    /// 信鸽推送服务初始化
+    func setupXinge() {
+        #if arch(i386) || arch(x86_64)
+            return
+        #endif
+        
+        let manager = XGPush.defaultManager()
+        #if DEBUG
+            manager.isEnableDebug = true
+        #else
+            manager.isEnableDebug = false
+        #endif
+        
+        manager.startXG(withAppID: UInt32(xgAppId), appKey: xgAppKey, delegate: self)
+        
+    }
+    
+    func reportNotification(info: Dictionary<AnyHashable, Any>?) {
+        if let i = info {
+            XGPush.defaultManager().reportXGNotificationInfo(i)
+        }
+    }
+    
+    func registerDeviceToken(data: Data) {
+        XGPushTokenManager.default().registerDeviceToken(data)
+    }
+}
+
+// MARK: 信鸽推送委托方法
+extension AppDelegate: XGPushDelegate {
+    func xgPush(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse?, withCompletionHandler completionHandler: @escaping () -> Void) {
+        self.reportNotification(info: response?.notification.request.content.userInfo)
+        completionHandler()
     }
 }
 

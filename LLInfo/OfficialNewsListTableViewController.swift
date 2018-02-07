@@ -79,6 +79,9 @@ final class OfficialNewsListTableViewController: UITableViewController {
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
                                     self.officialNewsDataModelSet.add(m)
                                 }
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.applicationIconBadgeNumber = 0
+                                }
                                 try InformationCoreDataHelper.shared.saveContext()
                             }
                         }
@@ -124,6 +127,7 @@ final class OfficialNewsListTableViewController: UITableViewController {
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
                                     self.officialNewsDataModelSet.add(m)
                                 }
+                                
                                 try InformationCoreDataHelper.shared.saveContext()
                             }
                         }

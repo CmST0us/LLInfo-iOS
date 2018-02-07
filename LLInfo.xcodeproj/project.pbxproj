@@ -58,6 +58,20 @@
 		4F662AF11FB96D1800FBEECC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F662AEF1FB96D1800FBEECC /* Main.storyboard */; };
 		4F662AF31FB96D1800FBEECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F662AF21FB96D1800FBEECC /* Assets.xcassets */; };
 		4F662AF61FB96D1800FBEECC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F662AF41FB96D1800FBEECC /* LaunchScreen.storyboard */; };
+		4F673858202AE3F000A6AFA7 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F673857202AE3F000A6AFA7 /* libXG-SDK.a */; };
+		4F67385A202AE44600A6AFA7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F673859202AE44600A6AFA7 /* UserNotifications.framework */; };
+		4F67385C202AE45000A6AFA7 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67385B202AE45000A6AFA7 /* CoreTelephony.framework */; };
+		4F67385E202AE45E00A6AFA7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67385D202AE45E00A6AFA7 /* SystemConfiguration.framework */; };
+		4F673860202AE46900A6AFA7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F67385F202AE46900A6AFA7 /* libz.tbd */; };
+		4F673863202AEBB200A6AFA7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F673862202AEBB200A6AFA7 /* Logger.swift */; };
+		4F673864202AEBB200A6AFA7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F673862202AEBB200A6AFA7 /* Logger.swift */; };
+		4F673865202AEBB200A6AFA7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F673862202AEBB200A6AFA7 /* Logger.swift */; };
+		4F673866202AEBB200A6AFA7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F673862202AEBB200A6AFA7 /* Logger.swift */; };
+		4F673867202AEBB200A6AFA7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F673862202AEBB200A6AFA7 /* Logger.swift */; };
+		4F673868202AEBB200A6AFA7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F673862202AEBB200A6AFA7 /* Logger.swift */; };
+		4F67386A202AF1FE00A6AFA7 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F673869202AF1FE00A6AFA7 /* libsqlite3.tbd */; };
+		4F67386C202B089200A6AFA7 /* InformationShareableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F67386B202B089200A6AFA7 /* InformationShareableProtocol.swift */; };
+		4F67386D202B089200A6AFA7 /* InformationShareableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F67386B202B089200A6AFA7 /* InformationShareableProtocol.swift */; };
 		4F7303572027828400376B13 /* SpeakText.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4F73034E2027828400376B13 /* SpeakText.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4F73035B2027830500376B13 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9707A2027399A0033B2FF /* ActionRequestHandler.swift */; };
 		4F73035C2027835800376B13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FA9708E202751560033B2FF /* Assets.xcassets */; };
@@ -232,6 +246,15 @@
 		4F662AF21FB96D1800FBEECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F662AF71FB96D1800FBEECC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F662AFD1FBB391700FBEECC /* MyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
+		4F673856202AE3E900A6AFA7 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
+		4F673857202AE3F000A6AFA7 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
+		4F673859202AE44600A6AFA7 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		4F67385B202AE45000A6AFA7 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		4F67385D202AE45E00A6AFA7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4F67385F202AE46900A6AFA7 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4F673862202AEBB200A6AFA7 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		4F673869202AF1FE00A6AFA7 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		4F67386B202B089200A6AFA7 /* InformationShareableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationShareableProtocol.swift; sourceTree = "<group>"; };
 		4F73034E2027828400376B13 /* SpeakText.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SpeakText.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F7303542027828400376B13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F7303782028203E00376B13 /* Translate.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Translate.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -303,7 +326,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F67386A202AF1FE00A6AFA7 /* libsqlite3.tbd in Frameworks */,
+				4F673860202AE46900A6AFA7 /* libz.tbd in Frameworks */,
+				4F67385E202AE45E00A6AFA7 /* SystemConfiguration.framework in Frameworks */,
+				4F67385C202AE45000A6AFA7 /* CoreTelephony.framework in Frameworks */,
+				4F67385A202AE44600A6AFA7 /* UserNotifications.framework in Frameworks */,
 				B4B86EB62F36B7338BCAEF25 /* Pods_LLInfo.framework in Frameworks */,
+				4F673858202AE3F000A6AFA7 /* libXG-SDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +387,11 @@
 		3E84308BC86C9814DA444F1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F673869202AF1FE00A6AFA7 /* libsqlite3.tbd */,
+				4F67385F202AE46900A6AFA7 /* libz.tbd */,
+				4F67385D202AE45E00A6AFA7 /* SystemConfiguration.framework */,
+				4F67385B202AE45000A6AFA7 /* CoreTelephony.framework */,
+				4F673859202AE44600A6AFA7 /* UserNotifications.framework */,
 				7B9F7E4CF0152DE2F33A31DE /* Pods_LLInfo.framework */,
 				AC9193F2A990D8C44D54AE1D /* Pods_LLInfoTest.framework */,
 				EBC06AF1F015B67B20044CEB /* Pods_LLInfoUITests.framework */,
@@ -525,6 +559,23 @@
 			path = LLInfo;
 			sourceTree = "<group>";
 		};
+		4F673855202AE3CF00A6AFA7 /* xinge */ = {
+			isa = PBXGroup;
+			children = (
+				4F673856202AE3E900A6AFA7 /* XGPush.h */,
+				4F673857202AE3F000A6AFA7 /* libXG-SDK.a */,
+			);
+			path = xinge;
+			sourceTree = "<group>";
+		};
+		4F673861202AEB9900A6AFA7 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				4F673862202AEBB200A6AFA7 /* Logger.swift */,
+			);
+			name = Logger;
+			sourceTree = "<group>";
+		};
 		4F7303792028203E00376B13 /* Translate */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +591,7 @@
 		4F7533232028B5AA001C7480 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				4F673855202AE3CF00A6AFA7 /* xinge */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -550,6 +602,7 @@
 				4F83D9532023007400827245 /* CommonApiParamProtocol.swift */,
 				4FC397802003C0E500D7B7E7 /* CoreDataModelBridgeProtocol.swift */,
 				4FA3F9F52021714500DCCAA2 /* InfomationApiParamProtocol.swift */,
+				4F67386B202B089200A6AFA7 /* InformationShareableProtocol.swift */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -586,6 +639,7 @@
 		4F946B921FFBB986001A15B1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				4F673861202AEB9900A6AFA7 /* Logger */,
 				4F06B63E2025CD0400B7CC18 /* DataModel */,
 				4FF3610D2009FBEF00E0141B /* Api */,
 			);
@@ -1170,7 +1224,9 @@
 				4F7533212028A83B001C7480 /* UIColor+More.swift in Sources */,
 				4FA3F9F420216E8F00DCCAA2 /* ApiParam.swift in Sources */,
 				4F75333F20296868001C7480 /* UserDataHelper.swift in Sources */,
+				4F673868202AEBB200A6AFA7 /* Logger.swift in Sources */,
 				4F5F83D620034BD100696F72 /* InformationDataModel.swift in Sources */,
+				4F67386D202B089200A6AFA7 /* InformationShareableProtocol.swift in Sources */,
 				4F5F83AD20023FDB00696F72 /* AppDelegate.swift in Sources */,
 				4F75334C20296FA5001C7480 /* Favorite+CoreDataClass.swift in Sources */,
 				4F5F83DB20034BDC00696F72 /* InfoDataModel.swift in Sources */,
@@ -1188,6 +1244,7 @@
 				4FA3F9F62021714500DCCAA2 /* InfomationApiParamProtocol.swift in Sources */,
 				4FD375DA1FBE0C330027FC4B /* InfoListTableViewCell.swift in Sources */,
 				4F75335020297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */,
+				4F673863202AEBB200A6AFA7 /* Logger.swift in Sources */,
 				4F75334B20296FA5001C7480 /* Favorite+CoreDataClass.swift in Sources */,
 				4FA7BBA32000D08E00351090 /* AppVersionUpdateDataModel.swift in Sources */,
 				4F83D9542023007400827245 /* CommonApiParamProtocol.swift in Sources */,
@@ -1198,6 +1255,7 @@
 				4F5F83792002278F00696F72 /* InformationDataModel.swift in Sources */,
 				4FA7BB9F2000AF5400351090 /* IndexPath+Tuple.swift in Sources */,
 				4F0E0D6A1FF6132800DDD242 /* InformationDetailViewController.swift in Sources */,
+				4F67386C202B089200A6AFA7 /* InformationShareableProtocol.swift in Sources */,
 				4F946B941FFBCB66001A15B1 /* ApiHelper.swift in Sources */,
 				4FA3F9F220216E8F00DCCAA2 /* ApiParam.swift in Sources */,
 				4F75333B202963E3001C7480 /* userdata.xcdatamodeld in Sources */,
@@ -1220,6 +1278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F73035D2027835B00376B13 /* TextSpeaker.swift in Sources */,
+				4F673864202AEBB200A6AFA7 /* Logger.swift in Sources */,
 				4F73035B2027830500376B13 /* ActionRequestHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1229,6 +1288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F73037B2028203E00376B13 /* ActionViewController.swift in Sources */,
+				4F673865202AEBB200A6AFA7 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,6 +1296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F673866202AEBB200A6AFA7 /* Logger.swift in Sources */,
 				4F83D9552023007400827245 /* CommonApiParamProtocol.swift in Sources */,
 				4F5F83BE2002402000696F72 /* CoreDataTest.swift in Sources */,
 				4F5F83D820034BDB00696F72 /* OfficialNewsDataModel.swift in Sources */,
@@ -1268,6 +1329,7 @@
 				4F5F83E320034BE500696F72 /* CoreDataHelper.swift in Sources */,
 				4FC397832003C1B300D7B7E7 /* CoreDataModelBridgeProtocol.swift in Sources */,
 				4F5F83DA20034BDB00696F72 /* OfficialNewsDataModel.swift in Sources */,
+				4F673867202AEBB200A6AFA7 /* Logger.swift in Sources */,
 				4F5F83DF20034BE100696F72 /* InformationCacheHelper.swift in Sources */,
 				4F5F83DD20034BE100696F72 /* DataModelHelper.swift in Sources */,
 				4F5F83D920034BDB00696F72 /* InfoDataModel.swift in Sources */,
@@ -1535,7 +1597,27 @@
 				INFOPLIST_FILE = LLInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLInfo/Vendor/xinge",
+				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AutoInsetter\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Pageboy\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"Tabman\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eki.LLInfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/LLInfo/Header-Bridge.h";
@@ -1559,7 +1641,27 @@
 				INFOPLIST_FILE = LLInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LLInfo/Vendor/xinge",
+				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"AutoInsetter\"",
+					"-framework",
+					"\"MJRefresh\"",
+					"-framework",
+					"\"Pageboy\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SnapKit\"",
+					"-framework",
+					"\"Tabman\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.eki.LLInfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/LLInfo/Header-Bridge.h";

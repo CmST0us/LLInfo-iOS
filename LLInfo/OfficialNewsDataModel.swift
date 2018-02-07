@@ -129,3 +129,9 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
     }
     
 }
+
+extension OfficialNewsDataModel: InformationShareableProtocol {
+    var sharedUrl: String {
+        return "/official/news/item/\(self.id)"
+    }
+}

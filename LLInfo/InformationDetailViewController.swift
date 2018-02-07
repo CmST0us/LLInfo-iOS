@@ -16,6 +16,7 @@ class InformationDetailViewController: UIViewController{
     
     var informationDataModel: InformationDataModel? = nil
     var wkView: WKWebView!
+    var sharedUrl: String = ""
     
     @IBAction func showMore(_ sender: Any) {
         let moreSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -26,17 +27,15 @@ class InformationDetailViewController: UIViewController{
         }
         
         let systemShare = UIAlertAction(title: "分享...", style: .default) { (alertAction) in
-            if let urlPath = self.informationDataModel?.urlPath {
-                if let url = URL(string: urlPath) {
-                    let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-                    ac.excludedActivityTypes = [.openInIBooks, .print, .copyToPasteboard]
-                    if let popover = ac.popoverPresentationController {
-                        popover.barButtonItem = sender as? UIBarButtonItem
-                        popover.permittedArrowDirections = UIPopoverArrowDirection.up
-                    }
-                    self.present(ac, animated: true, completion: nil)
+            
+            if let url = URL(string: self.sharedUrl) {
+                let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+                ac.excludedActivityTypes = [.openInIBooks, .print, .copyToPasteboard]
+                if let popover = ac.popoverPresentationController {
+                    popover.barButtonItem = sender as? UIBarButtonItem
+                    popover.permittedArrowDirections = UIPopoverArrowDirection.up
                 }
-                
+                self.present(ac, animated: true, completion: nil)
             }
             
         }
@@ -86,7 +85,7 @@ class InformationDetailViewController: UIViewController{
     /// setup InformationDetailViewController with model
     /// this method will request server if network is reachable. Or it will fetch database. When it download data from server it will update data in database
     /// - Parameter model: model is subclass of InformationDataModel, InformationApiParamProtocol, CoreDataModelBridgeProtocol
-    func setup<T>(withInformationDataModel model: T) where T: InformationDataModel, T: InformationApiParamProtocol, T: CoreDataModelBridgeProtocol {
+    func setup<T>(withInformationDataModel model: T) where T: InformationDataModel, T: InformationApiParamProtocol, T: CoreDataModelBridgeProtocol, T:InformationShareableProtocol {
     
         do {
             let param = T.requestInfomationApiParam(withId: model.id)
@@ -94,6 +93,7 @@ class InformationDetailViewController: UIViewController{
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 let m = T(dictionary: dicts[0])
                 self.informationDataModel = m
+                self.sharedUrl = ApiHelper.shared.baseUrlPath + m.sharedUrl
                 print(m.id)
                 if let contentHtml = m.contentHtml {
                     let _ = InformationCacheHelper.shared.updata(information: m, usingId: m.id, updateValuesAndKeys: [T.CodingKey.contentHtml: contentHtml])

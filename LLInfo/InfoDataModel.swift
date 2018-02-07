@@ -131,3 +131,9 @@ extension InfoDataModel: InformationApiParamProtocol {
         return p
     }
 }
+
+extension InfoDataModel: InformationShareableProtocol {
+    var sharedUrl: String  {
+        return "/info/item/\(self.id)"
+    }
+}

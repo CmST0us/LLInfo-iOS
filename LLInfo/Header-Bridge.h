@@ -9,5 +9,6 @@
 #ifndef Header_Bridge_h
 #define Header_Bridge_h
 
+#include "xinge/XGPush.h"
 
 #endif /* Header_Bridge_h */

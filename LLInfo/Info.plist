@@ -29,6 +29,8 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>点击好以允许保存图片</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>点击好以允许保存图片</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
