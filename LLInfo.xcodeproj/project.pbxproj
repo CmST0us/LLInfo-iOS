@@ -98,8 +98,6 @@
 		4F7F5469202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
 		4F7F546A202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
 		4F7F546B202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
-		4F7F546F202DCAD8008857B6 /* OfficialNewsListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F546E202DCAD8008857B6 /* OfficialNewsListCollectionViewController.swift */; };
-		4F7F5471202DCB03008857B6 /* OfficialNewsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5470202DCB03008857B6 /* OfficialNewsListCollectionViewCell.swift */; };
 		4F7F5476202DD633008857B6 /* InformationList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F7F5474202DD633008857B6 /* InformationList.storyboard */; };
 		4F83D9542023007400827245 /* CommonApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83D9532023007400827245 /* CommonApiParamProtocol.swift */; };
 		4F83D9552023007400827245 /* CommonApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83D9532023007400827245 /* CommonApiParamProtocol.swift */; };
@@ -279,8 +277,6 @@
 		4F75334A20296FA5001C7480 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataMethod.swift"; sourceTree = "<group>"; };
 		4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Base64EncodedAsUrlParams.swift"; sourceTree = "<group>"; };
-		4F7F546E202DCAD8008857B6 /* OfficialNewsListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialNewsListCollectionViewController.swift; sourceTree = "<group>"; };
-		4F7F5470202DCB03008857B6 /* OfficialNewsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialNewsListCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F7F5475202DD633008857B6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/InformationList.storyboard"; sourceTree = "<group>"; };
 		4F83D9532023007400827245 /* CommonApiParamProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonApiParamProtocol.swift; sourceTree = "<group>"; };
 		4F946B931FFBCB66001A15B1 /* ApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
@@ -457,8 +453,6 @@
 		4F29D5C01FFFD2F700DE4039 /* OfficialNewsList */ = {
 			isa = PBXGroup;
 			children = (
-				4F7F546E202DCAD8008857B6 /* OfficialNewsListCollectionViewController.swift */,
-				4F7F5470202DCB03008857B6 /* OfficialNewsListCollectionViewCell.swift */,
 				4F29D5C11FFFD33800DE4039 /* OfficialNewsListTableViewController.swift */,
 				4F29D5C31FFFD36700DE4039 /* OfficialNewsListTableViewCell.swift */,
 			);
@@ -1272,9 +1266,7 @@
 				4F5F839D20022DA300696F72 /* CoreDataHelper.swift in Sources */,
 				4F29D5C41FFFD36700DE4039 /* OfficialNewsListTableViewCell.swift in Sources */,
 				4F5F83792002278F00696F72 /* InformationDataModel.swift in Sources */,
-				4F7F5471202DCB03008857B6 /* OfficialNewsListCollectionViewCell.swift in Sources */,
 				4FA7BB9F2000AF5400351090 /* IndexPath+Tuple.swift in Sources */,
-				4F7F546F202DCAD8008857B6 /* OfficialNewsListCollectionViewController.swift in Sources */,
 				4F0E0D6A1FF6132800DDD242 /* InformationDetailViewController.swift in Sources */,
 				4F7F5466202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 				4F67386C202B089200A6AFA7 /* InformationShareableProtocol.swift in Sources */,
