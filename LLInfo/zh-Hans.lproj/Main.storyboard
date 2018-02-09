@@ -48,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="-1497" y="841"/>
         </scene>
-        <!--InformationList-->
+        <!--InformationPage-->
         <scene sceneID="MiY-oc-u3T">
             <objects>
-                <viewControllerPlaceholder storyboardName="InformationList" id="J7Q-9z-ZRt" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="InformationPage" id="J7Q-9z-ZRt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="vhj-HY-hFV"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ll-Oz-Bm4" userLabel="First Responder" sceneMemberID="firstResponder"/>
