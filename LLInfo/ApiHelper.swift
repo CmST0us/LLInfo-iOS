@@ -36,7 +36,7 @@ final class ApiHelper {
     static let shared = ApiHelper()
     //api base url
     var baseUrlPath: String = ""
-    
+
     //last invoke error
     var lastInvokeError: Error? = nil
     

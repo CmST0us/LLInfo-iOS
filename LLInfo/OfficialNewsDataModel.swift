@@ -55,6 +55,7 @@ extension OfficialNewsDataModel: CoreDataModelBridgeProtocol {
 }
 
 extension OfficialNewsDataModel: InformationApiParamProtocol {
+    
     static func requestPageApiParam(pageNum: Int, simpleMode: Bool) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
@@ -120,18 +121,26 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
         
         return p
     }
-    
-    static func requestInfomationApiParam(withId id: String) -> ApiParam {
+        
+    static func requestInformationApiParam(withUrl url: String) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
-        p.path = "/official/news/item/\(id)"
+        if let data = url.data(using: .utf8) {
+            let base64String = data.base64EncodedAsUrlParams()
+            p.path = "/official/news/item/\(base64String)"
+        } else {
+            p.path = "/official/news/notfound"
+        }
         return p
     }
-    
 }
 
 extension OfficialNewsDataModel: InformationShareableProtocol {
     var sharedUrl: String {
-        return "/official/news/item/\(self.id)"
+        if let data = self.urlPath?.data(using: .utf8) {
+            let base64EncodeString = data.base64EncodedAsUrlParams()
+            return "/official/news/\(base64EncodeString)"
+        }
+        return "/official/news/notfound"
     }
 }

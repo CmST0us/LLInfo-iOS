@@ -25,16 +25,16 @@ class UserDataHelper {
 
 // MARK: - Favorite entity method
 extension UserDataHelper {
-    func fetchInformation(witId id: String, informationEntityName: String) -> InformationDataModel? {
+    func fetchInformation(withUrl url: String, informationEntityName: String) -> InformationDataModel? {
         do {
             switch informationEntityName {
             case InfoDataModel.entityName:
-                if let s: Set<InfoDataModel> = try InformationCacheHelper.shared.requestInfomation(withId: id) {
+                if let s: Set<InfoDataModel> = try InformationCacheHelper.shared.requestInfomation(withUrl: url) {
                     return s.first
                 }
                 break
             case OfficialNewsDataModel.entityName:
-                if let s: Set<OfficialNewsDataModel> = try InformationCacheHelper.shared.requestInfomation(withId: id) {
+                if let s: Set<OfficialNewsDataModel> = try InformationCacheHelper.shared.requestInfomation(withUrl: url) {
                     return s.first
                 }
                 break

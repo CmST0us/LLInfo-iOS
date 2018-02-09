@@ -294,11 +294,11 @@ extension InformationCacheHelper {
         }
     }
     
-    func requestInfomation<T>(withId id: String) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiParamProtocol{
-        if let a: Set<T> = fetchInformation(withId: id) {
+    func requestInfomation<T>(withUrl url: String) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiParamProtocol{
+        if let a: Set<T> = fetchInformation(withUrlPath: url) {
             return a
         }
-        let param = T.requestInfomationApiParam(withId: id)
+        let param = T.requestInformationApiParam(withUrl: url)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
@@ -317,6 +317,7 @@ extension InformationCacheHelper {
             throw error
         }
     }
+    
     
     //MARK: Insert
     func insertInformation<T>(_ information: T) where T: InformationDataModel, T: CoreDataModelBridgeProtocol {

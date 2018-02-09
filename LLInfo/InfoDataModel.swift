@@ -58,6 +58,7 @@ extension InfoDataModel: CoreDataModelBridgeProtocol {
 }
 
 extension InfoDataModel: InformationApiParamProtocol {
+    
     static func requestPageApiParam(pageNum: Int, simpleMode: Bool) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
@@ -124,16 +125,27 @@ extension InfoDataModel: InformationApiParamProtocol {
         return p
     }
     
-    static func requestInfomationApiParam(withId id: String) -> ApiParam {
+    
+    
+    static func requestInformationApiParam(withUrl url: String) -> ApiParam {
         let p = ApiParam()
         p.method = ApiParam.Method.GET
-        p.path = "/info/item/\(id)"
+        if let data = url.data(using: .utf8) {
+            let base64String = data.base64EncodedAsUrlParams()
+            p.path = "/info/item/\(base64String)"
+        } else {
+            p.path = "/info/item/notfound"
+        }
         return p
     }
 }
 
 extension InfoDataModel: InformationShareableProtocol {
     var sharedUrl: String  {
-        return "/info/item/\(self.id)"
+        if let data = self.urlPath?.data(using: .utf8) {
+            let base64EncodeString = data.base64EncodedAsUrlParams()
+            return "/info/item/\(base64EncodeString)"
+        }
+        return "/info/item/notfound"
     }
 }

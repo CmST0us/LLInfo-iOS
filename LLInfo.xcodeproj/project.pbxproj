@@ -92,6 +92,12 @@
 		4F75334E20296FA5001C7480 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334A20296FA5001C7480 /* Favorite+CoreDataProperties.swift */; };
 		4F75335020297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */; };
 		4F75335120297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */; };
+		4F7F5466202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
+		4F7F5467202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
+		4F7F5468202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
+		4F7F5469202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
+		4F7F546A202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
+		4F7F546B202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
 		4F83D9542023007400827245 /* CommonApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83D9532023007400827245 /* CommonApiParamProtocol.swift */; };
 		4F83D9552023007400827245 /* CommonApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83D9532023007400827245 /* CommonApiParamProtocol.swift */; };
 		4F83D9562023007400827245 /* CommonApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F83D9532023007400827245 /* CommonApiParamProtocol.swift */; };
@@ -269,6 +275,7 @@
 		4F75334920296FA5001C7480 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4F75334A20296FA5001C7480 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataMethod.swift"; sourceTree = "<group>"; };
+		4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Base64EncodedAsUrlParams.swift"; sourceTree = "<group>"; };
 		4F83D9532023007400827245 /* CommonApiParamProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonApiParamProtocol.swift; sourceTree = "<group>"; };
 		4F946B931FFBCB66001A15B1 /* ApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		4F946B991FFBDEDD001A15B1 /* LLInfoTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LLInfoTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -458,6 +465,7 @@
 				4FA3F9F92021768F00DCCAA2 /* Dictionary+URLParam.swift */,
 				4F217D8320221A3600F0D876 /* UIViewController+ErrorAlert.swift */,
 				4F75331F2028A83B001C7480 /* UIColor+More.swift */,
+				4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -1206,6 +1214,7 @@
 			files = (
 				4F83D9572023007400827245 /* CommonApiParamProtocol.swift in Sources */,
 				4F5F83E420034BE500696F72 /* CoreDataHelper.swift in Sources */,
+				4F7F546B202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 				4F5F83EA20034EBA00696F72 /* DetailTableViewController.swift in Sources */,
 				4F5F83BF2002402A00696F72 /* informations.xcdatamodeld in Sources */,
 				4FA3F9F82021714500DCCAA2 /* InfomationApiParamProtocol.swift in Sources */,
@@ -1255,6 +1264,7 @@
 				4F5F83792002278F00696F72 /* InformationDataModel.swift in Sources */,
 				4FA7BB9F2000AF5400351090 /* IndexPath+Tuple.swift in Sources */,
 				4F0E0D6A1FF6132800DDD242 /* InformationDetailViewController.swift in Sources */,
+				4F7F5466202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 				4F67386C202B089200A6AFA7 /* InformationShareableProtocol.swift in Sources */,
 				4F946B941FFBCB66001A15B1 /* ApiHelper.swift in Sources */,
 				4FA3F9F220216E8F00DCCAA2 /* ApiParam.swift in Sources */,
@@ -1277,6 +1287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F7F5467202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 				4F73035D2027835B00376B13 /* TextSpeaker.swift in Sources */,
 				4F673864202AEBB200A6AFA7 /* Logger.swift in Sources */,
 				4F73035B2027830500376B13 /* ActionRequestHandler.swift in Sources */,
@@ -1289,6 +1300,7 @@
 			files = (
 				4F73037B2028203E00376B13 /* ActionViewController.swift in Sources */,
 				4F673865202AEBB200A6AFA7 /* Logger.swift in Sources */,
+				4F7F5468202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1304,6 +1316,7 @@
 				4FA3F9F72021714500DCCAA2 /* InfomationApiParamProtocol.swift in Sources */,
 				4FA7BBA42000D21B00351090 /* AppVersionUpdateDataModel.swift in Sources */,
 				4FC397822003C1B200D7B7E7 /* CoreDataModelBridgeProtocol.swift in Sources */,
+				4F7F5469202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 				4F217D8520221A3600F0D876 /* UIViewController+ErrorAlert.swift in Sources */,
 				4F5F83772002257000696F72 /* InformationCacheHelper.swift in Sources */,
 				4F946BCA1FFCB667001A15B1 /* DataModelHelper.swift in Sources */,
@@ -1330,6 +1343,7 @@
 				4FC397832003C1B300D7B7E7 /* CoreDataModelBridgeProtocol.swift in Sources */,
 				4F5F83DA20034BDB00696F72 /* OfficialNewsDataModel.swift in Sources */,
 				4F673867202AEBB200A6AFA7 /* Logger.swift in Sources */,
+				4F7F546A202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 				4F5F83DF20034BE100696F72 /* InformationCacheHelper.swift in Sources */,
 				4F5F83DD20034BE100696F72 /* DataModelHelper.swift in Sources */,
 				4F5F83D920034BDB00696F72 /* InfoDataModel.swift in Sources */,

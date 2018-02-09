@@ -18,6 +18,8 @@ protocol InformationApiParamProtocol {
     
     static func requestInfomationApiParam(afterTimeInterval: TimeInterval, simpleMode: Bool) -> ApiParam
     
-    static func requestInfomationApiParam(withId id: String) -> ApiParam
+//    static func requestInfomationApiParam(withId id: String) -> ApiParam
+    
+    static func requestInformationApiParam(withUrl url: String) -> ApiParam
     
 }

@@ -30,7 +30,7 @@ class InformationDetailViewController: UIViewController{
             
             if let url = URL(string: self.sharedUrl) {
                 let ac = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-                ac.excludedActivityTypes = [.openInIBooks, .print, .copyToPasteboard]
+                ac.excludedActivityTypes = [.openInIBooks, .print]
                 if let popover = ac.popoverPresentationController {
                     popover.barButtonItem = sender as? UIBarButtonItem
                     popover.permittedArrowDirections = UIPopoverArrowDirection.up
@@ -88,15 +88,23 @@ class InformationDetailViewController: UIViewController{
     func setup<T>(withInformationDataModel model: T) where T: InformationDataModel, T: InformationApiParamProtocol, T: CoreDataModelBridgeProtocol, T:InformationShareableProtocol {
     
         do {
-            let param = T.requestInfomationApiParam(withId: model.id)
+            let param = T.requestInformationApiParam(withUrl: model.urlPath ?? "")
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 let m = T(dictionary: dicts[0])
                 self.informationDataModel = m
-                self.sharedUrl = ApiHelper.shared.baseUrlPath + m.sharedUrl
-                print(m.id)
+
+                if let url = URL(string: ApiHelper.shared.baseUrlPath) {
+                    if let scheme = url.scheme {
+                        if let host = url.host {
+                            self.sharedUrl = "\(scheme)://\(host)\(m.sharedUrl)"
+                        }
+                    }
+                }
+                
+                Logger.shared.console("\(model.urlPath ?? "not found")")
                 if let contentHtml = m.contentHtml {
-                    let _ = InformationCacheHelper.shared.updata(information: m, usingId: m.id, updateValuesAndKeys: [T.CodingKey.contentHtml: contentHtml])
+                    let _ = InformationCacheHelper.shared.update(information: m, usingUrlPath: m.urlPath ?? "", updateValuesAndKeys: [T.CodingKey.contentHtml: contentHtml])
                     try InformationCoreDataHelper.shared.saveContext()
                     return
                 }
@@ -106,7 +114,7 @@ class InformationDetailViewController: UIViewController{
         }
         // fetch from database
         do {
-            if let set: Set<T> = try InformationCacheHelper.shared.requestInfomation(withId: model.id) {
+            if let set: Set<T> = try InformationCacheHelper.shared.requestInfomation(withUrl: model.urlPath ?? "") {
                 let m = set.first!
                 self.informationDataModel = m
             }
