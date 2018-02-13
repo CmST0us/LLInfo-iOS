@@ -37,20 +37,23 @@ extension Logger {
             levelString = "ERROR"
         }
         #if DEBUG
-//            let time = Date(timeIntervalSinceNow: 0)
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
-//            let timeString = formatter.string(from: time)
+            let time = Date(timeIntervalSinceNow: 0)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "YYYY-MM-dd HH:mm:ss.SSSS"
+            let timeString = formatter.string(from: time)
             let ps = """
-            [\(levelString)]: {
-                msg: \(msg),
-                file: \(file),
-                line: \(line),
-                col: \(col),
-                function: \(function)
-            }
+            {
+            time: "\(timeString)",
+            msg: "\(msg)",
+            level: "\(levelString)",
+            file: "\(file)",
+            line: \(line),
+            col: \(col),
+            func: "\(function)"
+            },
             """
             print(ps)
         #endif
     }
 }
+
