@@ -9,26 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--收藏-->
-        <scene sceneID="Bc7-E1-hOk">
-            <objects>
-                <navigationController id="XqV-QJ-bRF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="收藏" image="tabbar_favorite" id="Ldx-Eh-dYd"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DIw-BM-xRv">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </textAttributes>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wSQ-oq-CXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-184" y="840"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -40,7 +20,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="J7Q-9z-ZRt" kind="relationship" relationship="viewControllers" id="yGw-YU-3rx"/>
-                        <segue destination="XqV-QJ-bRF" kind="relationship" relationship="viewControllers" id="Vg8-vF-o0N"/>
                         <segue destination="9tT-td-bIe" kind="relationship" relationship="viewControllers" id="XXe-OH-P8Y"/>
                     </connections>
                 </tabBarController>
@@ -69,7 +48,4 @@
             <point key="canvasLocation" x="-691" y="1129"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="tabbar_favorite" width="26" height="24"/>
-    </resources>
 </document>
