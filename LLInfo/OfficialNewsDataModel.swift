@@ -129,7 +129,7 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
             let base64String = data.base64EncodedAsUrlParams()
             p.path = "/official/news/item/\(base64String)"
         } else {
-            p.path = "/official/news/notfound"
+            p.path = "/official/news/item/notfound"
         }
         return p
     }
@@ -139,8 +139,8 @@ extension OfficialNewsDataModel: InformationShareableProtocol {
     var sharedUrl: String {
         if let data = self.urlPath?.data(using: .utf8) {
             let base64EncodeString = data.base64EncodedAsUrlParams()
-            return "/official/news/\(base64EncodeString)"
+            return "/official/news/item/\(base64EncodeString)"
         }
-        return "/official/news/notfound"
+        return "/official/news/item/notfound"
     }
 }
