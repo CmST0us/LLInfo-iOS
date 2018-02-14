@@ -54,11 +54,11 @@ extension OfficialNewsDataModel: CoreDataModelBridgeProtocol {
     }
 }
 
-extension OfficialNewsDataModel: InformationApiParamProtocol {
+extension OfficialNewsDataModel: InformationApiRequestParamProtocol {
     
-    static func requestPageApiParam(pageNum: Int, simpleMode: Bool) -> ApiParam {
-        let p = ApiParam()
-        p.method = ApiParam.Method.GET
+    static func requestPageApiRequestParam(pageNum: Int, simpleMode: Bool) -> ApiRequestParam {
+        let p = ApiRequestParam()
+        p.method = ApiRequestParam.Method.GET
         
         if simpleMode == true {
             p.query["simple"] = "1"
@@ -68,9 +68,9 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
         return p
     }
     
-    static func requestNewestInformationApiParam(simpleMode: Bool) -> ApiParam {
-        let p = ApiParam()
-        p.method = ApiParam.Method.GET
+    static func requestNewestInformationApiRequestParam(simpleMode: Bool) -> ApiRequestParam {
+        let p = ApiRequestParam()
+        p.method = ApiRequestParam.Method.GET
         p.path = "/official/news/item"
         if simpleMode == true {
             p.query["simple"] = "1"
@@ -78,9 +78,9 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
         return p
     }
     
-    static func requestInfomationApiParam(atTimeIntervalRange range: NSRange, simpleMode: Bool) -> ApiParam {
-        let p = ApiParam()
-        p.method = ApiParam.Method.GET
+    static func requestInfomationApiRequestParam(atTimeIntervalRange range: NSRange, simpleMode: Bool) -> ApiRequestParam {
+        let p = ApiRequestParam()
+        p.method = ApiRequestParam.Method.GET
         p.path = "/official/news/item"
         if simpleMode == true {
             p.query["simple"] = "1"
@@ -94,9 +94,9 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
         return p
     }
     
-    static func requestInfomationApiParam(beforeTimeInterval: TimeInterval, simpleMode: Bool) -> ApiParam {
-        let p = ApiParam()
-        p.method = ApiParam.Method.GET
+    static func requestInfomationApiRequestParam(beforeTimeInterval: TimeInterval, simpleMode: Bool) -> ApiRequestParam {
+        let p = ApiRequestParam()
+        p.method = ApiRequestParam.Method.GET
         p.path = "/official/news/item"
         
         if simpleMode == true {
@@ -107,9 +107,9 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
         
         return p
     }
-    static func requestInfomationApiParam(afterTimeInterval: TimeInterval, simpleMode: Bool) -> ApiParam {
-        let p = ApiParam()
-        p.method = ApiParam.Method.GET
+    static func requestInfomationApiRequestParam(afterTimeInterval: TimeInterval, simpleMode: Bool) -> ApiRequestParam {
+        let p = ApiRequestParam()
+        p.method = ApiRequestParam.Method.GET
         p.path = "/official/news/item"
         
         if simpleMode == true {
@@ -122,9 +122,9 @@ extension OfficialNewsDataModel: InformationApiParamProtocol {
         return p
     }
         
-    static func requestInformationApiParam(withUrl url: String) -> ApiParam {
-        let p = ApiParam()
-        p.method = ApiParam.Method.GET
+    static func requestInformationApiRequestParam(withUrl url: String) -> ApiRequestParam {
+        let p = ApiRequestParam()
+        p.method = ApiRequestParam.Method.GET
         if let data = url.data(using: .utf8) {
             let base64String = data.base64EncodedAsUrlParams()
             p.path = "/official/news/item/\(base64String)"

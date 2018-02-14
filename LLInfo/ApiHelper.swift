@@ -456,7 +456,7 @@ final class ApiHelper {
 
 //MARK: - NEW DESIGN
 extension ApiHelper {
-    func request(withParam param: ApiParam) throws -> Data {
+    func request(withParam param: ApiRequestParam) throws -> Data {
         var requestPath = _baseUrlPath + param.path
         
         if param.query.count > 0 {

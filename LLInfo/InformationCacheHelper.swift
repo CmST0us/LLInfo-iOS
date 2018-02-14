@@ -197,11 +197,11 @@ extension InformationCacheHelper {
 //MARK: - InformationCacheApi
 extension InformationCacheHelper {
     // MARK: Request
-    func requestPage<T>(pageNum: Int, simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiParamProtocol{
+    func requestPage<T>(pageNum: Int, simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiRequestParamProtocol{
         if let a: Set<T> = fetchInformation(limit: 20, offset: (pageNum - 1) * 20) {
             return a
         }
-        let param = T.requestPageApiParam(pageNum: pageNum, simpleMode: simpleMode)
+        let param = T.requestPageApiRequestParam(pageNum: pageNum, simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
@@ -222,11 +222,11 @@ extension InformationCacheHelper {
         
     }
     
-    func requestNewestInformation<T>(simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiParamProtocol{
+    func requestNewestInformation<T>(simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiRequestParamProtocol{
         if let a: Set<T> = fetchInformation(limit: 1, offset: 0) {
             return a
         }
-        let param = T.requestNewestInformationApiParam(simpleMode: simpleMode)
+        let param = T.requestNewestInformationApiRequestParam(simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
@@ -246,11 +246,11 @@ extension InformationCacheHelper {
         }
     }
     
-    func requestInfomation<T>(beforeTimeInterval: TimeInterval, simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiParamProtocol{
+    func requestInfomation<T>(beforeTimeInterval: TimeInterval, simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiRequestParamProtocol{
         if let a: Set<T> = fetchInformation(beforeTimeInterval: beforeTimeInterval), a.count > 1 {
             return a
         }
-        let param = T.requestInfomationApiParam(beforeTimeInterval: beforeTimeInterval, simpleMode: simpleMode)
+        let param = T.requestInfomationApiRequestParam(beforeTimeInterval: beforeTimeInterval, simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
@@ -270,11 +270,11 @@ extension InformationCacheHelper {
         }
     }
     
-    func requestInfomation<T>(afterTimeInterval: TimeInterval, simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiParamProtocol{
+    func requestInfomation<T>(afterTimeInterval: TimeInterval, simpleMode: Bool) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiRequestParamProtocol{
         if let a: Set<T> = fetchInformation(afterTimeInterval: afterTimeInterval), a.count > 1 {
             return a
         }
-        let param = T.requestInfomationApiParam(afterTimeInterval: afterTimeInterval, simpleMode: simpleMode)
+        let param = T.requestInfomationApiRequestParam(afterTimeInterval: afterTimeInterval, simpleMode: simpleMode)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
@@ -294,11 +294,11 @@ extension InformationCacheHelper {
         }
     }
     
-    func requestInfomation<T>(withUrl url: String) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiParamProtocol{
+    func requestInfomation<T>(withUrl url: String) throws -> Set<T>? where T:InformationDataModel, T: CoreDataModelBridgeProtocol, T:InformationApiRequestParamProtocol{
         if let a: Set<T> = fetchInformation(withUrlPath: url) {
             return a
         }
-        let param = T.requestInformationApiParam(withUrl: url)
+        let param = T.requestInformationApiRequestParam(withUrl: url)
         do {
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {

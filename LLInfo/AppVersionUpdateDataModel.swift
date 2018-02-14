@@ -28,10 +28,10 @@ class AppVersionUpdateDataModel {
     }
 }
 
-extension AppVersionUpdateDataModel: CommonApiParamProtocol {
-    static func requestApiParam() -> ApiParam {
-        let p = ApiParam()
-        p.method = ApiParam.Method.GET
+extension AppVersionUpdateDataModel: CommonApiRequestParamProtocol {
+    static func requestApiRequestParam() -> ApiRequestParam {
+        let p = ApiRequestParam()
+        p.method = ApiRequestParam.Method.GET
         p.path = "/app/ios/version"
         return p
     }

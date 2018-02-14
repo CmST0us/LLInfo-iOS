@@ -108,9 +108,9 @@
 		4F946BC11FFCA81E001A15B1 /* LLInfoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F946BC01FFCA81E001A15B1 /* LLInfoUITests.swift */; };
 		4F946BC91FFCB667001A15B1 /* DataModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F946BC81FFCB667001A15B1 /* DataModelHelper.swift */; };
 		4F946BCA1FFCB667001A15B1 /* DataModelHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F946BC81FFCB667001A15B1 /* DataModelHelper.swift */; };
-		4FA3F9F220216E8F00DCCAA2 /* ApiParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F120216E8F00DCCAA2 /* ApiParam.swift */; };
-		4FA3F9F320216E8F00DCCAA2 /* ApiParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F120216E8F00DCCAA2 /* ApiParam.swift */; };
-		4FA3F9F420216E8F00DCCAA2 /* ApiParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F120216E8F00DCCAA2 /* ApiParam.swift */; };
+		4FA3F9F220216E8F00DCCAA2 /* ApiRequestParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F120216E8F00DCCAA2 /* ApiRequestParam.swift */; };
+		4FA3F9F320216E8F00DCCAA2 /* ApiRequestParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F120216E8F00DCCAA2 /* ApiRequestParam.swift */; };
+		4FA3F9F420216E8F00DCCAA2 /* ApiRequestParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F120216E8F00DCCAA2 /* ApiRequestParam.swift */; };
 		4FA3F9F62021714500DCCAA2 /* InfomationApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F52021714500DCCAA2 /* InfomationApiParamProtocol.swift */; };
 		4FA3F9F72021714500DCCAA2 /* InfomationApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F52021714500DCCAA2 /* InfomationApiParamProtocol.swift */; };
 		4FA3F9F82021714500DCCAA2 /* InfomationApiParamProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA3F9F52021714500DCCAA2 /* InfomationApiParamProtocol.swift */; };
@@ -271,7 +271,7 @@
 		4F946BC01FFCA81E001A15B1 /* LLInfoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLInfoUITests.swift; sourceTree = "<group>"; };
 		4F946BC21FFCA81E001A15B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F946BC81FFCB667001A15B1 /* DataModelHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelHelper.swift; sourceTree = "<group>"; };
-		4FA3F9F120216E8F00DCCAA2 /* ApiParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiParam.swift; sourceTree = "<group>"; };
+		4FA3F9F120216E8F00DCCAA2 /* ApiRequestParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRequestParam.swift; sourceTree = "<group>"; };
 		4FA3F9F52021714500DCCAA2 /* InfomationApiParamProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfomationApiParamProtocol.swift; sourceTree = "<group>"; };
 		4FA3F9F92021768F00DCCAA2 /* Dictionary+URLParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+URLParam.swift"; sourceTree = "<group>"; };
 		4FA7BB9C2000AE5A00351090 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
@@ -678,7 +678,7 @@
 			isa = PBXGroup;
 			children = (
 				4F946B931FFBCB66001A15B1 /* ApiHelper.swift */,
-				4FA3F9F120216E8F00DCCAA2 /* ApiParam.swift */,
+				4FA3F9F120216E8F00DCCAA2 /* ApiRequestParam.swift */,
 			);
 			name = Api;
 			sourceTree = "<group>";
@@ -1157,7 +1157,7 @@
 				4F75335120297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */,
 				4F5F83E820034EB000696F72 /* ExplorerTableViewController.swift in Sources */,
 				4F7533212028A83B001C7480 /* UIColor+More.swift in Sources */,
-				4FA3F9F420216E8F00DCCAA2 /* ApiParam.swift in Sources */,
+				4FA3F9F420216E8F00DCCAA2 /* ApiRequestParam.swift in Sources */,
 				4F75333F20296868001C7480 /* UserDataHelper.swift in Sources */,
 				4F673868202AEBB200A6AFA7 /* Logger.swift in Sources */,
 				4F5F83D620034BD100696F72 /* InformationDataModel.swift in Sources */,
@@ -1193,7 +1193,7 @@
 				4F7F5466202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */,
 				4F67386C202B089200A6AFA7 /* InformationShareableProtocol.swift in Sources */,
 				4F946B941FFBCB66001A15B1 /* ApiHelper.swift in Sources */,
-				4FA3F9F220216E8F00DCCAA2 /* ApiParam.swift in Sources */,
+				4FA3F9F220216E8F00DCCAA2 /* ApiRequestParam.swift in Sources */,
 				4F75333B202963E3001C7480 /* userdata.xcdatamodeld in Sources */,
 				4F7533202028A83B001C7480 /* UIColor+More.swift in Sources */,
 				4FA7BBA12000C98A00351090 /* UIDevice+ModelName.swift in Sources */,
@@ -1240,7 +1240,7 @@
 				4FA3F9FB2021768F00DCCAA2 /* Dictionary+URLParam.swift in Sources */,
 				4F946BA31FFBDFD9001A15B1 /* ApiHelper.swift in Sources */,
 				4F946BB71FFCA499001A15B1 /* TestUtil.swift in Sources */,
-				4FA3F9F320216E8F00DCCAA2 /* ApiParam.swift in Sources */,
+				4FA3F9F320216E8F00DCCAA2 /* ApiRequestParam.swift in Sources */,
 				4F5F83C12002403F00696F72 /* CoreDataHelper.swift in Sources */,
 				4F5F837A2002278F00696F72 /* InformationDataModel.swift in Sources */,
 				4F946B9C1FFBDEDD001A15B1 /* ApiHelperTest.swift in Sources */,

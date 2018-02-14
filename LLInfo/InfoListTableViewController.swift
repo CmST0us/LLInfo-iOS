@@ -66,7 +66,7 @@ final class InfoListTableViewController: UITableViewController {
                         }
                         let dataCountAfterAdd = self.infoListDataSet.count
                         if dataCountBeforAdd == dataCountAfterAdd {
-                            let p = InfoDataModel.requestInfomationApiParam(afterTimeInterval: firstObj.time!, simpleMode: true)
+                            let p = InfoDataModel.requestInfomationApiRequestParam(afterTimeInterval: firstObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
                             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {
@@ -114,7 +114,7 @@ final class InfoListTableViewController: UITableViewController {
                         }
                         let dataCountAfterAdd = self.infoListDataSet.count
                         if dataCountBeforAdd == dataCountAfterAdd {
-                            let p = InfoDataModel.requestInfomationApiParam(beforeTimeInterval: lastObj.time!, simpleMode: true)
+                            let p = InfoDataModel.requestInfomationApiRequestParam(beforeTimeInterval: lastObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
                             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {
@@ -152,7 +152,7 @@ final class InfoListTableViewController: UITableViewController {
         // 获取App的版本号
         if let appVersionString = infoDic["CFBundleShortVersionString"] as? String {
             if let appVersion = Float(appVersionString) {
-                let param = AppVersionUpdateDataModel.requestApiParam()
+                let param = AppVersionUpdateDataModel.requestApiRequestParam()
                 do {
                     let data = try ApiHelper.shared.request(withParam: param)
                     if let d = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {

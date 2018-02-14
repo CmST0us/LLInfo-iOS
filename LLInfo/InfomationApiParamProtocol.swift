@@ -1,5 +1,5 @@
 //
-//  ApiParamProtocol.swift
+//  ApiRequestParamProtocol.swift
 //  LLInfo
 //
 //  Created by CmST0us on 2018/1/31.
@@ -7,19 +7,19 @@
 //
 
 import Foundation
-protocol InformationApiParamProtocol {
-    static func requestPageApiParam(pageNum: Int, simpleMode: Bool) -> ApiParam
+protocol InformationApiRequestParamProtocol {
+    static func requestPageApiRequestParam(pageNum: Int, simpleMode: Bool) -> ApiRequestParam
     
-    static func requestNewestInformationApiParam(simpleMode: Bool) -> ApiParam
+    static func requestNewestInformationApiRequestParam(simpleMode: Bool) -> ApiRequestParam
     
-    static func requestInfomationApiParam(atTimeIntervalRange range: NSRange, simpleMode: Bool) -> ApiParam
+    static func requestInfomationApiRequestParam(atTimeIntervalRange range: NSRange, simpleMode: Bool) -> ApiRequestParam
     
-    static func requestInfomationApiParam(beforeTimeInterval: TimeInterval, simpleMode: Bool) -> ApiParam
+    static func requestInfomationApiRequestParam(beforeTimeInterval: TimeInterval, simpleMode: Bool) -> ApiRequestParam
     
-    static func requestInfomationApiParam(afterTimeInterval: TimeInterval, simpleMode: Bool) -> ApiParam
+    static func requestInfomationApiRequestParam(afterTimeInterval: TimeInterval, simpleMode: Bool) -> ApiRequestParam
     
-//    static func requestInfomationApiParam(withId id: String) -> ApiParam
+//    static func requestInfomationApiRequestParam(withId id: String) -> ApiRequestParam
     
-    static func requestInformationApiParam(withUrl url: String) -> ApiParam
+    static func requestInformationApiRequestParam(withUrl url: String) -> ApiRequestParam
     
 }

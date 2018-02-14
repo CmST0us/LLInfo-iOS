@@ -71,7 +71,7 @@ final class OfficialNewsListTableViewController: UITableViewController {
                         }
                         let dataCountAfterAdd = self.officialNewsDataModelSet.count
                         if dataCountBeforAdd == dataCountAfterAdd {
-                            let p = OfficialNewsDataModel.requestInfomationApiParam(afterTimeInterval: firstObj.time!, simpleMode: true)
+                            let p = OfficialNewsDataModel.requestInfomationApiRequestParam(afterTimeInterval: firstObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
                             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {
@@ -119,7 +119,7 @@ final class OfficialNewsListTableViewController: UITableViewController {
                         }
                         let dataCountAfterAdd = self.officialNewsDataModelSet.count
                         if dataCountBeforAdd == dataCountAfterAdd {
-                            let p = OfficialNewsDataModel.requestInfomationApiParam(beforeTimeInterval: lastObj.time!, simpleMode: true)
+                            let p = OfficialNewsDataModel.requestInfomationApiRequestParam(beforeTimeInterval: lastObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
                             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                                 for dict in dicts {

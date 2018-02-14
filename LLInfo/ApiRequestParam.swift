@@ -1,5 +1,5 @@
 //
-//  ApiParam.swift
+//  ApiRequestParam.swift
 //  LLInfo
 //
 //  Created by CmST0us on 2018/1/31.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class ApiParam {
+class ApiRequestParam {
     
     struct Method {
         static let GET = "GET"

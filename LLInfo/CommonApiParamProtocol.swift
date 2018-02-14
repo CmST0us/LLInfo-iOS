@@ -1,5 +1,5 @@
 //
-//  ApiParamProtocol.swift
+//  ApiRequestParamProtocol.swift
 //  LLInfo
 //
 //  Created by CmST0us on 2018/2/1.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol CommonApiParamProtocol {
-    static func requestApiParam() -> ApiParam
+protocol CommonApiRequestParamProtocol {
+    static func requestApiRequestParam() -> ApiRequestParam
 }

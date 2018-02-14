@@ -84,11 +84,11 @@ class InformationDetailViewController: UIViewController{
     
     /// setup InformationDetailViewController with model
     /// this method will request server if network is reachable. Or it will fetch database. When it download data from server it will update data in database
-    /// - Parameter model: model is subclass of InformationDataModel, InformationApiParamProtocol, CoreDataModelBridgeProtocol
-    func setup<T>(withInformationDataModel model: T) where T: InformationDataModel, T: InformationApiParamProtocol, T: CoreDataModelBridgeProtocol, T:InformationShareableProtocol {
+    /// - Parameter model: model is subclass of InformationDataModel, InformationApiRequestParamProtocol, CoreDataModelBridgeProtocol
+    func setup<T>(withInformationDataModel model: T) where T: InformationDataModel, T: InformationApiRequestParamProtocol, T: CoreDataModelBridgeProtocol, T:InformationShareableProtocol {
     
         do {
-            let param = T.requestInformationApiParam(withUrl: model.urlPath ?? "")
+            let param = T.requestInformationApiRequestParam(withUrl: model.urlPath ?? "")
             let data = try ApiHelper.shared.request(withParam: param)
             if let dicts = DataModelHelper.shared.payloadDictionaries(withJsonData: data) {
                 let m = T(dictionary: dicts[0])
