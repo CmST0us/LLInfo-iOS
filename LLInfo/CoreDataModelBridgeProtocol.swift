@@ -12,5 +12,5 @@ import CoreData
 protocol CoreDataModelBridgeProtocol {
     static var entityName: String {get}
     
-    func copy(to managerObject: NSManagedObject)
+    func copy(to managedObject: NSManagedObject)
 }

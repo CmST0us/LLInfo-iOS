@@ -43,17 +43,17 @@ class InfoDataModel: InformationDataModel {
 extension InfoDataModel: CoreDataModelBridgeProtocol {
     static var entityName: String = "Info"
     
-    func copy(to managerObject: NSManagedObject) {
-        managerObject.setValue(self.id, forKey: CodingKey.id)
-        managerObject.setValue(self.brief, forKey: CodingKey.brief)
-        managerObject.setValue(self.briefImageUrlPath, forKey: CodingKey.briefImageUrl)
-        managerObject.setValue(self.contentHtml, forKey: CodingKey.contentHtml)
-        managerObject.setValue(self.source, forKey: CodingKey.source)
-        managerObject.setValue(self.sourceName, forKey: CodingKey.sourceName)
-        managerObject.setValue(self.tags?.joined(separator: "||"), forKey: CodingKey.tags)
-        managerObject.setValue(self.title, forKey: CodingKey.title)
-        managerObject.setValue(self.time, forKey: CodingKey.time)
-        managerObject.setValue(self.urlPath, forKey: CodingKey.url)
+    func copy(to managedObject: NSManagedObject) {
+        managedObject.setValue(self.id, forKey: CodingKey.id)
+        managedObject.setValue(self.brief, forKey: CodingKey.brief)
+        managedObject.setValue(self.briefImageUrlPath, forKey: CodingKey.briefImageUrl)
+        managedObject.setValue(self.contentHtml, forKey: CodingKey.contentHtml)
+        managedObject.setValue(self.source, forKey: CodingKey.source)
+        managedObject.setValue(self.sourceName, forKey: CodingKey.sourceName)
+        managedObject.setValue(self.tags?.joined(separator: "||"), forKey: CodingKey.tags)
+        managedObject.setValue(self.title, forKey: CodingKey.title)
+        managedObject.setValue(self.time, forKey: CodingKey.time)
+        managedObject.setValue(self.urlPath, forKey: CodingKey.url)
     }
 }
 
