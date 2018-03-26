@@ -10,6 +10,9 @@ target 'LLInfo' do
   pod 'SDWebImage', '~> 4.0'
   pod 'Tabman', '~> 1.0'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'SSZipArchive'
+  pod 'MBProgressHUD'
+  pod 'TZImagePickerController'
   
   target 'LLInfoTest' do
     inherit! :search_paths
