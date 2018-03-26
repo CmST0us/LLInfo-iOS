@@ -129,6 +129,9 @@
 		4F75334E20296FA5001C7480 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334A20296FA5001C7480 /* Favorite+CoreDataProperties.swift */; };
 		4F75335020297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */; };
 		4F75335120297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */; };
+		4F7C39A0206947B40055872E /* resources.zip in Resources */ = {isa = PBXBuildFile; fileRef = 4F7C399F206947B40055872E /* resources.zip */; };
+		4F7C39A2206948620055872E /* SchoolIdolTomotachiApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7C39A1206948620055872E /* SchoolIdolTomotachiApiHelper.swift */; };
+		4F7C39A620695C080055872E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7C39A520695C080055872E /* MainTabBarController.swift */; };
 		4F7F5466202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
 		4F7F5467202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
 		4F7F5469202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */; };
@@ -345,6 +348,9 @@
 		4F75334920296FA5001C7480 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4F75334A20296FA5001C7480 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataMethod.swift"; sourceTree = "<group>"; };
+		4F7C399F206947B40055872E /* resources.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = resources.zip; sourceTree = "<group>"; };
+		4F7C39A1206948620055872E /* SchoolIdolTomotachiApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolIdolTomotachiApiHelper.swift; sourceTree = "<group>"; };
+		4F7C39A520695C080055872E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Base64EncodedAsUrlParams.swift"; sourceTree = "<group>"; };
 		4F7F5475202DD633008857B6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/InformationList.storyboard"; sourceTree = "<group>"; };
 		4F83D9532023007400827245 /* CommonApiRequestParamProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonApiRequestParamProtocol.swift; sourceTree = "<group>"; };
@@ -572,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				4F946B931FFBCB66001A15B1 /* ApiHelper.swift */,
+				4F7C39A1206948620055872E /* SchoolIdolTomotachiApiHelper.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -600,6 +607,7 @@
 		4F03B3522068BDB70050F0A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4F7C399F206947B40055872E /* resources.zip */,
 				4F03B3542068BDE70050F0A1 /* Xib */,
 				4F03B3532068BDD10050F0A1 /* StoryBoards */,
 				4F662AF21FB96D1800FBEECC /* Assets.xcassets */,
@@ -701,6 +709,7 @@
 		4F03B3EC2068BF960050F0A1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				4F7C39A420695BC20055872E /* TabBar */,
 				4F03B3F42068C08A0050F0A1 /* InformationDetail */,
 				4F03B3F22068C0710050F0A1 /* InfoList */,
 				4F03B3F12068C05E0050F0A1 /* OfficialNewsList */,
@@ -892,6 +901,14 @@
 				4F673855202AE3CF00A6AFA7 /* xinge */,
 			);
 			path = Vendor;
+			sourceTree = "<group>";
+		};
+		4F7C39A420695BC20055872E /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4F7C39A520695C080055872E /* MainTabBarController.swift */,
+			);
+			name = TabBar;
 			sourceTree = "<group>";
 		};
 		4F946B9A1FFBDEDD001A15B1 /* LLInfoTest */ = {
@@ -1131,6 +1148,7 @@
 				4F662AF61FB96D1800FBEECC /* LaunchScreen.storyboard in Resources */,
 				4F06B6592025D03600B7CC18 /* InformationDetail.storyboard in Resources */,
 				4F03B3502068BD790050F0A1 /* SortToolView.xib in Resources */,
+				4F7C39A0206947B40055872E /* resources.zip in Resources */,
 				4F662AF31FB96D1800FBEECC /* Assets.xcassets in Resources */,
 				4F06B6552025CEFB00B7CC18 /* Setting.storyboard in Resources */,
 				4F7F5476202DD633008857B6 /* InformationList.storyboard in Resources */,
@@ -1425,9 +1443,11 @@
 			files = (
 				4F03B3E82068BF730050F0A1 /* SIFCardFilterPredicateEditorTableViewController.swift in Sources */,
 				4F5F83742002206600696F72 /* informations.xcdatamodeld in Sources */,
+				4F7C39A620695C080055872E /* MainTabBarController.swift in Sources */,
 				4F03B40D206921E70050F0A1 /* SIFCardFilterPredicateTableViewCell.swift in Sources */,
 				4F03B3DC2068BEB00050F0A1 /* OpenCVBridgeSwiftHelper.mm in Sources */,
 				4F5F83762002257000696F72 /* InformationCacheHelper.swift in Sources */,
+				4F7C39A2206948620055872E /* SchoolIdolTomotachiApiHelper.swift in Sources */,
 				4F03B3E12068BF2B0050F0A1 /* SIFCardToolListViewController.swift in Sources */,
 				4FA9706A2026C2AE0033B2FF /* InformationPageViewController.swift in Sources */,
 				4FA7BB9D2000AE5A00351090 /* SettingTableViewController.swift in Sources */,

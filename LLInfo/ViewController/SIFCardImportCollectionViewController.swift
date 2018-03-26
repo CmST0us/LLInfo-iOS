@@ -27,6 +27,8 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
     
     var detector: SIFRoundIconDetector!
     var detectorConfiguration: SIFRoundIconDetectorConfiguration!
+    var scanWorkItem: DispatchWorkItem!
+    
     
     var cards: [UserCardDataModel] = []
     
@@ -36,6 +38,8 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
     }
     
     // MARK: IBAction IBOutlet
+    @IBOutlet weak var importButton: UIBarButtonItem!
+    
     @IBAction func onDoImportButtonDown(_ sender: Any) {
         
         progressHud.label.text = "正在导入"
@@ -53,6 +57,7 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: SIFCardToolListViewController.NotificationName.importFinish), object: nil)
         
     }
+    
     
     private func setupDetector() {
         
@@ -83,17 +88,28 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
         
     }
     
+    private func checkCardUpdate() -> Bool {
+        let param = CardDataModel.requestIds()
+        if let resData = try? SchoolIdolTomotachiApiHelper.shared.request(withParam: param) {
+            if let array = DataModelHelper.shared.array(withJsonData: resData) as? [Int] {
+                return !(array.count == SIFCacheHelper.shared.cards.count)
+            }
+        }
+        return false
+    }
+    
     private func scanScreenshot() {
         
-        self.progressHud = MBProgressHUD(view: self.view)
+        self.progressHud = MBProgressHUD(view: UIApplication.shared.keyWindow!)
         self.view.addSubview(self.progressHud)
         self.progressHud.show(animated: true)
         self.progressHud.label.text = "正在扫描图片"
         self.cards = []
-        func hideProgressHud() {
+        
+        func hideProgressHud(after: TimeInterval = 0) {
             
             DispatchQueue.main.async {
-                self.progressHud.hide(animated: true)
+                self.progressHud.hide(animated: true, afterDelay: after)
             }
             
         }
@@ -118,18 +134,32 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
             
             DispatchQueue.main.async {
                 self.collectionView?.reloadData()
+                self.importButton.isEnabled = true
             }
             
         }
         
-        DispatchQueue.global().async {
-            if SIFCacheHelper.shared.cards.count == 0 {
-                errorAlert(title: "扫描游戏截图", message: "卡片数据不存在，请前往设置下载更新卡片数据")
+        scanWorkItem = DispatchWorkItem(block: {
+            setProgressHudLabelText("检查卡片更新")
+            if self.checkCardUpdate() {
+                setProgressHudLabelText("正在更新卡片")
+                do {
+                    try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
+                        setProgressHudLabelText("正在更新卡片 \(String(current)) / \(String(total))")
+                    })
+                    hideProgressHud()
+                } catch let e as ApiRequestError {
+                    setProgressHudLabelText(e.message)
+                    hideProgressHud(after: 1.0)
+                    return
+                } catch {
+                    setProgressHudLabelText(error.localizedDescription)
+                    hideProgressHud(after: 1.0)
+                    return
+                }
             }
             
-            Logger.shared.output("load cards cache ok")
-            
-            setProgressHudLabelText("更新卡片数据")
+            setProgressHudLabelText("缓存图片数据")
             self.setupDetector()
             setProgressHudLabelText("扫描中")
             
@@ -170,8 +200,8 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
             
             hideProgressHud()
             finish()
-            
-        }
+        })
+        DispatchQueue.global().async(execute: self.scanWorkItem)
         
     }
 
@@ -195,9 +225,11 @@ extension SIFCardImportCollectionViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    
+    override func viewDidDisappear(_ animated: Bool) {
         
-        
+        super.viewDidDisappear(animated)
+        scanWorkItem.cancel()
         
     }
     

@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.setupApiHelper()
         self.setupXinge()
+        self.setupApiHelper()
+        self.setupCardCache()
         
         self.reportNotification(info: launchOptions)
         return true
@@ -68,9 +70,31 @@ extension AppDelegate {
     func setupApiHelper() {
         #if arch(i386) || arch(x86_64)
             ApiHelper.shared.baseUrlPath = "http://127.0.0.1:3000/api/v1"
+            SchoolIdolTomotachiApiHelper.shared.baseUrlPath = "http://schoolido.lu/api"
         #else
             ApiHelper.shared.baseUrlPath = "https://www.llinfo.club/api/v1"
+            SchoolIdolTomotachiApiHelper.shared.baseUrlPath = "http://schoolido.lu/api"
+            
         #endif
+        
+        ApiHelper.shared.taskWaitTime = 10
+        SchoolIdolTomotachiApiHelper.shared.taskWaitTime = 10
+    }
+    
+    func setupCardCache() {
+        let cacheDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true)[0].appendingPathComponent("resources")
+        
+        if FileManager.default.fileExists(atPath: cacheDir) {
+            try? FileManager.default.createDirectory(atPath: cacheDir, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        let cache = SIFCacheHelper.shared
+        cache.cacheDirectory = cacheDir
+        
+        if !cache.isCardsCached {
+            assert(cache.unzipResourceData())
+            cache.cards = cache.loadCardsJsonFile()
+        }
     }
     
     func requestPushAuthorization() {

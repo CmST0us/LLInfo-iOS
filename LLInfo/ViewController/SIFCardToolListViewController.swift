@@ -302,6 +302,7 @@ class SIFCardToolListViewController: UIViewController {
             photoPicker.pickerDelegate = self
             photoPicker.naviBgColor = UIColor.navigationBar
             photoPicker.naviTitleColor = UIColor.white
+            photoPicker.allowPickingOriginalPhoto = false
             
             self.present(photoPicker, animated: true, completion: nil)
         }

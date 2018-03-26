@@ -131,12 +131,12 @@ extension SIFCacheHelper {
         do {
             //request total cards id
             let totalCardsIdParam = CardDataModel.requestIds()
-            let totalCardsIdData = try ApiHelper.shared.request(withParam: totalCardsIdParam)
+            let totalCardsIdData = try SchoolIdolTomotachiApiHelper.shared.request(withParam: totalCardsIdParam)
             let cardIdsArray = DataModelHelper.shared.array(withJsonData: totalCardsIdData) as! [Int]
             
             while haveNext {
                 let p = CardDataModel.requestPage(page, pageSize: 100)
-                let data = try ApiHelper.shared.request(withParam: p)
+                let data = try SchoolIdolTomotachiApiHelper.shared.request(withParam: p)
                 if DataModelHelper.shared.next(withJsonData: data) == nil {
                     haveNext = false
                 }

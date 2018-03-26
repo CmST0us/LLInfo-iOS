@@ -168,7 +168,7 @@ extension SIFCardSetNameSelectTableViewController {
     
     static func storyBoardInstance() -> SIFCardSetNameSelectTableViewController {
         
-        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
+        let storyBoard = UIStoryboard.init(name: "SIFCardTool", bundle: nil)
         return storyBoard.instantiateViewController(withIdentifier: "SIFCardSetNameSelectTableViewController") as! SIFCardSetNameSelectTableViewController
         
     }
