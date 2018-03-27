@@ -113,7 +113,7 @@ extension SIFCardAllCardImportCollectionViewController {
                 dest.delegate = self
                 dest.templateRow = [
                     SIFCardFilterPredicateEditorRowTemplate.init(
-                        withLeftExpression: (expression: NSExpression.init(forKeyPath: "id"), displayName: "卡片ID"),
+                        withLeftExpression: (expression: NSExpression.init(forKeyPath: "id.stringValue"), displayName: "卡片ID"),
                         rightExpression: [(expression: NSExpression.init(expressionType: NSExpression.ExpressionType.variable), displayName: "")],
                         condition: SIFCardFilterPredicateCondition.init(withConditions: [SIFCardFilterPredicateCondition.Condition.equal]),
                         rightExpressionType: .variable),

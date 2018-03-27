@@ -63,10 +63,9 @@ class SIFCardFilterPredicateCondition: NSObject {
         }
     }
     func currentConditionsDisplayName() -> [String] {
-//        return conditions.map { item in
-//            return NSLocalizedString(item.rawValue, comment: "")
-//        }
-        return currentConditions()
+        return conditions.map { item in
+            return NSLocalizedString(item.rawValue, comment: "")
+        }
     }
 }
 

@@ -61,7 +61,7 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
         let cardCache = SIFCacheHelper.shared.cards
         self.detectorConfiguration = SIFRoundIconDetectorConfiguration.defaultRoundIconConfiguration(radio: 0.5)
         let patternImage = UIImage.init(contentsOfFile: SIFCacheHelper.shared.cacheDirectory.appendingPathComponent("pattern.png"))
-        if  patternImage != nil && usePatternCache{
+        if patternImage != nil && usePatternCache {
             self.detector = SIFRoundIconDetector(withCards: cardCache, configuration: self.detectorConfiguration, roundCardImagePattern: patternImage!.mat)
             Logger.shared.console("use pattern image cache")
         } else {
@@ -138,7 +138,7 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
         }
         
         scanWorkItem = DispatchWorkItem(block: {
-            var willUpdate = false
+            var useCache = true
             setProgressHudLabelText("检查卡片更新")
             if self.checkCardUpdate() {
                 setProgressHudLabelText("正在更新卡片")
@@ -146,15 +146,15 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
                     try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
                         setProgressHudLabelText("正在更新卡片 \(String(current)) / \(String(total))")
                     })
-                    willUpdate = true
+                    useCache = false
                     hideProgressHud()
                 } catch let e as ApiRequestError {
-                    willUpdate = false
+                    useCache = true
                     setProgressHudLabelText(e.message)
                     hideProgressHud(after: 1.0)
                     return
                 } catch {
-                    willUpdate = false
+                    useCache = true
                     setProgressHudLabelText(error.localizedDescription)
                     hideProgressHud(after: 1.0)
                     return
@@ -162,7 +162,7 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
             }
             
             setProgressHudLabelText("缓存图片数据")
-            self.setupDetector(usePatternCache: willUpdate)
+            self.setupDetector(usePatternCache: useCache)
             setProgressHudLabelText("扫描中")
             
             for screenshot in self.screenshots {
@@ -262,11 +262,16 @@ extension SIFCardScreenshotImportCollectionViewController {
         let cardDataModel = SIFCacheHelper.shared.cards[userCard.cardId]
         cell.setupView(withCard: cardDataModel!, userCard: userCard)
         cell.valueChangeHandle = { [weak self] v in
-            let index = collectionView.indexPath(for: v.cell)!
-            let card = self?.cards[index.row]
-            card?.isIdolized = v.isIdolized
-            card?.isImport = v.isImport
-            card?.isKizunaMax = v.isKizunaMax
+            if let index = collectionView.indexPath(for: v.cell) {
+                let uc = self?.cards[index.row]
+                let c = SIFCacheHelper.shared.cards[uc!.cardId]
+                
+                uc?.isIdolized = v.isIdolized
+                uc?.isImport = v.isImport
+                uc?.isKizunaMax = v.isKizunaMax
+                
+                v.cell.setupView(withCard: c!, userCard: uc!)
+            }
         }
         return cell
         
