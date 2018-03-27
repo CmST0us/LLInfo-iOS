@@ -46,6 +46,8 @@ class SIFCardImportCollectionViewCell: SIFUserCardCollectionViewCell {
         }
     }
     
+    var valueChangeHandle: (((isImport: Bool, isIdolized: Bool, isKizunaMax: Bool, cell: SIFCardImportCollectionViewCell)) -> Void)? = nil
+    
     @IBOutlet weak var isKizunaMaxButton: UIButton!
     
     @IBOutlet weak var isIdolizedButton: UIButton!
@@ -53,25 +55,34 @@ class SIFCardImportCollectionViewCell: SIFUserCardCollectionViewCell {
     @IBOutlet weak var isImportButton: UIButton!
     
     
-    @IBAction func onKizunaMaxButtonDown(_ sender: Any) {
+    @IBAction func onKizunaMaxButtonDown(_ sender: UIButton) {
         self.isKizunaMax = !self.isKizunaMax
+        if let handle = self.valueChangeHandle {
+            handle((isImport: isImport, isIdolized: isIdolized, isKizunaMax: isKizunaMax, cell: self))
+        }
     }
     
     
-    @IBAction func onIdolizedButtonDown(_ sender: Any) {
+    @IBAction func onIdolizedButtonDown(_ sender: UIButton) {
         self.isIdolized = !self.isIdolized
+        if let handle = self.valueChangeHandle {
+            handle((isImport: isImport, isIdolized: isIdolized, isKizunaMax: isKizunaMax, cell: self))
+        }
     }
     
-    @IBAction func onImportButtonDown(_ sender: Any) {
+    @IBAction func onImportButtonDown(_ sender: UIButton) {
         self.isImport = !self.isImport
+        if let handle = self.valueChangeHandle {
+            handle((isImport: isImport, isIdolized: isIdolized, isKizunaMax: isKizunaMax, cell: self))
+        }
     }
     
     override func setupView(withCard: CardDataModel, userCard: UserCardDataModel) {
         
         super.setupView(withCard: withCard, userCard: userCard)
         self.isKizunaMax = userCard.isKizunaMax
-        self.isImport = true
-        self.isIdolized = userCard.idolized
+        self.isImport = userCard.isImport
+        self.isIdolized = userCard.isIdolized
         
     }
     

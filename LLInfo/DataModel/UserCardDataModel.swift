@@ -10,7 +10,7 @@ import CoreData
 @objcMembers
 class UserCardDataModel: NSObject {
     var cardId: Int = 0
-    var idolized: Bool = false
+    var isIdolized: Bool = false
     var cardSetName: String = ""
     
     var isImport: Bool = true
@@ -18,7 +18,7 @@ class UserCardDataModel: NSObject {
 
     init(withDictionary dictionary:[String: Any]) {
         cardId = dictionary["cardId"] as! Int
-        idolized = dictionary["isIdolized"] as! Bool
+        isIdolized = dictionary["isIdolized"] as! Bool
         cardSetName = dictionary["cardSetName"] as! String
         isKizunaMax = dictionary["isKizunaMax"] as! Bool
     }
@@ -34,7 +34,7 @@ extension UserCardDataModel: CoreDataModelBridgeProtocol {
     
     func copy(to managedObject: NSManagedObject) {
         managedObject.setValue(cardId, forKey: "cardId")
-        managedObject.setValue(idolized, forKey: "isIdolized")
+        managedObject.setValue(isIdolized, forKey: "isIdolized")
         managedObject.setValue(cardSetName, forKey: "cardSetName")
         managedObject.setValue(isKizunaMax, forKey: "isKizunaMax")
     }

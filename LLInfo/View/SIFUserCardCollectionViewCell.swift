@@ -30,28 +30,37 @@ class SIFUserCardCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func setupView(withCard: CardDataModel, userCard: UserCardDataModel) {
-        
-        cardRoundImageView.image = SIFCacheHelper.shared.image(withUrl: URL(string: (userCard.idolized ? withCard.roundCardIdolizedImage : withCard.roundCardImage) ?? ""))
-        
-        rarityNameIdLabel.text = "\(withCard.rarity) \(withCard.idol.japaneseName ?? withCard.idol.englishName) (\(String(withCard.id.intValue)))"
-        
-        let kizunaMaxString = userCard.isKizunaMax ? "绊满" : "绊0"
-        let idolizedString = userCard.idolized ? "已觉醒" : "未觉醒"
+    func setupCardRoundImageView(withCard card: CardDataModel, idolized: Bool) {
+        cardRoundImageView.image = SIFCacheHelper.shared.image(withUrl: URL(string: (idolized ? card.roundCardIdolizedImage : card.roundCardImage) ?? ""))
+    }
+    
+    func setupIdolizedKizunaLabel(isKizunaMax: Bool, isIdolized: Bool) {
+        let kizunaMaxString = isKizunaMax ? "绊满" : "绊0"
+        let idolizedString = isIdolized ? "已觉醒" : "未觉醒"
         
         if idolizedKizunaLabel != nil {
             idolizedKizunaLabel.text = (kizunaMaxString + " " + idolizedString)
         }
-
-        smileIndicatorView.maxScore = withCard.statisticsSmile(idolized: true, isKizunaMax: true).doubleValue
-        smileIndicatorView.score = withCard.statisticsSmile(idolized: userCard.idolized, isKizunaMax: userCard.isKizunaMax).doubleValue
+    }
+    
+    func setupScoreIndicator(withCard card: CardDataModel, isKizunaMax: Bool, isIdolized: Bool)  {
+        smileIndicatorView.maxScore = card.statisticsSmile(idolized: true, isKizunaMax: true).doubleValue
+        smileIndicatorView.score = card.statisticsSmile(idolized: isIdolized, isKizunaMax: isKizunaMax).doubleValue
         
-        coolScoreIndicatorView.maxScore = withCard.statisticsCool(idolized: true, isKizunaMax: true).doubleValue
-        coolScoreIndicatorView.score = withCard.statisticsCool(idolized: userCard.idolized, isKizunaMax: userCard.isKizunaMax).doubleValue
+        coolScoreIndicatorView.maxScore = card.statisticsCool(idolized: true, isKizunaMax: true).doubleValue
+        coolScoreIndicatorView.score = card.statisticsCool(idolized: isIdolized, isKizunaMax: isKizunaMax).doubleValue
         
-        pureScoreIndicatorView.maxScore = withCard.statisticsPure(idolized: true, isKizunaMax: true).doubleValue
-        pureScoreIndicatorView.score = withCard.statisticsPure(idolized: userCard.idolized, isKizunaMax: userCard.isKizunaMax).doubleValue
+        pureScoreIndicatorView.maxScore = card.statisticsPure(idolized: true, isKizunaMax: true).doubleValue
+        pureScoreIndicatorView.score = card.statisticsPure(idolized: isIdolized, isKizunaMax: isKizunaMax).doubleValue
+    }
+    
+    func setupView(withCard: CardDataModel, userCard: UserCardDataModel) {
+        setupCardRoundImageView(withCard: withCard, idolized: userCard.isIdolized)
+        setupIdolizedKizunaLabel(isKizunaMax: userCard.isKizunaMax, isIdolized: userCard.isIdolized)
         
+        rarityNameIdLabel.text = "\(withCard.rarity) \(withCard.idol.japaneseName ?? withCard.idol.englishName) (\(String(withCard.id.intValue)))"
+        
+        setupScoreIndicator(withCard: withCard, isKizunaMax: userCard.isKizunaMax, isIdolized: userCard.isIdolized)
     }
     
 }

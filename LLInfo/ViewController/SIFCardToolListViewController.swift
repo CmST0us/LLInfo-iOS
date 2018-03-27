@@ -16,7 +16,8 @@ class SIFCardToolListViewController: UIViewController {
     
     struct Segue {
         static let cardFilterSegue = "cardFilterSegue"
-        static let importCardSegue = "importCardSegue"
+        static let screenshotImportSegue = "screenshotImportSegue"
+        static let allCardImportSegue = "allCardImportSegue"
     }
     
     struct Identificer {
@@ -26,8 +27,8 @@ class SIFCardToolListViewController: UIViewController {
     }
     
     struct NotificationName {
-        static let importFinish = "SIFCardImportCollectionViewController.importFinish"
-        static let switchCardSet = "SIFCardImportCollectionViewController.switchCardSet"
+        static let importFinish = "SIFCardScreenshotImportCollectionViewController.importFinish"
+        static let switchCardSet = "SIFCardScreenshotImportCollectionViewController.switchCardSet"
     }
     
     //MARK: Private Member
@@ -70,7 +71,7 @@ class SIFCardToolListViewController: UIViewController {
                     [aCard.minimumStatisticsCool, aCard.minimumStatisticsPure, aCard.minimumStatisticsSmile],
                     [aCard.nonIdolizedMaximumStatisticsCool, aCard.nonIdolizedMaximumStatisticsPure, aCard.nonIdolizedMaximumStatisticsSmile],
                     [aCard.idolizedMaximumStatisticsCool, aCard.idolizedMaximumStatisticsPure, aCard.idolizedMaximumStatisticsSmile],
-                    [aCard.statisticsCool(idolized: a.idolized, isKizunaMax: a.isKizunaMax), aCard.statisticsPure(idolized: a.idolized, isKizunaMax: a.isKizunaMax), aCard.statisticsSmile(idolized: a.idolized, isKizunaMax: a.isKizunaMax)]
+                    [aCard.statisticsCool(idolized: a.isIdolized, isKizunaMax: a.isKizunaMax), aCard.statisticsPure(idolized: a.isIdolized, isKizunaMax: a.isKizunaMax), aCard.statisticsSmile(idolized: a.isIdolized, isKizunaMax: a.isKizunaMax)]
                     
                 ]
                 
@@ -78,7 +79,7 @@ class SIFCardToolListViewController: UIViewController {
                     [bCard.minimumStatisticsCool, bCard.minimumStatisticsPure, bCard.minimumStatisticsSmile],
                     [bCard.nonIdolizedMaximumStatisticsCool, bCard.nonIdolizedMaximumStatisticsPure, bCard.nonIdolizedMaximumStatisticsSmile],
                     [bCard.idolizedMaximumStatisticsCool, bCard.idolizedMaximumStatisticsPure, bCard.idolizedMaximumStatisticsSmile],
-                    [bCard.statisticsCool(idolized: b.idolized, isKizunaMax: b.isKizunaMax), bCard.statisticsPure(idolized: b.idolized, isKizunaMax: b.isKizunaMax), bCard.statisticsSmile(idolized: b.idolized, isKizunaMax: b.isKizunaMax)]
+                    [bCard.statisticsCool(idolized: b.isIdolized, isKizunaMax: b.isKizunaMax), bCard.statisticsPure(idolized: b.isIdolized, isKizunaMax: b.isKizunaMax), bCard.statisticsSmile(idolized: b.isIdolized, isKizunaMax: b.isKizunaMax)]
                 ]
                 
                 let attributeIndex = sortConfigSelectIndexTuple.attribute
@@ -97,11 +98,11 @@ class SIFCardToolListViewController: UIViewController {
         }
     }
     
-    private var cardFiltePredicates: [SIFCardFilterPredicate] = []
+    private var cardFilterPredicates: [SIFCardFilterPredicate] = []
 
     private var filteCardDataSource: [UserCardDataModel] {
         
-        let p = cardFiltePredicates.map { (item) -> NSPredicate in
+        let p = cardFilterPredicates.map { (item) -> NSPredicate in
             item.predicate
         }
         
@@ -125,7 +126,7 @@ class SIFCardToolListViewController: UIViewController {
     
     private var collectionViewDataSource: [UserCardDataModel] {
         
-        if cardFiltePredicates.count > 0 {
+        if cardFilterPredicates.count > 0 {
             return filteCardDataSource
         }
         
@@ -288,7 +289,7 @@ class SIFCardToolListViewController: UIViewController {
         
         let addMethodSheet = UIAlertController(title: "添加卡片", message: nil, preferredStyle: .actionSheet)
         let addMethodAllCard = UIAlertAction(title: "从所有卡片中添加", style: .default) { (action) in
-            
+            self.performSegue(withIdentifier: Segue.allCardImportSegue, sender: nil)
         }
         let addMethodScreenshot = UIAlertAction(title: "从游戏截图添加", style: .default) { (action) in
             guard self.isPhotoLibraryAvailable() else {
@@ -495,7 +496,7 @@ extension SIFCardToolListViewController {
         if let identifier = segue.identifier {
             if identifier == Segue.cardFilterSegue {
                 let dest = (segue.destination as! UINavigationController).topViewController! as! SIFCardFilterViewController
-                dest.predicates = self.cardFiltePredicates
+                dest.predicates = self.cardFilterPredicates
                 dest.delegate = self
                 dest.templateRow = [
                     SIFCardFilterPredicateEditorRowTemplate.init(
@@ -530,8 +531,8 @@ extension SIFCardToolListViewController {
                         condition: SIFCardFilterPredicateCondition.init(withConditions: [SIFCardFilterPredicateCondition.Condition.equal]),
                         rightExpressionType: NSExpression.ExpressionType.constantValue)
                 ]
-            } else if identifier == Segue.importCardSegue {
-                let importViewController = segue.destination as! SIFCardImportCollectionViewController
+            } else if identifier == Segue.screenshotImportSegue {
+                let importViewController = segue.destination as! SIFCardScreenshotImportCollectionViewController
                 importViewController.screenshots = self.selectScreenshots
             }
         }
@@ -544,7 +545,7 @@ extension SIFCardToolListViewController: SIFCardFilterDelegate {
     
     func cardFilter(_ cardFilter: SIFCardFilterViewController, didFinishPredicateEdit predicates: [SIFCardFilterPredicate]) {
         
-        self.cardFiltePredicates = predicates
+        self.cardFilterPredicates = predicates
         self.userCardCollectionView.reloadData()
         
     }
@@ -560,7 +561,7 @@ extension SIFCardToolListViewController: TZImagePickerControllerDelegate {
         var originCallCount: Int = 0 {
             didSet {
                 if originCallCount == assets.count {
-                    self.performSegue(withIdentifier: Segue.importCardSegue, sender: nil)
+                    self.performSegue(withIdentifier: Segue.screenshotImportSegue, sender: nil)
                 }
             }
             

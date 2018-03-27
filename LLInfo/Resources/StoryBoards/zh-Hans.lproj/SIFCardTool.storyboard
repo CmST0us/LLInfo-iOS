@@ -157,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yBr-Wl-lfD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="-726"/>
+            <point key="canvasLocation" x="812" y="-1038"/>
         </scene>
         <!--Card Filter Predicate Editor Table View Controller-->
         <scene sceneID="VP9-9o-FoO">
@@ -220,7 +220,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6UD-SF-B8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1590.625" y="-726.5625"/>
+            <point key="canvasLocation" x="1564" y="-1038"/>
         </scene>
         <!--Card Tool List View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -533,7 +533,8 @@
                         <outlet property="editButton" destination="0Hg-0u-S4N" id="GPJ-qb-9QR"/>
                         <outlet property="selectCardSetButton" destination="NGO-Pu-iuz" id="pzC-Eo-zEI"/>
                         <outlet property="userCardCollectionView" destination="6OP-XS-KvD" id="8cc-QE-tvW"/>
-                        <segue destination="V9c-FC-8dx" kind="show" identifier="importCardSegue" id="01C-8T-7CG"/>
+                        <segue destination="V9c-FC-8dx" kind="show" identifier="screenshotImportSegue" id="01C-8T-7CG"/>
+                        <segue destination="73u-4H-wZF" kind="show" identifier="allCardImportSegue" id="rTr-oc-EHk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -596,12 +597,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t9W-60-6CF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-54" y="710"/>
+            <point key="canvasLocation" x="-54" y="769"/>
         </scene>
         <!--导入卡片-->
         <scene sceneID="BzP-12-1Iz">
             <objects>
-                <collectionViewController storyboardIdentifier="SIFCardImportCollectionViewController" title="导入卡片" clearsSelectionOnViewWillAppear="NO" id="V9c-FC-8dx" customClass="SIFCardImportCollectionViewController" customModule="LLInfo" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="SIFCardScreenshotImportCollectionViewController" title="导入卡片" clearsSelectionOnViewWillAppear="NO" id="V9c-FC-8dx" customClass="SIFCardScreenshotImportCollectionViewController" customModule="LLInfo" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rm8-qs-dpO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -907,14 +908,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="importButton" destination="6Lg-du-N9w" id="e4M-m7-LDY"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7E-7v-gS3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="184"/>
+            <point key="canvasLocation" x="1230" y="-260"/>
         </scene>
         <!--卡片-->
         <scene sceneID="G19-BG-EpO">
@@ -961,7 +961,330 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q56-Ye-YIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="86" y="-726"/>
+            <point key="canvasLocation" x="86" y="-1038"/>
+        </scene>
+        <!--导入卡片-->
+        <scene sceneID="JzO-qk-ZHn">
+            <objects>
+                <collectionViewController storyboardIdentifier="SIFCardAllCardImportCollectionViewController" title="导入卡片" clearsSelectionOnViewWillAppear="NO" id="73u-4H-wZF" customClass="SIFCardAllCardImportCollectionViewController" customModule="LLInfo" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="QMm-97-caD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kKf-xI-Lln">
+                            <size key="itemSize" width="174" height="280"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="8" minY="4" maxX="8" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCell" id="BuQ-Rb-FZK" customClass="SIFCardImportCollectionViewCell" customModule="LLInfo" customModuleProvider="target">
+                                <rect key="frame" x="8" y="4" width="174" height="280"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="174" height="280"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aq3-OI-Zth">
+                                            <rect key="frame" x="8" y="8" width="158" height="145.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="145.5" id="Eb2-uh-rku"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="8B1-HA-E2E">
+                                            <rect key="frame" x="8" y="180" width="158" height="56"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="BKz-7K-bMW">
+                                                    <rect key="frame" x="0.0" y="0.0" width="158" height="16"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="清纯" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvA-Of-sfi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="29" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="wY8-dM-uS1">
+                                                            <rect key="frame" x="36" y="0.0" width="122" height="16"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xs1-iH-c15" customClass="ScoreIndicatorView" customModule="LLInfo" customModuleProvider="target">
+                                                                    <rect key="frame" x="12" y="0.0" width="110" height="16"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="110" id="ThP-Rb-c1d"/>
+                                                                        <constraint firstAttribute="height" constant="16" id="UPR-tw-dVO"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="maxScore">
+                                                                            <real key="value" value="4200"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="minScore">
+                                                                            <real key="value" value="0.0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="score">
+                                                                            <real key="value" value="3000"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="indicatorBackgroundColor">
+                                                                            <color key="value" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="scoreLabelTextSize">
+                                                                            <real key="value" value="11"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="indicatorProcessColor">
+                                                                            <color key="value" red="0.12637946010000001" green="0.66992861029999995" blue="0.32429128889999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="indicatorCornerRadius">
+                                                                            <real key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="pdY-82-naD">
+                                                    <rect key="frame" x="0.0" y="20" width="158" height="16"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="洒脱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZG-Ze-NaH">
+                                                            <rect key="frame" x="0.0" y="0.0" width="29" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="ez6-ja-NfX">
+                                                            <rect key="frame" x="33" y="0.0" width="125" height="16"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fo-Tf-fwH" customClass="ScoreIndicatorView" customModule="LLInfo" customModuleProvider="target">
+                                                                    <rect key="frame" x="15" y="0.0" width="110" height="16"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="16" id="kTF-SX-dk1"/>
+                                                                        <constraint firstAttribute="width" constant="110" id="pSt-DE-fRS"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="maxScore">
+                                                                            <real key="value" value="4200"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="minScore">
+                                                                            <real key="value" value="0.0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="score">
+                                                                            <real key="value" value="3000"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="indicatorBackgroundColor">
+                                                                            <color key="value" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="scoreLabelTextSize">
+                                                                            <real key="value" value="11"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="indicatorProcessColor">
+                                                                            <color key="value" red="0.01273097284" green="0.59783947469999998" blue="0.92159408330000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="indicatorCornerRadius">
+                                                                            <real key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="vIX-Om-zMZ">
+                                                    <rect key="frame" x="0.0" y="40" width="158" height="16"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="甜美" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfY-tD-Dwp">
+                                                            <rect key="frame" x="0.0" y="0.0" width="29" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="W7i-rW-cOX">
+                                                            <rect key="frame" x="33" y="0.0" width="125" height="16"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgc-LX-fhj" customClass="ScoreIndicatorView" customModule="LLInfo" customModuleProvider="target">
+                                                                    <rect key="frame" x="15" y="0.0" width="110" height="16"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="16" id="muN-lO-XSS"/>
+                                                                        <constraint firstAttribute="width" constant="110" id="sc5-ou-kJP"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="maxScore">
+                                                                            <real key="value" value="4200"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="minScore">
+                                                                            <real key="value" value="0.0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="score">
+                                                                            <real key="value" value="3000"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="indicatorBackgroundColor">
+                                                                            <color key="value" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="indicatorProcessColor">
+                                                                            <color key="value" red="0.90057617430000003" green="0.0095076672730000002" blue="0.43578991290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="indicatorCornerRadius">
+                                                                            <real key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="scoreLabelTextSize">
+                                                                            <real key="value" value="11"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </view>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="RARITY NAME (ID)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjE-dl-uFl">
+                                            <rect key="frame" x="8" y="158" width="135.5" height="18"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="fz8-z8-zQV">
+                                            <rect key="frame" x="13" y="244" width="148" height="24"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gov-lg-PKy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="24"/>
+                                                    <color key="backgroundColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="9lO-PX-fWc"/>
+                                                        <constraint firstAttribute="height" constant="24" id="hSA-Hw-q6U"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <state key="normal" title="绊满">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onKizunaMaxButtonDown:" destination="BuQ-Rb-FZK" eventType="touchUpInside" id="ePF-fW-hbY"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1r-9N-2Vi">
+                                                    <rect key="frame" x="52" y="0.0" width="44" height="24"/>
+                                                    <color key="backgroundColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="FA1-Xd-ZT4"/>
+                                                        <constraint firstAttribute="width" constant="44" id="yD1-CB-GvK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <state key="normal" title="觉醒">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onIdolizedButtonDown:" destination="BuQ-Rb-FZK" eventType="touchUpInside" id="OFz-BW-MAw"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8x-vN-1UI">
+                                                    <rect key="frame" x="104" y="0.0" width="44" height="24"/>
+                                                    <color key="backgroundColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="Hik-uZ-DbN"/>
+                                                        <constraint firstAttribute="height" constant="24" id="Ywr-3T-VyG"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                    <state key="normal" title="导入">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onImportButtonDown:" destination="BuQ-Rb-FZK" eventType="touchUpInside" id="fe7-J3-Evt"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="aq3-OI-Zth" secondAttribute="trailing" constant="8" id="ETv-gM-1mB"/>
+                                    <constraint firstItem="xjE-dl-uFl" firstAttribute="leading" secondItem="BuQ-Rb-FZK" secondAttribute="leadingMargin" id="GV3-BJ-EcM"/>
+                                    <constraint firstItem="aq3-OI-Zth" firstAttribute="leading" secondItem="BuQ-Rb-FZK" secondAttribute="leading" constant="8" id="SBa-Df-VxQ"/>
+                                    <constraint firstItem="aq3-OI-Zth" firstAttribute="top" secondItem="BuQ-Rb-FZK" secondAttribute="top" constant="8" id="YSr-ot-b4W"/>
+                                    <constraint firstItem="fz8-z8-zQV" firstAttribute="centerX" secondItem="BuQ-Rb-FZK" secondAttribute="centerX" id="b5a-2K-1b4"/>
+                                    <constraint firstItem="fz8-z8-zQV" firstAttribute="top" secondItem="8B1-HA-E2E" secondAttribute="bottom" constant="8" id="k79-QZ-XLZ"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="8B1-HA-E2E" secondAttribute="trailing" id="pdT-j6-j5e"/>
+                                    <constraint firstItem="8B1-HA-E2E" firstAttribute="leading" secondItem="BuQ-Rb-FZK" secondAttribute="leadingMargin" id="pwh-Tc-hfA"/>
+                                    <constraint firstItem="xjE-dl-uFl" firstAttribute="top" secondItem="aq3-OI-Zth" secondAttribute="bottom" constant="4" id="qmb-28-FYP"/>
+                                    <constraint firstItem="8B1-HA-E2E" firstAttribute="top" secondItem="xjE-dl-uFl" secondAttribute="bottom" constant="4" id="z7T-PP-LIF"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="1" height="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.20000000000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="cardRoundImageView" destination="aq3-OI-Zth" id="yfh-68-8Po"/>
+                                    <outlet property="coolScoreIndicatorView" destination="9fo-Tf-fwH" id="zfC-Rf-5Hf"/>
+                                    <outlet property="isIdolizedButton" destination="A1r-9N-2Vi" id="h0b-R4-dP7"/>
+                                    <outlet property="isImportButton" destination="X8x-vN-1UI" id="uhV-gF-6L8"/>
+                                    <outlet property="isKizunaMaxButton" destination="gov-lg-PKy" id="PMJ-77-Dzh"/>
+                                    <outlet property="pureScoreIndicatorView" destination="xs1-iH-c15" id="23q-S4-BLd"/>
+                                    <outlet property="rarityNameIdLabel" destination="xjE-dl-uFl" id="6Cn-kO-bRV"/>
+                                    <outlet property="smileIndicatorView" destination="rgc-LX-fhj" id="frh-Ij-uYB"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="73u-4H-wZF" id="gFo-Pl-zQs"/>
+                            <outlet property="delegate" destination="73u-4H-wZF" id="ufl-st-Yr4"/>
+                        </connections>
+                    </collectionView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="导入卡片" id="kUj-Dl-lWY">
+                        <rightBarButtonItems>
+                            <barButtonItem title="导入" id="TJh-lr-Pc8">
+                                <connections>
+                                    <action selector="onImportButtonDown:" destination="73u-4H-wZF" id="fax-e9-OQ6"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="navbar_filter_fill" id="fvY-qZ-cIc">
+                                <connections>
+                                    <segue destination="2uu-p9-7Tw" kind="popoverPresentation" identifier="cardFilterSegue" popoverAnchorBarButtonItem="fvY-qZ-cIc" id="1gY-9I-0s4">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QMW-ro-IZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1230" y="603"/>
         </scene>
     </scenes>
     <resources>
@@ -970,4 +1293,7 @@
         <image name="navbar_filter_fill" width="18" height="18"/>
         <image name="tabbar_card_set" width="27" height="23"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="1gY-9I-0s4"/>
+    </inferredMetricsTieBreakers>
 </document>

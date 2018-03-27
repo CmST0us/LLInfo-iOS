@@ -1,0 +1,212 @@
+//
+//  SIFCardAllCardImportCollectionViewController.swift
+//  LLInfo
+//
+//  Created by CmST0us on 2018/3/27.
+//  Copyright © 2018年 eki. All rights reserved.
+//
+
+import UIKit
+import MBProgressHUD
+
+class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
+    
+    struct Identifier {
+        static let cardCell = "cardCell"
+    }
+    
+    struct Segue {
+        static let cardFilterSegue = "cardFilterSegue"
+    }
+    
+    private var filteCardDataSource: [UserCardDataModel] {
+        
+        let p = cardFilterPredicates.map { (item) -> NSPredicate in
+            item.predicate
+        }
+        
+        return allCardDataSource.filter { (item) -> Bool in
+            let cardInfoModel = SIFCacheHelper.shared.cards[item.cardId]!
+            for i in p {
+                if i.evaluate(with: cardInfoModel) == false {
+                    return false
+                }
+            }
+            return true
+        }
+        
+    }
+    
+    lazy private var allCardDataSource: [UserCardDataModel] = {
+        return SIFCacheHelper.shared.cards.map({ (kv) -> UserCardDataModel in
+            let userCard = UserCardDataModel()
+            userCard.cardId = kv.key
+            userCard.cardSetName = SIFCacheHelper.shared.currentCardSetName
+            userCard.isIdolized = false
+            userCard.isKizunaMax = false
+            userCard.isImport = false
+            return userCard
+        })
+    }()
+    
+    private var collectionViewDataSource: [UserCardDataModel] {
+        
+        if cardFilterPredicates.count > 0 {
+            return filteCardDataSource
+        }
+        
+        return allCardDataSource
+        
+    }
+    
+    private var cardFilterPredicates: [SIFCardFilterPredicate] = []
+    
+    var progressHud: MBProgressHUD!
+    
+    // MARK: Private Method
+    private func setupProgressHud() {
+        progressHud = MBProgressHUD(view: self.view)
+        self.view.addSubview(progressHud)
+    }
+    
+    // MARK: IBAction IBOutlet
+    @IBAction func onImportButtonDown(_ sender: Any) {
+        progressHud.mode = .indeterminate
+        progressHud.label.text = "正在导入"
+        progressHud.show(animated: true)
+        
+        DispatchQueue.global().async {
+            for card in self.allCardDataSource {
+                if card.isImport {
+                    UserDataHelper.shared.addCard(card: card, checkExist: true)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.progressHud.mode = .text
+                self.progressHud.label.text = "导入成功"
+                self.progressHud.hide(animated: true, afterDelay: 0.5)
+                
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: SIFCardToolListViewController.NotificationName.importFinish), object: nil)
+            }
+        }
+
+    }
+}
+
+// MARK: Stroy Board Method
+extension SIFCardAllCardImportCollectionViewController {
+    
+    static func storyBoardInstance() -> SIFCardAllCardImportCollectionViewController {
+        
+        let storyBoard = UIStoryboard.init(name: "SIFCardTool", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "SIFCardAllCardImportCollectionViewController") as! SIFCardAllCardImportCollectionViewController
+        
+    }
+        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let identifier = segue.identifier {
+            if identifier == Segue.cardFilterSegue {
+                let dest = (segue.destination as! UINavigationController).topViewController! as! SIFCardFilterViewController
+                dest.predicates = self.cardFilterPredicates
+                dest.delegate = self
+                dest.templateRow = [
+                    SIFCardFilterPredicateEditorRowTemplate.init(
+                        withLeftExpression: (expression: NSExpression.init(forKeyPath: "id"), displayName: "卡片ID"),
+                        rightExpression: [(expression: NSExpression.init(expressionType: NSExpression.ExpressionType.variable), displayName: "")],
+                        condition: SIFCardFilterPredicateCondition.init(withConditions: [SIFCardFilterPredicateCondition.Condition.equal]),
+                        rightExpressionType: .variable),
+                    
+                    SIFCardFilterPredicateEditorRowTemplate.init(
+                        withLeftExpression: (expression: NSExpression.init(forKeyPath: "idol.name"), displayName: "名字"),
+                        rightExpression: [(expression: NSExpression.init(expressionType: NSExpression.ExpressionType.variable), displayName: "")],
+                        condition: SIFCardFilterPredicateCondition.init(withConditions: [SIFCardFilterPredicateCondition.Condition.equal, .contains]),
+                        rightExpressionType: .variable),
+                    
+                    SIFCardFilterPredicateEditorRowTemplate.init(
+                        withLeftExpression: (expression: NSExpression.init(forKeyPath: "rarity"), displayName: "稀有度"),
+                        rightExpression: [(expression: NSExpression.init(forConstantValue: "N"), displayName: "N"),
+                                          (expression: NSExpression.init(forConstantValue: "R"), displayName: "R"),
+                                          (expression: NSExpression.init(forConstantValue: "SR"), displayName: "SR"),
+                                          (expression: NSExpression.init(forConstantValue: "SSR"), displayName: "SSR"),
+                                          (expression: NSExpression.init(forConstantValue: "UR"), displayName: "UR"),
+                                          ],
+                        condition: SIFCardFilterPredicateCondition.init(withConditions: [SIFCardFilterPredicateCondition.Condition.equal]),
+                        rightExpressionType: .constantValue),
+                    
+                    SIFCardFilterPredicateEditorRowTemplate.init(
+                        withLeftExpression: (expression: NSExpression.init(forKeyPath: "attribute"), displayName: "属性"),
+                        rightExpression: [(expression: NSExpression.init(forConstantValue: "Pure"), displayName: "清纯"),
+                                          (expression: NSExpression.init(forConstantValue: "Cool"), displayName: "洒脱"),
+                                          (expression: NSExpression.init(forConstantValue: "Smile"), displayName: "甜美")
+                        ],
+                        condition: SIFCardFilterPredicateCondition.init(withConditions: [SIFCardFilterPredicateCondition.Condition.equal]),
+                        rightExpressionType: NSExpression.ExpressionType.constantValue)
+                ]
+            }
+        }
+    }
+}
+
+
+// MARK: Collection View Data Source And Delegate
+extension SIFCardAllCardImportCollectionViewController {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return collectionViewDataSource.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardCell, for: indexPath) as! SIFCardImportCollectionViewCell
+        let userCard = collectionViewDataSource[indexPath.row]
+        let card = SIFCacheHelper.shared.cards[userCard.cardId]!
+        cell.setupView(withCard: card, userCard: userCard)
+        cell.isImport = false
+        cell.valueChangeHandle = { [weak self] v in
+            if let index = collectionView.indexPath(for: v.cell) {
+                let uc = self?.collectionViewDataSource[index.row]
+                let c = SIFCacheHelper.shared.cards[uc!.cardId]
+                
+                uc?.isIdolized = v.isIdolized
+                uc?.isImport = v.isImport
+                uc?.isKizunaMax = v.isKizunaMax
+                
+                v.cell.setupView(withCard: c!, userCard: uc!)
+            }
+        }
+        return cell
+    }
+}
+
+// MARK: - SIFCardFilterDelegate
+extension SIFCardAllCardImportCollectionViewController: SIFCardFilterDelegate {
+    
+    func cardFilter(_ cardFilter: SIFCardFilterViewController, didFinishPredicateEdit predicates: [SIFCardFilterPredicate]) {
+        
+        self.cardFilterPredicates = predicates
+        self.collectionView?.reloadData()
+        
+    }
+    
+}
+
+// MARK: View Lift Cycle
+extension SIFCardAllCardImportCollectionViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupProgressHud()
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+    }
+}

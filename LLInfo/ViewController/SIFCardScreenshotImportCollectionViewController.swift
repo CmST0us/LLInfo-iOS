@@ -1,5 +1,5 @@
  //
-//  SIFCardImportCollectionViewController.swift
+//  SIFCardScreenshotImportCollectionViewController.swift
 //  SIFTool
 //
 //  Created by CmST0us on 2018/3/11.
@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class SIFCardImportCollectionViewController: UICollectionViewController {
+class SIFCardScreenshotImportCollectionViewController: UICollectionViewController {
 
     struct Identifier {
         static let cardCell = "cardCell"
@@ -41,9 +41,6 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
     @IBOutlet weak var importButton: UIBarButtonItem!
     
     @IBAction func onDoImportButtonDown(_ sender: Any) {
-        
-        progressHud.label.text = "正在导入"
-        progressHud.show(animated: true)
 
         for card in self.cards {
             if card.isImport {
@@ -59,12 +56,13 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
     }
     
     
-    private func setupDetector() {
+    private func setupDetector(usePatternCache: Bool = true) {
         
         let cardCache = SIFCacheHelper.shared.cards
         self.detectorConfiguration = SIFRoundIconDetectorConfiguration.defaultRoundIconConfiguration(radio: 0.5)
-        if let patternImage = UIImage.init(contentsOfFile: SIFCacheHelper.shared.cacheDirectory.appendingPathComponent("pattern.png")) {
-            self.detector = SIFRoundIconDetector(withCards: cardCache, configuration: self.detectorConfiguration, roundCardImagePattern: patternImage.mat)
+        let patternImage = UIImage.init(contentsOfFile: SIFCacheHelper.shared.cacheDirectory.appendingPathComponent("pattern.png"))
+        if  patternImage != nil && usePatternCache{
+            self.detector = SIFRoundIconDetector(withCards: cardCache, configuration: self.detectorConfiguration, roundCardImagePattern: patternImage!.mat)
             Logger.shared.console("use pattern image cache")
         } else {
             self.detector = SIFRoundIconDetector(withCards: cardCache, configuration: self.detectorConfiguration)
@@ -140,6 +138,7 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
         }
         
         scanWorkItem = DispatchWorkItem(block: {
+            var willUpdate = false
             setProgressHudLabelText("检查卡片更新")
             if self.checkCardUpdate() {
                 setProgressHudLabelText("正在更新卡片")
@@ -147,12 +146,15 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
                     try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
                         setProgressHudLabelText("正在更新卡片 \(String(current)) / \(String(total))")
                     })
+                    willUpdate = true
                     hideProgressHud()
                 } catch let e as ApiRequestError {
+                    willUpdate = false
                     setProgressHudLabelText(e.message)
                     hideProgressHud(after: 1.0)
                     return
                 } catch {
+                    willUpdate = false
                     setProgressHudLabelText(error.localizedDescription)
                     hideProgressHud(after: 1.0)
                     return
@@ -160,7 +162,7 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
             }
             
             setProgressHudLabelText("缓存图片数据")
-            self.setupDetector()
+            self.setupDetector(usePatternCache: willUpdate)
             setProgressHudLabelText("扫描中")
             
             for screenshot in self.screenshots {
@@ -185,7 +187,7 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
                         
                         let userCard = UserCardDataModel()
                         userCard.cardId = card!.0.id.intValue
-                        userCard.idolized = card!.1
+                        userCard.isIdolized = card!.1
                         userCard.isImport = true
                         userCard.isKizunaMax = true
                         userCard.cardSetName = SIFCacheHelper.shared.currentCardSetName
@@ -209,7 +211,7 @@ class SIFCardImportCollectionViewController: UICollectionViewController {
 
 
 // MARK: - View Life Cycle Method
-extension SIFCardImportCollectionViewController {
+extension SIFCardScreenshotImportCollectionViewController {
     
     
     override func viewDidLoad() {
@@ -237,7 +239,7 @@ extension SIFCardImportCollectionViewController {
 
 
 // MARK: - Collection View DataSource And Delegate Method
-extension SIFCardImportCollectionViewController {
+extension SIFCardScreenshotImportCollectionViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         
@@ -259,6 +261,13 @@ extension SIFCardImportCollectionViewController {
         let userCard = cards[indexPath.row]
         let cardDataModel = SIFCacheHelper.shared.cards[userCard.cardId]
         cell.setupView(withCard: cardDataModel!, userCard: userCard)
+        cell.valueChangeHandle = { [weak self] v in
+            let index = collectionView.indexPath(for: v.cell)!
+            let card = self?.cards[index.row]
+            card?.isIdolized = v.isIdolized
+            card?.isImport = v.isImport
+            card?.isKizunaMax = v.isKizunaMax
+        }
         return cell
         
     }
@@ -266,12 +275,12 @@ extension SIFCardImportCollectionViewController {
 }
 
 // MARK: - Story Board Instance
-extension SIFCardImportCollectionViewController {
+extension SIFCardScreenshotImportCollectionViewController {
     
-    static func storyBoardInstance() -> SIFCardImportCollectionViewController {
+    static func storyBoardInstance() -> SIFCardScreenshotImportCollectionViewController {
         
-        let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-        return storyBoard.instantiateViewController(withIdentifier: "SIFCardImportCollectionViewController") as! SIFCardImportCollectionViewController
+        let storyBoard = UIStoryboard.init(name: "SIFCardTool", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "SIFCardScreenshotImportCollectionViewController") as! SIFCardScreenshotImportCollectionViewController
         
     }
     
