@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        static let cameraRollAccessKey = "cameraRollAccessKey"
 //    }
     
-    private let xgAppId = 2200276944
+    private let xgAppId: UInt32 = 2200276944
     private let xgAppKey = "I3X58G3SHJ5A"
     
     var window: UIWindow?
@@ -140,7 +140,7 @@ extension AppDelegate {
             manager.isEnableDebug = false
         #endif
         
-        manager.startXG(withAppID: UInt32(xgAppId), appKey: xgAppKey, delegate: self)
+        manager.startXG(withAppID: xgAppId, appKey: xgAppKey, delegate: self)
         
     }
     
