@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="cardImageCell" reuseIdentifier="cardImageCell" id="92Z-gX-qKP" customClass="SIFCardDetailCardImageCollectionReusableView" customModule="LLInfo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="765"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Q5G-qi-OpX">
+                    <rect key="frame" x="-1" y="0.0" width="1026" height="721"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478Rin" translatesAutoresizingMaskIntoConstraints="NO" id="C2M-ht-g4X">
+                            <rect key="frame" x="0.0" y="0.0" width="512" height="720"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="C2M-ht-g4X" secondAttribute="height" multiplier="512:720" id="x7g-Q6-Lx4"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478idolizedRin" translatesAutoresizingMaskIntoConstraints="NO" id="pBU-Ay-YFK">
+                            <rect key="frame" x="514" y="0.0" width="512" height="720.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="pBU-Ay-YFK" secondAttribute="height" multiplier="512:720" id="HrR-iE-CsW"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                </stackView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2KP-bY-ie6">
+                    <rect key="frame" x="377" y="729" width="270" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="270" id="Wuj-Vy-cRf"/>
+                    </constraints>
+                    <segments>
+                        <segment title="带框"/>
+                        <segment title="去框"/>
+                        <segment title="立绘"/>
+                    </segments>
+                    <color key="tintColor" red="0.0" green="0.73555195330000001" blue="0.26786080000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="onCardImageStyleChange:" destination="92Z-gX-qKP" eventType="valueChanged" id="vmw-cb-3i1"/>
+                    </connections>
+                </segmentedControl>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Q5G-qi-OpX" firstAttribute="centerX" secondItem="92Z-gX-qKP" secondAttribute="centerX" id="TKS-Jj-kvk"/>
+                <constraint firstAttribute="bottom" secondItem="Q5G-qi-OpX" secondAttribute="bottom" constant="44" id="hwX-mR-htL"/>
+                <constraint firstItem="Q5G-qi-OpX" firstAttribute="top" secondItem="92Z-gX-qKP" secondAttribute="top" id="m7A-in-dE2"/>
+                <constraint firstItem="2KP-bY-ie6" firstAttribute="centerX" secondItem="92Z-gX-qKP" secondAttribute="centerX" id="szt-yZ-hGj"/>
+                <constraint firstItem="DBu-7c-tCS" firstAttribute="bottom" secondItem="2KP-bY-ie6" secondAttribute="bottom" constant="8" id="z5y-64-hxi"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="DBu-7c-tCS"/>
+            <connections>
+                <outlet property="cardImageStyleSegmentedControl" destination="2KP-bY-ie6" id="qUM-Xd-iLW"/>
+                <outlet property="idolizedImageView" destination="pBU-Ay-YFK" id="rvT-sH-AYE"/>
+                <outlet property="nonIdolizedImageView" destination="C2M-ht-g4X" id="C0s-t0-Erv"/>
+            </connections>
+            <point key="canvasLocation" x="-5" y="728.5"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="1478Rin" width="512" height="720"/>
+        <image name="1478idolizedRin" width="512" height="720"/>
+    </resources>
+</document>

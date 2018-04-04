@@ -476,6 +476,7 @@
                                             <outlet property="pureScoreIndicatorView" destination="boF-g6-zuy" id="tPk-d0-5lB"/>
                                             <outlet property="rarityNameIdLabel" destination="aZI-qh-803" id="MZe-Ru-dDD"/>
                                             <outlet property="smileIndicatorView" destination="xEN-SV-mZQ" id="lQI-BX-iNO"/>
+                                            <segue destination="UiQ-Md-mwO" kind="show" identifier="cardDetailSegue" id="RG0-50-ncU"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -598,6 +599,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t9W-60-6CF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-54" y="769"/>
+        </scene>
+        <!--SIFCardDetail-->
+        <scene sceneID="jFZ-4e-Q4h">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SIFCardDetail" id="UiQ-Md-mwO" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e4L-a5-SgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="769" y="184"/>
         </scene>
         <!--导入卡片-->
         <scene sceneID="BzP-12-1Iz">
@@ -914,7 +923,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7E-7v-gS3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1230" y="-260"/>
+            <point key="canvasLocation" x="1564" y="-272"/>
         </scene>
         <!--卡片-->
         <scene sceneID="G19-BG-EpO">
@@ -1284,7 +1293,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMW-ro-IZa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1230" y="603"/>
+            <point key="canvasLocation" x="1564" y="512"/>
         </scene>
     </scenes>
     <resources>
@@ -1294,6 +1303,6 @@
         <image name="tabbar_card_set" width="27" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1gY-9I-0s4"/>
+        <segue reference="tpX-2Q-UEs"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -147,7 +147,6 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
                         setProgressHudLabelText("正在更新卡片 \(String(current)) / \(String(total))")
                     })
                     useCache = false
-                    hideProgressHud()
                 } catch let e as ApiRequestError {
                     useCache = true
                     setProgressHudLabelText(e.message)

@@ -18,6 +18,7 @@ class SIFCardToolListViewController: UIViewController {
         static let cardFilterSegue = "cardFilterSegue"
         static let screenshotImportSegue = "screenshotImportSegue"
         static let allCardImportSegue = "allCardImportSegue"
+        static let cardDetailSegue = "cardDetailSegue"
     }
     
     struct Identificer {
@@ -32,6 +33,8 @@ class SIFCardToolListViewController: UIViewController {
     }
     
     //MARK: Private Member
+    private var nextViewController: UIViewController? = nil
+    
     private var processHUD: MBProgressHUD!
     
     private var sortToolView: SIFCardSortToolView!
@@ -480,7 +483,8 @@ extension SIFCardToolListViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        let cell = collectionView.cellForItem(at: indexPath) as! SIFUserCardCollectionViewCell
         if !self.isEditing {
-            
+            let userCardModel = collectionViewDataSource[indexPath.row]
+            nextViewController?.setValue(userCardModel, forKey: "userCard")
         }
         
     }
@@ -534,6 +538,9 @@ extension SIFCardToolListViewController {
             } else if identifier == Segue.screenshotImportSegue {
                 let importViewController = segue.destination as! SIFCardScreenshotImportCollectionViewController
                 importViewController.screenshots = self.selectScreenshots
+            } else if identifier == Segue.cardDetailSegue {
+                nextViewController = segue.destination
+                
             }
         }
         
