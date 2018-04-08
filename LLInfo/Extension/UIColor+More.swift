@@ -17,4 +17,5 @@ extension UIColor {
     class var aqua: UIColor {
         return UIColor(r: 0, g: 150, b: 255)
     }
+    
 }

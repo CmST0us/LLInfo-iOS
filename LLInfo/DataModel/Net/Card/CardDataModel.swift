@@ -81,6 +81,8 @@ class CardDataModel: NSObject {
         static let all = "All"
     }
     
+    static let maxCardScore = 7000.0
+    
     var id: NSNumber
     var idol: MiniIdolDataModel
     var rarity: String
@@ -91,7 +93,7 @@ class CardDataModel: NSObject {
     var isPromo: NSNumber? = nil
     var promoItem: String? = nil
     var promoLink: String? = nil
-    var releaseDate: Date? = nil
+    var releaseDate: String? = nil
     var japanOnly: NSNumber? = nil
     var event: MiniEventDataModel? = nil
     var isSpecial: NSNumber? = nil
@@ -142,7 +144,7 @@ class CardDataModel: NSObject {
         return NSNumber.init(value: 0)
     }
     
-    func statisticsSmile(idolized: Bool, isKizunaMax: Bool) -> NSNumber {
+    func statisticsSmile(idolized: Bool, isKizunaMax: Bool, currentIdolizedStateLevelMax: Bool = true) -> NSNumber {
         if idolized {
             if attribute == Attribute.smile && isKizunaMax {
                 return NSNumber.init(value: idolizedMaximumStatisticsSmile.intValue + statisticsKizuna(idolized: true).intValue)
@@ -150,12 +152,14 @@ class CardDataModel: NSObject {
             return idolizedMaximumStatisticsSmile
         }
         if attribute == Attribute.smile && isKizunaMax {
-            return NSNumber.init(value: nonIdolizedMaximumStatisticsSmile.intValue + statisticsKizuna(idolized: false).intValue)
+            return currentIdolizedStateLevelMax ?
+                NSNumber.init(value: nonIdolizedMaximumStatisticsSmile.intValue + statisticsKizuna(idolized: false).intValue) :
+                NSNumber.init(value: minimumStatisticsSmile.intValue + statisticsKizuna(idolized: false).intValue)
         }
-        return nonIdolizedMaximumStatisticsSmile
+        return currentIdolizedStateLevelMax ? nonIdolizedMaximumStatisticsSmile : minimumStatisticsSmile
     }
     
-    func statisticsPure(idolized: Bool, isKizunaMax: Bool) -> NSNumber {
+    func statisticsPure(idolized: Bool, isKizunaMax: Bool, currentIdolizedStateLevelMax: Bool = true) -> NSNumber {
         if idolized {
             if attribute == Attribute.pure && isKizunaMax {
                 return NSNumber.init(value: idolizedMaximumStatisticsPure.intValue + statisticsKizuna(idolized: true).intValue)
@@ -163,12 +167,14 @@ class CardDataModel: NSObject {
             return idolizedMaximumStatisticsPure
         }
         if attribute == Attribute.pure && isKizunaMax {
-            return NSNumber.init(value: nonIdolizedMaximumStatisticsPure.intValue + statisticsKizuna(idolized: false).intValue)
+            return currentIdolizedStateLevelMax ?
+                NSNumber.init(value: nonIdolizedMaximumStatisticsPure.intValue + statisticsKizuna(idolized: false).intValue) :
+                NSNumber.init(value: minimumStatisticsPure.intValue + statisticsKizuna(idolized: false).intValue)
         }
-        return nonIdolizedMaximumStatisticsPure
+        return currentIdolizedStateLevelMax ? nonIdolizedMaximumStatisticsPure : minimumStatisticsPure
     }
     
-    func statisticsCool(idolized: Bool, isKizunaMax: Bool) -> NSNumber {
+    func statisticsCool(idolized: Bool, isKizunaMax: Bool, currentIdolizedStateLevelMax: Bool = true) -> NSNumber {
         if idolized {
             if attribute == Attribute.cool && isKizunaMax {
                 return NSNumber.init(value: idolizedMaximumStatisticsCool.intValue + statisticsKizuna(idolized: true).intValue)
@@ -176,9 +182,12 @@ class CardDataModel: NSObject {
             return idolizedMaximumStatisticsCool
         }
         if attribute == Attribute.cool && isKizunaMax {
-            return NSNumber.init(value: nonIdolizedMaximumStatisticsCool.intValue + statisticsKizuna(idolized: false).intValue)
+            return currentIdolizedStateLevelMax ?
+                NSNumber.init(value: nonIdolizedMaximumStatisticsCool.intValue + statisticsKizuna(idolized: false).intValue) :
+                NSNumber.init(value: minimumStatisticsCool.intValue + statisticsKizuna(idolized: false).intValue)
+            
         }
-        return nonIdolizedMaximumStatisticsCool
+        return currentIdolizedStateLevelMax ? nonIdolizedMaximumStatisticsCool : minimumStatisticsCool
     }
     
     func statisticsKizuna(idolized: Bool) -> NSNumber {
@@ -232,7 +241,8 @@ class CardDataModel: NSObject {
         promoItem = dictionary[CodingKey.promoItem] as? String
         promoLink = dictionary[CodingKey.promoLink] as? String
         if let rd = dictionary[CodingKey.releaseDate] as? String {
-            releaseDate = rd.dateObj(withFormat: "yyyy-MM-dd")
+//            releaseDate = rd.dateObj(withFormat: "yyyy-MM-dd")
+            releaseDate = rd
         }
         if let japanOnlyRaw = dictionary[CodingKey.japanOnly] as? Bool {
             japanOnly = NSNumber(value: japanOnlyRaw)

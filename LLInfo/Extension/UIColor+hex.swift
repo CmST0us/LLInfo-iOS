@@ -48,4 +48,8 @@ extension UIColor {
     static let buttonOn = UIColor.init(hex: "#7ED321")!
     static let currentCardSet = UIColor.init(hex: "#057AFF")!
     static let navigationBar = UIColor.init(hex: "#0096FF")!
+    static let pureAttribute = UIColor.init(hex: "#00BB44")
+    static let smileAttribute = UIColor.init(hex: "#EB1884")
+    static let coolAttribute = UIColor.init(hex: "#01B8FE")
+    static let allAttribute = UIColor.init(hex: "#B659E7")
 }

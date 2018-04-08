@@ -14,6 +14,8 @@ class SIFCardDetailViewController: UIViewController {
         static let cardImageCell = "cardImageCell"
         static let cardScoreCell = "cardScoreCell"
         static let cardIdolCell = "cardIdolCell"
+        static let cardInfoCell = "cardInfoCell"
+        static let cardSkillCell = "cardSkillCell"
     }
     
     @objc var userCard: UserCardDataModel!
@@ -43,6 +45,8 @@ extension SIFCardDetailViewController {
         self.collectionView.register(UINib.init(nibName: "SIFCardDetailCardImageCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Identifier.cardImageCell)
         self.collectionView.register(UINib.init(nibName: "SIFCardDetailCardScoreCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: Identifier.cardScoreCell)
         self.collectionView.register(UINib.init(nibName: "SIFCardDetailIdolCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: Identifier.cardIdolCell)
+        self.collectionView.register(UINib.init(nibName: "SIFCardDetailCardInfoCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: Identifier.cardInfoCell)
+        self.collectionView.register(UINib.init(nibName: "SIFCardDetailCardSkillCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: Identifier.cardSkillCell)
         self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
 }
@@ -78,7 +82,7 @@ extension SIFCardDetailViewController {
 extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 4
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -87,6 +91,7 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Identifier.cardImageCell, for: indexPath) as! SIFCardDetailCardImageCollectionReusableView
+        cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
         cell.cardImageViewUrlBlock = { [weak self] (idolized, type) -> String? in
             switch type {
             case .clear:
@@ -103,10 +108,54 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.tuple {
         case (0, 0):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardScoreCell, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardScoreCell, for: indexPath) as! SIFCardDetailCardScoreCollectionViewCell
+            cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
+            cell.idolizedStateChangeBlock = { [weak self] (levelState) in
+                let weakSelf = self!
+                let isKizunaMax = weakSelf.userCard.isKizunaMax
+                var isIdolized = true
+                var isLevelMax = true
+                
+                switch levelState {
+                case .maxIdolizedLevel:
+                    isLevelMax = true
+                case .minLevel:
+                    isLevelMax = false
+                    isIdolized = false
+                case .maxNonIdolizedLevel:
+                    isIdolized = false
+                    isLevelMax = true
+                }
+                
+                cell.smileScoreIndicator.maxScore = CardDataModel.maxCardScore
+                cell.smileScoreIndicator.score = weakSelf.cardDataModel!.statisticsSmile(idolized: isIdolized, isKizunaMax: isKizunaMax, currentIdolizedStateLevelMax: isLevelMax).doubleValue
+        
+                cell.coolScoreIndicator.maxScore = CardDataModel.maxCardScore
+                cell.coolScoreIndicator.score = weakSelf.cardDataModel!.statisticsCool(idolized: isIdolized, isKizunaMax: isKizunaMax, currentIdolizedStateLevelMax: isLevelMax).doubleValue
+        
+                cell.pureScoreIndicator.maxScore = CardDataModel.maxCardScore
+                cell.pureScoreIndicator.score = weakSelf.cardDataModel!.statisticsPure(idolized: isIdolized, isKizunaMax: isKizunaMax, currentIdolizedStateLevelMax: isLevelMax).doubleValue
+                
+                if isIdolized {
+                    cell.hp = (weakSelf.cardDataModel?.hp?.intValue ?? 2) + 1
+                } else {
+                    cell.hp = (weakSelf.cardDataModel?.hp?.intValue ?? 2)
+                }
+                
+            }
             return cell
         case (0, 1):
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardIdolCell, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardIdolCell, for: indexPath) as! SIFCardDetailIdolCollectionViewCell
+            cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
+            return cell
+        case (0, 2):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardInfoCell, for: indexPath) as! SIFCardDetailCardInfoCollectionViewCell
+            cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
+            return cell
+        case (0, 3):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardSkillCell, for: indexPath) as!
+                SIFCardDetailCardSkillCollectionViewCell
+            cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
             return cell
         default:
             fatalError()

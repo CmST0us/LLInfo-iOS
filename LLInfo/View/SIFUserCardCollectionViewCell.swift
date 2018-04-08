@@ -44,13 +44,13 @@ class SIFUserCardCollectionViewCell: UICollectionViewCell {
     }
     
     func setupScoreIndicator(withCard card: CardDataModel, isKizunaMax: Bool, isIdolized: Bool)  {
-        smileIndicatorView.maxScore = card.statisticsSmile(idolized: true, isKizunaMax: true).doubleValue
+        smileIndicatorView.maxScore = CardDataModel.maxCardScore
         smileIndicatorView.score = card.statisticsSmile(idolized: isIdolized, isKizunaMax: isKizunaMax).doubleValue
         
-        coolScoreIndicatorView.maxScore = card.statisticsCool(idolized: true, isKizunaMax: true).doubleValue
+        coolScoreIndicatorView.maxScore = CardDataModel.maxCardScore
         coolScoreIndicatorView.score = card.statisticsCool(idolized: isIdolized, isKizunaMax: isKizunaMax).doubleValue
         
-        pureScoreIndicatorView.maxScore = card.statisticsPure(idolized: true, isKizunaMax: true).doubleValue
+        pureScoreIndicatorView.maxScore = CardDataModel.maxCardScore
         pureScoreIndicatorView.score = card.statisticsPure(idolized: isIdolized, isKizunaMax: isKizunaMax).doubleValue
     }
     

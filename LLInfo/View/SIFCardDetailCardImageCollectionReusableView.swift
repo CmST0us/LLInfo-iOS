@@ -23,6 +23,20 @@ class SIFCardDetailCardImageCollectionReusableView: UICollectionReusableView {
     
     var cardImageViewUrlBlock: ((_ idolized: Bool, _ cardImageType: CardImageType) -> String?)? = nil
     
+    func setupView(withUserCard userCard: UserCardDataModel, cardDataModel: CardDataModel) {
+        switch cardDataModel.attribute {
+        case CardDataModel.Attribute.cool:
+            self.cardImageStyleSegmentedControl.tintColor = UIColor.coolAttribute
+        case CardDataModel.Attribute.smile:
+            self.cardImageStyleSegmentedControl.tintColor = UIColor.smileAttribute
+        case CardDataModel.Attribute.pure:
+            self.cardImageStyleSegmentedControl.tintColor = UIColor.pureAttribute
+        case CardDataModel.Attribute.all:
+            self.cardImageStyleSegmentedControl.tintColor = UIColor.allAttribute
+        default:
+            self.cardImageStyleSegmentedControl.tintColor = UIColor.aqua
+        }
+    }
     // MARK: IBOutlet IBAction
     @IBOutlet weak var idolizedImageView: UIImageView!
     @IBOutlet weak var nonIdolizedImageView: UIImageView!
@@ -42,6 +56,7 @@ class SIFCardDetailCardImageCollectionReusableView: UICollectionReusableView {
             let nonidolizedPath = block(false, cardImageType) ?? ""
             self.idolizedImageView.isHidden = false
             self.nonIdolizedImageView.isHidden = false
+            
             if let idolizedUrl = URL(string: idolizedPath) {
                 self.idolizedImageView.sd_setImage(with: idolizedUrl, placeholderImage: #imageLiteral(resourceName: "sif_card_placeholder"), options: SDWebImageOptions.allowInvalidSSLCertificates, completed: { (image, error, type, url) in
                     self.idolizedImageView.image = image
@@ -57,6 +72,7 @@ class SIFCardDetailCardImageCollectionReusableView: UICollectionReusableView {
             } else {
                 self.nonIdolizedImageView.isHidden = true
             }
+            
         }
     }
     

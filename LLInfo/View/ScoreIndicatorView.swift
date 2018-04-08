@@ -68,7 +68,7 @@ class ScoreIndicatorView: UIView {
     var score: Double = 50 {
         
         didSet {
-            updateView()
+            self.updateView()
         }
         
     }
