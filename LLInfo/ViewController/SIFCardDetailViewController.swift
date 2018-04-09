@@ -19,8 +19,9 @@ class SIFCardDetailViewController: UIViewController {
     }
     
     @objc var userCard: UserCardDataModel!
-    
-    lazy var cardDataModel: CardDataModel? = { [weak self] in
+
+    // MARK: Private Member
+    private lazy var cardDataModel: CardDataModel? = { [weak self] in
         guard userCard != nil else {
             return nil
         }
@@ -28,8 +29,6 @@ class SIFCardDetailViewController: UIViewController {
         var cardId = userCard!.cardId
         return SIFCacheHelper.shared.cards[cardId]
     }()
-
-    // MARK: Private Member
     
     // MARK: IBOutlet And IBAction
     @IBOutlet weak var collectionView: UICollectionView!
@@ -151,6 +150,24 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
         case (0, 2):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardInfoCell, for: indexPath) as! SIFCardDetailCardInfoCollectionViewCell
             cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
+            cell.pairButtonDownBlock = { [weak self] in
+                let weakSelf = self!
+                guard weakSelf.cardDataModel!.urPair?.card != nil else {
+                    return
+                }
+                
+                let pairCardVC = SIFCardDetailViewController.storyBoardInstance()
+                let uc = UserCardDataModel.init()
+                uc.cardId = weakSelf.cardDataModel!.urPair!.card!.id?.intValue ?? -1
+                if uc.cardId == -1 {
+                    return
+                }
+                uc.isImport = false
+                uc.isIdolized = false
+                uc.isKizunaMax = false
+                pairCardVC.userCard = uc
+                self?.navigationController?.pushViewController(pairCardVC, animated: true)
+            }
             return cell
         case (0, 3):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardSkillCell, for: indexPath) as!
@@ -173,7 +190,7 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let radio = 1026.0 / 720.0
+        let radio = 1025.0 / 720.0
         var imageWidth = Double(self.collectionView.bounds.width)
         if imageWidth > 900 {
             imageWidth = 900
@@ -187,5 +204,14 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
         collectionView.collectionViewLayout.invalidateLayout()
     }
     
+}
+
+// MARK: - Story Board Method
+extension SIFCardDetailViewController {
+    
+    static func storyBoardInstance() -> SIFCardDetailViewController {
+        let storyBoard = UIStoryboard.init(name: "SIFCardDetail", bundle: nil)
+        return storyBoard.instantiateViewController(withIdentifier: "SIFCardDetailViewController") as! SIFCardDetailViewController
+    }
 }
 

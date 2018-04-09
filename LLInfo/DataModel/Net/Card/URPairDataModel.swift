@@ -18,13 +18,15 @@ struct URPairCard {
     
     var attribute: String? = nil
     var roundCardImage: String? = nil
-    var id: String? = nil
+    var id: NSNumber? = nil
     var name: String? = nil
     
     init(withDictionar dictionary: Dictionary<String, Any>) {
         attribute = dictionary[CodingKey.attribute] as? String
         roundCardImage = dictionary[CodingKey.roundCardImage] as? String
-        id = dictionary[CodingKey.id] as? String
+        if let idRaw = dictionary[CodingKey.id] as? Int {
+            id = NSNumber.init(value: idRaw)
+        }
         name = dictionary[CodingKey.name] as? String
     }
 }
@@ -36,14 +38,14 @@ class URPairDataModel: NSObject {
     }
     
     var card: URPairCard? = nil
-    var reverseDisplayIdolized: String? = nil
-    var reverseDisplay: String? = nil
+    var reverseDisplayIdolized: Bool? = nil
+    var reverseDisplay: Bool? = nil
     
     required init(withDictionary dictionary: Dictionary<String, Any>) {
         if let c = dictionary[CodingKey.card] as? Dictionary<String, Any> {
             card = URPairCard(withDictionar: c)
         }
-        reverseDisplay = dictionary[CodingKey.reverseDisplay] as? String
-        reverseDisplayIdolized = dictionary[CodingKey.reverseDisplayIdolized] as? String
+        reverseDisplay = dictionary[CodingKey.reverseDisplay] as? Bool
+        reverseDisplayIdolized = dictionary[CodingKey.reverseDisplayIdolized] as? Bool
     }
  }

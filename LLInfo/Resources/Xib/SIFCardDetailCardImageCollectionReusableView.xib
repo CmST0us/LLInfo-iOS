@@ -17,8 +17,8 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="765"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Q5G-qi-OpX">
-                    <rect key="frame" x="-1" y="0.0" width="1026" height="721"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Q5G-qi-OpX">
+                    <rect key="frame" x="-0.5" y="0.0" width="1025" height="721"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478Rin" translatesAutoresizingMaskIntoConstraints="NO" id="C2M-ht-g4X">
                             <rect key="frame" x="0.0" y="0.0" width="512" height="720"/>
@@ -27,7 +27,7 @@
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478idolizedRin" translatesAutoresizingMaskIntoConstraints="NO" id="pBU-Ay-YFK">
-                            <rect key="frame" x="514" y="0.0" width="512" height="720.5"/>
+                            <rect key="frame" x="513" y="0.0" width="512" height="720.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="pBU-Ay-YFK" secondAttribute="height" multiplier="512:720" id="HrR-iE-CsW"/>
                             </constraints>

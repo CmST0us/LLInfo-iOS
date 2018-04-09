@@ -13,7 +13,7 @@
         <!--CARD_IDOL_NAME-->
         <scene sceneID="X6P-d0-uP2">
             <objects>
-                <viewController id="lwO-wR-Rii" customClass="SIFCardDetailViewController" customModule="LLInfo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SIFCardDetailViewController" id="lwO-wR-Rii" customClass="SIFCardDetailViewController" customModule="LLInfo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S9E-R9-Jq9">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,24 +23,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="P25-n2-odG">
                                     <size key="itemSize" width="394" height="213"/>
-                                    <size key="headerReferenceSize" width="67" height="276"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lWE-vv-bPf">
-                                        <rect key="frame" x="0.0" y="276" width="394" height="213"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="394" height="213"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gdG-TY-MBr">
-                                    <rect key="frame" x="0.0" y="0.0" width="834" height="276"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionReusableView>
+                                <cells/>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
