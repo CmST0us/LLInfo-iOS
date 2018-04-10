@@ -20,13 +20,13 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="Q5G-qi-OpX">
                     <rect key="frame" x="-0.5" y="0.0" width="1025" height="721"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478Rin" translatesAutoresizingMaskIntoConstraints="NO" id="C2M-ht-g4X">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478Rin" translatesAutoresizingMaskIntoConstraints="NO" id="C2M-ht-g4X" customClass="TapToZoomImageView" customModule="LLInfo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="512" height="720"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="C2M-ht-g4X" secondAttribute="height" multiplier="512:720" id="x7g-Q6-Lx4"/>
                             </constraints>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478idolizedRin" translatesAutoresizingMaskIntoConstraints="NO" id="pBU-Ay-YFK">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1478idolizedRin" translatesAutoresizingMaskIntoConstraints="NO" id="pBU-Ay-YFK" customClass="TapToZoomImageView" customModule="LLInfo" customModuleProvider="target">
                             <rect key="frame" x="513" y="0.0" width="512" height="720.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="pBU-Ay-YFK" secondAttribute="height" multiplier="512:720" id="HrR-iE-CsW"/>

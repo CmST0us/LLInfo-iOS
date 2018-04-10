@@ -108,7 +108,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" tag="1" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Yvv-qH-0kS">
+                            <stackView opaque="NO" tag="1" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Yvv-qH-0kS">
                                 <rect key="frame" x="0.0" y="114" width="413" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合卡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ue-sJ-ynR">
@@ -118,10 +118,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujv-b0-7On">
-                                        <rect key="frame" x="39" y="0.0" width="374" height="30"/>
+                                        <rect key="frame" x="47" y="0.0" width="332" height="30"/>
                                         <state key="normal" title="本卡和xxx是合卡"/>
                                         <connections>
-                                            <action selector="onPairButtonDown:" destination="op8-CP-ocL" eventType="touchUpInside" id="Twq-k3-Kyl"/>
+                                            <action selector="onShowPairCardButtonDown:" destination="op8-CP-ocL" eventType="touchUpInside" id="Z1V-GQ-bqT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edb-pS-jD1">
+                                        <rect key="frame" x="391" y="0.0" width="22" height="30"/>
+                                        <connections>
+                                            <action selector="onShowPairCardImageButtonDown:" destination="op8-CP-ocL" eventType="touchUpInside" id="PnQ-DY-dh3"/>
                                         </connections>
                                     </button>
                                 </subviews>

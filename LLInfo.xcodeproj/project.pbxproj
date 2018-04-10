@@ -189,6 +189,8 @@
 		4FD9256520727BE8002B892D /* SIFCardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD9256420727BE8002B892D /* SIFCardDetailViewController.swift */; };
 		4FD9256720728347002B892D /* SIFCardDetailCardImageCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD9256620728347002B892D /* SIFCardDetailCardImageCollectionReusableView.xib */; };
 		4FD9256A207292D8002B892D /* SIFCardDetailCardScoreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD92569207292D8002B892D /* SIFCardDetailCardScoreCollectionViewCell.xib */; };
+		4FE66CF5207CDB7A00D6E6E7 /* TapToZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE66CF4207CDB7A00D6E6E7 /* TapToZoomImageView.swift */; };
+		4FE66CF7207D009A00D6E6E7 /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE66CF6207D009A00D6E6E7 /* ZoomImageView.swift */; };
 		A8AF06B24B09769E9FE5EFE5 /* Pods_LLInfoTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC9193F2A990D8C44D54AE1D /* Pods_LLInfoTest.framework */; };
 		B4B86EB62F36B7338BCAEF25 /* Pods_LLInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9F7E4CF0152DE2F33A31DE /* Pods_LLInfo.framework */; };
 		E1BF11C8852194307C772977 /* Pods_testHostApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE4BF3EDBD436556F0A9BFC /* Pods_testHostApp.framework */; };
@@ -418,6 +420,8 @@
 		4FD9256620728347002B892D /* SIFCardDetailCardImageCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SIFCardDetailCardImageCollectionReusableView.xib; sourceTree = "<group>"; };
 		4FD92569207292D8002B892D /* SIFCardDetailCardScoreCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SIFCardDetailCardScoreCollectionViewCell.xib; sourceTree = "<group>"; };
 		4FDB03C51FBF574A00CD9787 /* EKLoadMoreControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EKLoadMoreControl.swift; sourceTree = "<group>"; };
+		4FE66CF4207CDB7A00D6E6E7 /* TapToZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToZoomImageView.swift; sourceTree = "<group>"; };
+		4FE66CF6207D009A00D6E6E7 /* ZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
 		628FA43B60D13CCF277C7B10 /* Pods-LLInfoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LLInfoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LLInfoUITests/Pods-LLInfoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		673C0A6F093C33DC8147FC4F /* Pods-testHostApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testHostApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testHostApp/Pods-testHostApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7B9F7E4CF0152DE2F33A31DE /* Pods_LLInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LLInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -836,6 +840,8 @@
 				4FD9256B20729F2C002B892D /* SIFCardDetail */,
 				4F03B406206921DC0050F0A1 /* Filter */,
 				4F03B3FE206921D40050F0A1 /* ScoreIndicatorView.swift */,
+				4FE66CF4207CDB7A00D6E6E7 /* TapToZoomImageView.swift */,
+				4FE66CF6207D009A00D6E6E7 /* ZoomImageView.swift */,
 				4F03B401206921D40050F0A1 /* SIFCardImportCollectionViewCell.swift */,
 				4F03B400206921D40050F0A1 /* SIFCardSortCollectionReusableView.swift */,
 				4F03B3FF206921D40050F0A1 /* SIFUserCardCollectionViewCell.swift */,
@@ -1585,6 +1591,7 @@
 				4F5F83792002278F00696F72 /* InformationDataModel.swift in Sources */,
 				4F03B3D62068BE7B0050F0A1 /* NSValue+ValueWithPoint.m in Sources */,
 				4FA7BB9F2000AF5400351090 /* IndexPath+Tuple.swift in Sources */,
+				4FE66CF5207CDB7A00D6E6E7 /* TapToZoomImageView.swift in Sources */,
 				4F03B31D2068B1BE0050F0A1 /* String+appendPathComponent.swift in Sources */,
 				4F03B31B2068B1B70050F0A1 /* String+Date.swift in Sources */,
 				4F0E0D6A1FF6132800DDD242 /* InformationDetailViewController.swift in Sources */,
@@ -1616,6 +1623,7 @@
 				4F03B3E42068BF650050F0A1 /* SIFCardScreenshotImportCollectionViewController.swift in Sources */,
 				4F946BC91FFCB667001A15B1 /* DataModelHelper.swift in Sources */,
 				4F03B3EA2068BF780050F0A1 /* SIFCardFilterViewController.swift in Sources */,
+				4FE66CF7207D009A00D6E6E7 /* ZoomImageView.swift in Sources */,
 				4FC397812003C0E500D7B7E7 /* CoreDataModelBridgeProtocol.swift in Sources */,
 				4F03B405206921D40050F0A1 /* SIFCardImportCollectionViewCell.swift in Sources */,
 				4FA3F9FA2021768F00DCCAA2 /* Dictionary+URLParam.swift in Sources */,

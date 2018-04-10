@@ -18,10 +18,16 @@ class SIFCardDetailCardInfoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pairCardButton: UIButton!
     
     
-    var pairButtonDownBlock: (() -> Void)? = nil
+    var showPairCardButtonDownBlock: (() -> Void)? = nil
+    var showPairCardImageButtonDownBlock: (() -> Void)? = nil
     
-    @IBAction func onPairButtonDown(_ sender: Any) {
-        if let block = pairButtonDownBlock {
+    @IBAction func onShowPairCardButtonDown(_ sender: Any) {
+        if let block = showPairCardButtonDownBlock {
+            block()
+        }
+    }
+    @IBAction func onShowPairCardImageButtonDown(_ sender: UIButton) {
+        if let block = showPairCardImageButtonDownBlock {
             block()
         }
     }

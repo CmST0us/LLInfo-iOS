@@ -38,8 +38,8 @@ class SIFCardDetailCardImageCollectionReusableView: UICollectionReusableView {
         }
     }
     // MARK: IBOutlet IBAction
-    @IBOutlet weak var idolizedImageView: UIImageView!
-    @IBOutlet weak var nonIdolizedImageView: UIImageView!
+    @IBOutlet weak var idolizedImageView: TapToZoomImageView!
+    @IBOutlet weak var nonIdolizedImageView: TapToZoomImageView!
     @IBOutlet weak var cardImageStyleSegmentedControl: UISegmentedControl!
     
     @IBAction func onCardImageStyleChange(_ sender: UISegmentedControl) {

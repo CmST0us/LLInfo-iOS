@@ -29,7 +29,7 @@ class SIFCardDetailViewController: UIViewController {
         var cardId = userCard!.cardId
         return SIFCacheHelper.shared.cards[cardId]
     }()
-    
+    var currentSelectCardImageType: SIFCardDetailCardImageCollectionReusableView.CardImageType = .normal
     // MARK: IBOutlet And IBAction
     @IBOutlet weak var collectionView: UICollectionView!
 }
@@ -90,8 +90,10 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Identifier.cardImageCell, for: indexPath) as! SIFCardDetailCardImageCollectionReusableView
+        
         cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
         cell.cardImageViewUrlBlock = { [weak self] (idolized, type) -> String? in
+            self?.currentSelectCardImageType = type
             switch type {
             case .clear:
                 return idolized ? self?.cardDataModel?.cleanUrIdolized : self?.cardDataModel?.cleanUr
@@ -101,6 +103,20 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
                 return idolized ? self?.cardDataModel?.transparentIdolizedImage : self?.cardDataModel?.transparentImage
             }
         }
+        
+        let showActionSheetBlock: ((_ actionSheet: UIAlertController) -> Void) = { [weak self] actionSheet in
+            let weakSelf = self!
+            weakSelf.present(actionSheet, animated: true, completion: nil)
+        }
+        
+        cell.nonIdolizedImageView.tapImageViewBlock = { (sender) in
+            sender.zoomImageView.saveImageActionSheetShowBlock = showActionSheetBlock
+        }
+        
+        cell.idolizedImageView.tapImageViewBlock = { (sender) in
+            sender.zoomImageView.saveImageActionSheetShowBlock = showActionSheetBlock
+        }
+        
         return cell
     }
     
@@ -150,7 +166,7 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
         case (0, 2):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier.cardInfoCell, for: indexPath) as! SIFCardDetailCardInfoCollectionViewCell
             cell.setupView(withUserCard: userCard, cardDataModel: cardDataModel!)
-            cell.pairButtonDownBlock = { [weak self] in
+            cell.showPairCardButtonDownBlock = { [weak self] in
                 let weakSelf = self!
                 guard weakSelf.cardDataModel!.urPair?.card != nil else {
                     return
@@ -167,6 +183,19 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
                 uc.isKizunaMax = false
                 pairCardVC.userCard = uc
                 self?.navigationController?.pushViewController(pairCardVC, animated: true)
+            }
+            cell.showPairCardImageButtonDownBlock = { [weak self] in
+                let weakSelf = self!
+                let pariCardImage = OpenCVBridgeSwiftHelper.sharedInstance().emptyImage(with: CGSize.init(width: 1024, height: 720), channel: 3)
+                
+//                switch weakSelf.currentSelectCardImageType {
+//                case .clear:
+//                    
+//                case .normal:
+//                    
+//                case .transparent:
+//                    
+//                }
             }
             return cell
         case (0, 3):
