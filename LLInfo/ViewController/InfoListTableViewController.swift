@@ -56,15 +56,15 @@ final class InfoListTableViewController: UITableViewController {
     
     @objc
     private func loadNewData() {
-        DispatchQueue.global().async {
-            if let firstObj = self.infoListDataSet.firstObject as? InfoDataModel {
+        DispatchQueue.global().async { [weak self] in
+            if let firstObj = self!.infoListDataSet.firstObject as? InfoDataModel {
                 do {
                     if let s: Set<InfoDataModel> = try InformationCacheHelper.shared.requestInfomation(afterTimeInterval: firstObj.time!, simpleMode: true) {
-                        let dataCountBeforAdd = self.infoListDataSet.count
+                        let dataCountBeforAdd = self!.infoListDataSet.count
                         for o in s {
-                            self.infoListDataSet.add(o)
+                            self!.infoListDataSet.add(o)
                         }
-                        let dataCountAfterAdd = self.infoListDataSet.count
+                        let dataCountAfterAdd = self!.infoListDataSet.count
                         if dataCountBeforAdd == dataCountAfterAdd {
                             let p = InfoDataModel.requestInfomationApiRequestParam(afterTimeInterval: firstObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
@@ -72,7 +72,7 @@ final class InfoListTableViewController: UITableViewController {
                                 for dict in dicts {
                                     let m = InfoDataModel(dictionary: dict)
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
-                                    self.infoListDataSet.add(m)
+                                    self!.infoListDataSet.add(m)
                                 }
                                 DispatchQueue.main.async {
                                     UIApplication.shared.applicationIconBadgeNumber = 0
@@ -80,39 +80,39 @@ final class InfoListTableViewController: UITableViewController {
                                 try InformationCoreDataHelper.shared.saveContext()
                             }
                         }
-                        self.sortDataOrderSet()
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                        self!.sortDataOrderSet()
+                        DispatchQueue.main.async { [weak self] in
+                            self!.tableView.reloadData()
                         }
                     }
                 } catch let e as ApiRequestError {
-                    self.showErrorAlert(title: "错误", message: e.message)
+                    self!.showErrorAlert(title: "错误", message: e.message)
                 } catch {
-                    self.showErrorAlert(title: "错误", message: error.localizedDescription)
+                    self!.showErrorAlert(title: "错误", message: error.localizedDescription)
                 }
             } else {
-                self.initData()
+                self!.initData()
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self!.tableView.reloadData()
                 }
             }
             DispatchQueue.main.async {
-                self.tableView.mj_header.endRefreshing()
+                self!.tableView.mj_header.endRefreshing()
             }
         }
     }
     
     @objc
     private func loadOldData() {
-        DispatchQueue.global().async {
-            if let lastObj = self.infoListDataSet.lastObject as? InfoDataModel {
+        DispatchQueue.global().async { [weak self] in
+            if let lastObj = self!.infoListDataSet.lastObject as? InfoDataModel {
                 do {
                     if let s: Set<InfoDataModel> = try InformationCacheHelper.shared.requestInfomation(beforeTimeInterval: lastObj.time!, simpleMode: true) {
-                        let dataCountBeforAdd = self.infoListDataSet.count
+                        let dataCountBeforAdd = self!.infoListDataSet.count
                         for o in s {
-                            self.infoListDataSet.add(o)
+                            self!.infoListDataSet.add(o)
                         }
-                        let dataCountAfterAdd = self.infoListDataSet.count
+                        let dataCountAfterAdd = self!.infoListDataSet.count
                         if dataCountBeforAdd == dataCountAfterAdd {
                             let p = InfoDataModel.requestInfomationApiRequestParam(beforeTimeInterval: lastObj.time!, simpleMode: true)
                             let data = try ApiHelper.shared.request(withParam: p)
@@ -120,29 +120,29 @@ final class InfoListTableViewController: UITableViewController {
                                 for dict in dicts {
                                     let m = InfoDataModel(dictionary: dict)
                                     InformationCacheHelper.shared.insertInformationIfNotExist(m)
-                                    self.infoListDataSet.add(m)
+                                    self!.infoListDataSet.add(m)
                                 }
                                 try InformationCoreDataHelper.shared.saveContext()
                             }
                         }
-                        self.sortDataOrderSet()
+                        self!.sortDataOrderSet()
                         DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                            self!.tableView.reloadData()
                         }
                     }
                 } catch let e as ApiRequestError {
-                    self.showErrorAlert(title: "错误", message: e.message)
+                    self!.showErrorAlert(title: "错误", message: e.message)
                 } catch {
-                    self.showErrorAlert(title: "错误", message: error.localizedDescription)
+                    self!.showErrorAlert(title: "错误", message: error.localizedDescription)
                 }
             } else {
-                self.initData()
+                self!.initData()
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self!.tableView.reloadData()
                 }
             }
             DispatchQueue.main.async {
-                self.tableView.mj_footer.endRefreshing()
+                self!.tableView.mj_footer.endRefreshing()
             }
         }
     }
@@ -189,8 +189,8 @@ extension InfoListTableViewController {
         
         self.tableView.separatorStyle = .none
         
-        DispatchQueue.global().async {
-            self.checkNewVersion()
+        DispatchQueue.global().async { [weak self] in
+            self!.checkNewVersion()
         }
     }
     

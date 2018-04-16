@@ -19,6 +19,8 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
         static let cardFilterSegue = "cardFilterSegue"
     }
     
+    private var checkAndUpdateCardWorkItem: DispatchWorkItem!
+    
     private var filteCardDataSource: [UserCardDataModel] {
         
         let p = cardFilterPredicates.map { (item) -> NSPredicate in
@@ -37,24 +39,7 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
         
     }
     
-    lazy private var allCardDataSource: [UserCardDataModel] = {
-        return SIFCacheHelper.shared.cards.map({ (kv) -> UserCardDataModel in
-            let userCard = UserCardDataModel()
-            userCard.cardId = kv.key
-            userCard.cardSetName = SIFCacheHelper.shared.currentCardSetName
-            userCard.isIdolized = false
-            userCard.isKizunaMax = false
-            userCard.isImport = false
-            if let promo = kv.value.isPromo?.boolValue {
-                if promo {
-                    userCard.isIdolized = true
-                }
-            }
-            return userCard
-        }).sorted(by: { (a, b) -> Bool in
-            return a.cardId > b.cardId
-        })
-    }()
+    private var allCardDataSource: [UserCardDataModel] = []
     
     private var collectionViewDataSource: [UserCardDataModel] {
         
@@ -71,9 +56,104 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
     var progressHud: MBProgressHUD!
     
     // MARK: Private Method
+    private func initAllCardDataSource() {
+        allCardDataSource = SIFCacheHelper.shared.cards.map({ (kv) -> UserCardDataModel in
+            let userCard = UserCardDataModel()
+            userCard.cardId = kv.key
+            userCard.cardSetName = SIFCacheHelper.shared.currentCardSetName
+            userCard.isIdolized = false
+            userCard.isKizunaMax = false
+            userCard.isImport = false
+            if let promo = kv.value.isPromo?.boolValue {
+                if promo {
+                    userCard.isIdolized = true
+                }
+            }
+            return userCard
+        }).sorted(by: { (a, b) -> Bool in
+            let aCard: CardDataModel = SIFCacheHelper.shared.cards[a.cardId]!
+            let bCard: CardDataModel = SIFCacheHelper.shared.cards[b.cardId]!
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            if let aDate = dateFormatter.date(from: aCard.releaseDate ?? "") {
+                if let bDate = dateFormatter.date(from: bCard.releaseDate ?? "") {
+                    return aDate > bDate
+                }
+            }
+            return a.cardId > b.cardId
+        })
+    }
+    
     private func setupProgressHud() {
         progressHud = MBProgressHUD(view: self.view)
         self.view.addSubview(progressHud)
+    }
+    
+    private func checkCardUpdate() -> Bool {
+        let param = CardDataModel.requestIds()
+        if let resData = try? SchoolIdolTomotachiApiHelper.shared.request(withParam: param) {
+            if let array = DataModelHelper.shared.array(withJsonData: resData) as? [Int] {
+                return !(array.count == SIFCacheHelper.shared.cards.count)
+            }
+        }
+        return false
+    }
+    
+    private func checkAndUpdateCard() {
+        self.progressHud.show(animated: true)
+        func hideProgressHud(after: TimeInterval = 0) {
+            DispatchQueue.main.async {
+                self.progressHud.hide(animated: true, afterDelay: after)
+            }
+        }
+        
+        func setProgressHudLabelText(_ text: String) {
+            DispatchQueue.main.async {
+                self.progressHud.label.text = text
+            }
+        }
+        
+        func errorAlert(title: String, message: String) {
+            DispatchQueue.main.async {
+                self.showErrorAlert(title: title, message: message)
+            }
+        }
+        
+        func finish() {
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
+        }
+        
+        
+        self.checkAndUpdateCardWorkItem = DispatchWorkItem(block: { [weak self] in
+            setProgressHudLabelText("检查卡片更新")
+            if self!.checkCardUpdate() {
+                setProgressHudLabelText("正在更新卡片")
+                do {
+                    try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
+                        setProgressHudLabelText("正在更新卡片 \(String(current)) / \(String(total))")
+                    })
+                } catch let e as ApiRequestError {
+                    setProgressHudLabelText(e.message)
+                    self!.initAllCardDataSource()
+                    hideProgressHud(after: 1.0)
+                    return
+                } catch {
+                    setProgressHudLabelText(error.localizedDescription)
+                    self!.initAllCardDataSource()
+                    hideProgressHud(after: 1.0)
+                    return
+                }
+            }
+            setProgressHudLabelText("加载数据")
+            SIFCacheHelper.shared.cacheAllRoundCardImage()
+            self!.initAllCardDataSource()
+            hideProgressHud()
+            finish()
+        })
+        DispatchQueue.global().async(execute: self.checkAndUpdateCardWorkItem)
     }
     
     // MARK: IBAction IBOutlet
@@ -98,6 +178,10 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
             }
         }
 
+    }
+    
+    deinit {
+        Logger.shared.console("deinit")
     }
 }
 
@@ -209,7 +293,7 @@ extension SIFCardAllCardImportCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupProgressHud()
-        
+        checkAndUpdateCard()
     }
     
     override func didReceiveMemoryWarning() {

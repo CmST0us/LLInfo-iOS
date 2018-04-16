@@ -182,5 +182,19 @@ extension SIFCacheHelper {
         }
     }
     
+    func cacheAllRoundCardImage() {
+        for card in cards.values {
+            if let urlPath = card.roundCardImage {
+                if let roundCardImageUrl = URL(string: urlPath) {
+                    let _ = SIFCacheHelper.shared.image(withUrl: roundCardImageUrl)
+                }
+            }
+            if let urlPath = card.roundCardIdolizedImage {
+                if let roundCardIdolizedImageUrl = URL(string: urlPath) {
+                    let _ = SIFCacheHelper.shared.image(withUrl: roundCardIdolizedImageUrl)
+                }
+            }
+        }
+    }
 }
 
