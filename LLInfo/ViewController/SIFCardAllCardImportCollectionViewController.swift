@@ -45,7 +45,14 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
             userCard.isIdolized = false
             userCard.isKizunaMax = false
             userCard.isImport = false
+            if let promo = kv.value.isPromo?.boolValue {
+                if promo {
+                    userCard.isIdolized = true
+                }
+            }
             return userCard
+        }).sorted(by: { (a, b) -> Bool in
+            return a.cardId > b.cardId
         })
     }()
     

@@ -31,7 +31,7 @@ class SIFUserCardCollectionViewCell: UICollectionViewCell {
     }
     
     func setupCardRoundImageView(withCard card: CardDataModel, idolized: Bool) {
-        cardRoundImageView.image = SIFCacheHelper.shared.image(withUrl: URL(string: (idolized ? card.roundCardIdolizedImage : card.roundCardImage) ?? ""))
+        cardRoundImageView.image = SIFCacheHelper.shared.image(withUrl: URL(string: (idolized ? card.roundCardIdolizedImage : card.roundCardImage) ?? card.roundCardIdolizedImage ?? ""))
     }
     
     func setupIdolizedKizunaLabel(isKizunaMax: Bool, isIdolized: Bool) {
@@ -55,6 +55,7 @@ class SIFUserCardCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView(withCard: CardDataModel, userCard: UserCardDataModel) {
+        
         setupCardRoundImageView(withCard: withCard, idolized: userCard.isIdolized)
         setupIdolizedKizunaLabel(isKizunaMax: userCard.isKizunaMax, isIdolized: userCard.isIdolized)
         

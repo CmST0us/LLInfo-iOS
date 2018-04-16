@@ -64,6 +64,7 @@ class ZoomImageView: UIScrollView {
         self.addGestureRecognizer(longPress)
     }
     
+    @objc
     private func setupImageViewFrame() {
         let screenRadio = self.bounds.size.width / self.bounds.size.height
         let imageRadio = imageView.image!.size.width / imageView.image!.size.height
@@ -86,20 +87,6 @@ class ZoomImageView: UIScrollView {
     
     private func setupImageView() {
         self.addSubview(imageView)
-//        imageView.layer.anchorPoint = CGPoint.init(x: 0.5, y: 0.5)
-//        imageView.snp.remakeConstraints { (make) in
-//            make.center.equalToSuperview()
-//            let screenRadio = self.bounds.size.width / self.bounds.size.height
-//            let imageRadio = imageView.image!.size.width / imageView.image!.size.height
-//            if  imageRadio > screenRadio {
-//                make.width.equalToSuperview()
-//                make.height.equalTo(imageView.snp.width).multipliedBy(imageView.image!.size.height / imageView.image!.size.width)
-//            } else {
-//                make.height.equalToSuperview()
-//                make.width.equalTo(imageView.snp.height).multipliedBy(imageView.image!.size.width / imageView.image!.size.height)
-//            }
-//        }
-        
     }
     
     
@@ -126,7 +113,6 @@ class ZoomImageView: UIScrollView {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if let previous = previousTraitCollection, previous.horizontalSizeClass != .unspecified || previous.verticalSizeClass != .unspecified {
-//            imageView.setNeedsUpdateConstraints()
             self.setupImageViewFrame()
         }
     }
