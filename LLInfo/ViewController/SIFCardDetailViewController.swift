@@ -33,6 +33,7 @@ class SIFCardDetailViewController: UIViewController {
     var currentSelectCardImageType: SIFCardDetailCardImageCollectionReusableView.CardImageType = .normal
     // MARK: IBOutlet And IBAction
     @IBOutlet weak var collectionView: UICollectionView!
+    
 }
 
 // MARK: - Private Method

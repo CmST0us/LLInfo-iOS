@@ -33,7 +33,7 @@ class SIFCardToolListViewController: UIViewController {
     }
     
     //MARK: Private Member
-    private var nextViewController: UIViewController? = nil
+    private weak var nextViewController: UIViewController? = nil
     
     private var processHUD: MBProgressHUD!
     
