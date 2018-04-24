@@ -21,7 +21,7 @@ class SIFCardDetailViewController: UIViewController {
     @objc var userCard: UserCardDataModel!
 
     // MARK: Private Member
-    private lazy var cardDataModel: CardDataModel? = { [weak self] in
+    private lazy var cardDataModel: CardDataModel? = {
         guard userCard != nil else {
             return nil
         }
@@ -29,6 +29,7 @@ class SIFCardDetailViewController: UIViewController {
         var cardId = userCard!.cardId
         return SIFCacheHelper.shared.cards[cardId]
     }()
+    
     var currentSelectCardImageType: SIFCardDetailCardImageCollectionReusableView.CardImageType = .normal
     // MARK: IBOutlet And IBAction
     @IBOutlet weak var collectionView: UICollectionView!

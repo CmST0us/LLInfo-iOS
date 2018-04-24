@@ -30,7 +30,7 @@ class SIFCardFilterPredicateEditorTableViewController: UITableViewController {
         static let valueCell = "valueCell"
         
     }
-    
+
     var rowIndex: Int = 0
     
     var templateRow: [SIFCardFilterPredicateEditorRowTemplate]!

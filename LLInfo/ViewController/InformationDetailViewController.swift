@@ -134,6 +134,9 @@ class InformationDetailViewController: UIViewController{
             self.present(s, animated: true, completion: nil)
         }
     }
+    deinit {
+        Logger.shared.console("deinit")
+    }
 }
 
 

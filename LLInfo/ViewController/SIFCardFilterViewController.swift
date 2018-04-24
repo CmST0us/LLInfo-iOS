@@ -25,7 +25,7 @@ class SIFCardFilterViewController: UIViewController {
     
     var templateRow: [SIFCardFilterPredicateEditorRowTemplate] = []
     
-    private var nextViewController: UIViewController!
+    private weak var nextViewController: UIViewController!
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -43,6 +43,7 @@ class SIFCardFilterViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         
     }
+    
 }
 
 // MARK: - Life Cycle Method
