@@ -53,7 +53,7 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
     
     private var cardFilterPredicates: [SIFCardFilterPredicate] = []
     
-    var progressHud: MBProgressHUD!
+    private var progressHud: MBProgressHUD!
     
     // MARK: Private Method
     private func initAllCardDataSource() {
@@ -299,5 +299,10 @@ extension SIFCardAllCardImportCollectionViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        Logger.shared.console("disappear")
+        self.checkAndUpdateCardWorkItem.cancel()
+        self.progressHud.removeFromSuperview()
     }
 }

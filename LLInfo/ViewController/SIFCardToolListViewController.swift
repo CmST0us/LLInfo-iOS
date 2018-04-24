@@ -291,11 +291,11 @@ class SIFCardToolListViewController: UIViewController {
     @IBAction func addCard(_ sender: Any) {
         
         let addMethodSheet = UIAlertController(title: "添加卡片", message: nil, preferredStyle: .actionSheet)
-        let addMethodAllCard = UIAlertAction(title: "从所有卡片中添加", style: .default) { (action) in
-            self.performSegue(withIdentifier: Segue.allCardImportSegue, sender: nil)
+        let addMethodAllCard = UIAlertAction(title: "从所有卡片中添加", style: .default) { [weak self] (action) in
+            self?.performSegue(withIdentifier: Segue.allCardImportSegue, sender: nil)
         }
-        let addMethodScreenshot = UIAlertAction(title: "从游戏截图添加", style: .default) { (action) in
-            guard self.isPhotoLibraryAvailable() else {
+        let addMethodScreenshot = UIAlertAction(title: "从游戏截图添加", style: .default) { [weak self] (action) in
+            guard self?.isPhotoLibraryAvailable() ?? false else {
                 return
             }
             
@@ -308,7 +308,7 @@ class SIFCardToolListViewController: UIViewController {
             photoPicker.naviTitleColor = UIColor.white
             photoPicker.allowPickingOriginalPhoto = false
             
-            self.present(photoPicker, animated: true, completion: nil)
+            self?.present(photoPicker, animated: true, completion: nil)
         }
         let addMethodCancel = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         

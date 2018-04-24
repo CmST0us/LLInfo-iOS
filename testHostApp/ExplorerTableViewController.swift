@@ -156,26 +156,7 @@ class ExplorerTableViewController: UITableViewController {
     }
     
     @IBAction func getDataFromServer(_ sender: Any) {
-        dataOrderSet.removeAllObjects()
-        if let d = ApiHelper.shared.getInfoPage(1, true) {
-            if let js = DataModelHelper.shared.payloadDictionaries(withJsonData: d) {
-                for j in js {
-                    let m = InfoDataModel(dictionary: j)
-                    dataOrderSet.add(m)
-                    InformationCacheHelper.shared.insertInformationIfNotExist(m)
-                }
-                self.sortDataOrderSet()
-            }
-        }
-        do {
-            try InformationCoreDataHelper.shared.saveContext()
-        } catch {
-            let a = UIAlertController(title: "错误", message: "error \(error)", preferredStyle: .alert)
-            let c = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-            a.addAction(c)
-            self.present(a, animated: true, completion: nil)
-        }
-        self.tableView.reloadData()
+
     }
     
     override func didReceiveMemoryWarning() {
