@@ -137,10 +137,10 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
             
         }
         
-        scanWorkItem = DispatchWorkItem(block: {
+        scanWorkItem = DispatchWorkItem(block: { [weak self] in
             var useCache = true
             setProgressHudLabelText("检查卡片更新")
-            if self.checkCardUpdate() {
+            if self!.checkCardUpdate() {
                 setProgressHudLabelText("正在更新卡片")
                 do {
                     try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
@@ -161,13 +161,13 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
             }
             
             setProgressHudLabelText("缓存图片数据")
-            self.setupDetector(usePatternCache: useCache)
+            self!.setupDetector(usePatternCache: useCache)
             setProgressHudLabelText("扫描中")
             
-            for screenshot in self.screenshots {
-                let originMat = self.detector.cutEdgeArea(screenshot.mat)
+            for screenshot in self!.screenshots {
+                let originMat = self!.detector.cutEdgeArea(screenshot.mat)
                 
-                let results = self.detector.search(screenshot: originMat)
+                let results = self!.detector.search(screenshot: originMat)
                 
                 for result in results.1 {
                     let roi = originMat.roi(at: results.0)?.roi(at: result)
@@ -175,10 +175,10 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
                         continue
                     }
                     
-                    let template = self.detector.makeTemplateImagePattern(image: roi!)
+                    let template = self!.detector.makeTemplateImagePattern(image: roi!)
                     
-                    if let point = self.detector.match(image: template) {
-                        let card = self.detector.card(atPatternPoint: point)
+                    if let point = self!.detector.match(image: template) {
+                        let card = self!.detector.card(atPatternPoint: point)
                         
                         if card == nil {
                             continue
@@ -190,7 +190,7 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
                         userCard.isImport = true
                         userCard.isKizunaMax = true
                         userCard.cardSetName = SIFCacheHelper.shared.currentCardSetName
-                        self.cards.append(userCard)
+                        self!.cards.append(userCard)
                         
                         setProgressHudLabelText("找到卡片(ID: \(String(userCard.cardId)))")
                     }
