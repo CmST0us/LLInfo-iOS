@@ -41,7 +41,7 @@
 		4F03B3E82068BF730050F0A1 /* SIFCardFilterPredicateEditorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03B3E72068BF730050F0A1 /* SIFCardFilterPredicateEditorTableViewController.swift */; };
 		4F03B3EA2068BF780050F0A1 /* SIFCardFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03B3E92068BF780050F0A1 /* SIFCardFilterViewController.swift */; };
 		4F03B3FA2068C1C00050F0A1 /* SIFCardTool.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F03B3F82068C1C00050F0A1 /* SIFCardTool.storyboard */; };
-		4F03B3FC2068C2C70050F0A1 /* UIView+IB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03B3FB2068C2C70050F0A1 /* UIView+IB.swift */; };
+		4F03B3FC2068C2C70050F0A1 /* UIView+util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03B3FB2068C2C70050F0A1 /* UIView+util.swift */; };
 		4F03B402206921D40050F0A1 /* ScoreIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03B3FE206921D40050F0A1 /* ScoreIndicatorView.swift */; };
 		4F03B403206921D40050F0A1 /* SIFUserCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03B3FF206921D40050F0A1 /* SIFUserCardCollectionViewCell.swift */; };
 		4F03B404206921D40050F0A1 /* SIFCardSortCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F03B400206921D40050F0A1 /* SIFCardSortCollectionReusableView.swift */; };
@@ -119,6 +119,8 @@
 		4F75334E20296FA5001C7480 /* Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334A20296FA5001C7480 /* Favorite+CoreDataProperties.swift */; };
 		4F75335020297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */; };
 		4F75335120297666001C7480 /* Favorite+CoreDataMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */; };
+		4F7B2A712099EF0400839482 /* MBProgressHUD+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B2A702099EF0400839482 /* MBProgressHUD+Async.swift */; };
+		4F7B2A732099F87000839482 /* UICollectionViewController+ReloadDataAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7B2A722099F87000839482 /* UICollectionViewController+ReloadDataAsync.swift */; };
 		4F7C39A0206947B40055872E /* resources.zip in Resources */ = {isa = PBXBuildFile; fileRef = 4F7C399F206947B40055872E /* resources.zip */; };
 		4F7C39A2206948620055872E /* SchoolIdolTomotachiApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7C39A1206948620055872E /* SchoolIdolTomotachiApiHelper.swift */; };
 		4F7C39A620695C080055872E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7C39A520695C080055872E /* MainTabBarController.swift */; };
@@ -300,7 +302,7 @@
 		4F03B3E72068BF730050F0A1 /* SIFCardFilterPredicateEditorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIFCardFilterPredicateEditorTableViewController.swift; sourceTree = "<group>"; };
 		4F03B3E92068BF780050F0A1 /* SIFCardFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIFCardFilterViewController.swift; sourceTree = "<group>"; };
 		4F03B3F92068C1C00050F0A1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SIFCardTool.storyboard"; sourceTree = "<group>"; };
-		4F03B3FB2068C2C70050F0A1 /* UIView+IB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IB.swift"; sourceTree = "<group>"; };
+		4F03B3FB2068C2C70050F0A1 /* UIView+util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+util.swift"; sourceTree = "<group>"; };
 		4F03B3FE206921D40050F0A1 /* ScoreIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreIndicatorView.swift; sourceTree = "<group>"; };
 		4F03B3FF206921D40050F0A1 /* SIFUserCardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIFUserCardCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F03B400206921D40050F0A1 /* SIFCardSortCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SIFCardSortCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -360,6 +362,8 @@
 		4F75334920296FA5001C7480 /* Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4F75334A20296FA5001C7480 /* Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4F75334F20297666001C7480 /* Favorite+CoreDataMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Favorite+CoreDataMethod.swift"; sourceTree = "<group>"; };
+		4F7B2A702099EF0400839482 /* MBProgressHUD+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MBProgressHUD+Async.swift"; sourceTree = "<group>"; };
+		4F7B2A722099F87000839482 /* UICollectionViewController+ReloadDataAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewController+ReloadDataAsync.swift"; sourceTree = "<group>"; };
 		4F7C399F206947B40055872E /* resources.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = resources.zip; sourceTree = "<group>"; };
 		4F7C39A1206948620055872E /* SchoolIdolTomotachiApiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolIdolTomotachiApiHelper.swift; sourceTree = "<group>"; };
 		4F7C39A520695C080055872E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -678,7 +682,7 @@
 		4F03B3552068BDF90050F0A1 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4F03B3FB2068C2C70050F0A1 /* UIView+IB.swift */,
+				4F03B3FB2068C2C70050F0A1 /* UIView+util.swift */,
 				4F03B3242068B1FC0050F0A1 /* UIColor+hex.swift */,
 				4F03B3222068B1F50050F0A1 /* NSValue+pointValue.swift */,
 				4F03B3202068B1CD0050F0A1 /* URL+FilePath.swift */,
@@ -693,6 +697,8 @@
 				4F75331F2028A83B001C7480 /* UIColor+More.swift */,
 				4F7F5465202DB671008857B6 /* Data+Base64EncodedAsUrlParams.swift */,
 				4F03B3162068B1930050F0A1 /* Data+JSONDataToDictionary.swift */,
+				4F7B2A702099EF0400839482 /* MBProgressHUD+Async.swift */,
+				4F7B2A722099F87000839482 /* UICollectionViewController+ReloadDataAsync.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1435,12 +1441,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-testHostApp/Pods-testHostApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -1554,7 +1562,9 @@
 				4F912CE82073D8A3001B1AA4 /* SIFCardDetailSectionView.swift in Sources */,
 				4F03B40D206921E70050F0A1 /* SIFCardFilterPredicateTableViewCell.swift in Sources */,
 				4F03B3DC2068BEB00050F0A1 /* OpenCVBridgeSwiftHelper.mm in Sources */,
+				4F7B2A732099F87000839482 /* UICollectionViewController+ReloadDataAsync.swift in Sources */,
 				4F5F83762002257000696F72 /* InformationCacheHelper.swift in Sources */,
+				4F7B2A712099EF0400839482 /* MBProgressHUD+Async.swift in Sources */,
 				4F7C39A2206948620055872E /* SchoolIdolTomotachiApiHelper.swift in Sources */,
 				4F03B3E12068BF2B0050F0A1 /* SIFCardToolListViewController.swift in Sources */,
 				4FA9706A2026C2AE0033B2FF /* InformationPageViewController.swift in Sources */,
@@ -1610,7 +1620,7 @@
 				4F03B31F2068B1C50050F0A1 /* Array+PointArrayRect.swift in Sources */,
 				4F912CEC2073D8D3001B1AA4 /* SIFCardDetailCardInfoCollectionViewCell.swift in Sources */,
 				4FA7BBA12000C98A00351090 /* UIDevice+ModelName.swift in Sources */,
-				4F03B3FC2068C2C70050F0A1 /* UIView+IB.swift in Sources */,
+				4F03B3FC2068C2C70050F0A1 /* UIView+util.swift in Sources */,
 				4F03B32B2068B23A0050F0A1 /* SIFRoundIconDetectorConfiguration.swift in Sources */,
 				4F03B404206921D40050F0A1 /* SIFCardSortCollectionReusableView.swift in Sources */,
 				4F946BB11FFC9411001A15B1 /* InfoDataModel.swift in Sources */,

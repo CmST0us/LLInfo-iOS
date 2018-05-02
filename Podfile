@@ -33,5 +33,6 @@ target 'testHostApp' do
   pod 'MJRefresh'
   pod 'SDWebImage', '~> 4.0'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'MBProgressHUD'
   
 end

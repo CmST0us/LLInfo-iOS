@@ -7,39 +7,46 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class lazyWeakCheckViewController: UIViewController {
-
-    lazy var data: [Int] = {
-        var dd: [Int] = []
-        for i in 0 ... self.count {
-            dd.append(i)
-        }
-        return dd
+    
+    
+    private lazy var progressHud: MBProgressHUD = {
+        var hud = MBProgressHUD(view: self.view)
+        return hud
     }()
     
-    var count = 10
-    
     var workItem: DispatchWorkItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        Logger.shared.console(data.description)
-        
-        workItem = DispatchWorkItem(block: { [weak self] in
-            Logger.shared.console("workItem start")
-            Thread.sleep(forTimeInterval: 2)
-            Logger.shared.console("workItem sleep")
-            
-            if let weakSelf = self{
-                weakSelf.count += 1
+
+        func hideProgress(afterDelay: TimeInterval) {
+            DispatchQueue.main.async { [weak self] in
+                self?.progressHud.hide(animated: true, afterDelay: afterDelay)
             }
-            
+        }
+        
+        func setLabelText(text: String) {
+            DispatchQueue.main.async { [weak self] in
+                self?.progressHud.label.text = text
+            }
+        }
+        
+        self.view.addSubview(progressHud)
+        progressHud.show(animated: true)
+        progressHud.label.text = "loding..."
+        
+        workItem = DispatchWorkItem.init(block: { [weak self] in
             Thread.sleep(forTimeInterval: 2)
-            Logger.shared.console("workItem sleep")
-        })
+            Logger.shared.console("sleep 2s ok")
+            
+            setLabelText(text: "ok")
+            hideProgress(afterDelay: 2)
+        }) //leak
         
         DispatchQueue.global().async(execute: workItem)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,9 +54,6 @@ class lazyWeakCheckViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        workItem.cancel()
-    }
     deinit {
         Logger.shared.console("deinit")
     }

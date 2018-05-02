@@ -94,3 +94,9 @@ extension UIView {
         }
     }
 }
+
+extension UIView {
+    func settingViewAsync(block: @escaping ((_ view: UIView) -> Void)) {
+        block(self)
+    }
+}

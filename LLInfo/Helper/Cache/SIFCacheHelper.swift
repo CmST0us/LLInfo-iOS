@@ -18,6 +18,7 @@ import SSZipArchive
 struct SIFCacheHelperError: Error {
     enum SIFCacheHelperErrorType {
         case notInitial
+        case stopByUser
     }
     
     var localizedDescription: String = ""
@@ -36,7 +37,12 @@ class SIFCacheHelper {
     
     static var shared: SIFCacheHelper = SIFCacheHelper()
     
-    private var imageCache = NSCache<NSString, UIImage>()
+    private lazy var imageCache: NSCache<NSString, UIImage> = {
+        var cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 1024
+        cache.totalCostLimit = 30 * 1024 * 1024
+        return cache
+    }()
     
     var currentCardSetName: String {
         set {
@@ -119,11 +125,15 @@ extension SIFCacheHelper {
             }
             return nil
         }
-        Logger.shared.output("not specific url")
+//        Logger.shared.output("not specific url")
         return nil
     }
 
-    func cacheCards(process: ((Int, Int) -> Void)?) throws {
+    func removeAllImageCache() {
+        self.imageCache.removeAllObjects()
+    }
+    
+    func cacheCards(process: ((Int, Int) throws -> Void)?) throws {
         var page = 1
         var currentCardIndex = 1
         var haveNext = true
@@ -145,7 +155,7 @@ extension SIFCacheHelper {
                         let card = CardDataModel(withDictionary: dict)
                         self.cards[card.id.intValue] = card
                         if process != nil {
-                            process!(currentCardIndex, cardIdsArray.count)
+                            try process!(currentCardIndex, cardIdsArray.count)
                         }
                         currentCardIndex += 1
                     }
