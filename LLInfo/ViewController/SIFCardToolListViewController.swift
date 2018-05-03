@@ -35,7 +35,16 @@ class SIFCardToolListViewController: UIViewController {
     //MARK: Private Member
     private weak var nextViewController: UIViewController? = nil
     
-    private var processHUD: MBProgressHUD!
+    private lazy var cardUpdater: SIFCardUpdater = {
+        var updater = SIFCardUpdater(withWorkQueue: DispatchQueue.init(label: "SIFCardToolListViewController.cardUpdater"))
+        updater.delegate = self
+        return updater
+    }()
+    
+    private lazy var processHUD: MBProgressHUD = {
+        var hud = MBProgressHUD(view: self.view)
+        return hud
+    }()
     
     private var sortToolView: SIFCardSortToolView!
     
@@ -329,48 +338,6 @@ class SIFCardToolListViewController: UIViewController {
         
     }
     
-    @IBAction func refreshCache(_ sender: Any) {
-
-        try? SIFCacheHelper.shared.deleteMatchPattern()
-        
-        processHUD = MBProgressHUD(view: self.view)
-        self.view.addSubview(processHUD)
-        
-        processHUD.show(animated: true)
-        
-        func hideHUD(afterDelay: TimeInterval) {
-            
-            DispatchQueue.main.async {
-                self.processHUD.hide(animated: true, afterDelay: afterDelay)
-            }
-            
-        }
-        
-        func setHUDLabelText(_ text: String) {
-            
-            DispatchQueue.main.async {
-                self.processHUD.label.text = text
-            }
-            
-        }
-        
-        DispatchQueue.global().async {
-            do {
-                try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
-                    setHUDLabelText("\(String(current)) / \(String(total))")
-                })
-                hideHUD(afterDelay: 0)
-            } catch let e as ApiRequestError{
-                setHUDLabelText(e.message)
-                hideHUD(afterDelay: 1.0)
-            } catch {
-                setHUDLabelText(error.localizedDescription)
-                hideHUD(afterDelay: 1.0)
-            }
-        }
-        
-    }
-    
 }
 
 
@@ -420,7 +387,7 @@ extension SIFCardToolListViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(importFinish), name: NSNotification.Name(rawValue: NotificationName.importFinish), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didSwitchCardSet), name: NSNotification.Name(rawValue: NotificationName.switchCardSet), object: nil)
         
-//        Logger.shared.enableMatWindow()
+        self.cardUpdater.startCheckCardUpdate()
         
     }
     
@@ -434,7 +401,7 @@ extension SIFCardToolListViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         setupSelectCardSetButtonTitle()
-        
+
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -593,4 +560,54 @@ extension SIFCardToolListViewController: TZImagePickerControllerDelegate {
 // MARK: - UINavigationController Delegate
 extension SIFCardToolListViewController: UINavigationControllerDelegate {
     
+}
+
+// MARK: - SFICardUpdaterDelegate
+extension SIFCardToolListViewController: SIFCardUpdaterDelegate {
+    
+    func updaterWillStartCheckCardUpdate(_ updater: SIFCardUpdater) {
+        Logger.shared.console("")
+    }
+    
+    func updaterDidFindNewCard(_ updater: SIFCardUpdater) {
+        let alert = UIAlertController(title: "卡片", message: "有新的卡片数据，是否更新", preferredStyle: .alert)
+        let updateAction = UIAlertAction(title: "更新", style: .default) { (alertAction) in
+            self.cardUpdater.startUpdateCard()
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (cancelAction) in
+            self.cardUpdater.stopUpdateCard()
+        }
+        alert.addAction(updateAction)
+        alert.addAction(cancelAction)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func updaterWillUpdateCard(_ updater: SIFCardUpdater) {
+        DispatchQueue.main.async {
+            self.view.addSubview(self.processHUD)
+            self.processHUD.show(animated: true)
+            self.processHUD.label.text = "正在更新卡片数据"
+        }
+    }
+    
+    func updaterDidUpdateCard(_ updater: SIFCardUpdater, currentCardCount: Int, totalCardCount: Int) {
+        self.processHUD.setLabelTextAsync(text: "正在更新卡片数据 \(String(currentCardCount)) / \(String(totalCardCount))")
+    }
+    
+    func updaterDidFinishUpdateCard(_ updater: SIFCardUpdater, success: Bool) {
+        if success {
+            self.processHUD.setLabelTextAsync(text: "更新成功")
+        } else {
+            self.processHUD.setLabelTextAsync(text: "更新失败")
+        }
+        
+        self.processHUD.hideAsync(animated: true, afterDelay: 1.0)
+        
+    }
+    
+    func updaterWillCancelByUser(_ updater: SIFCardUpdater) {
+        self.processHUD.hideAsync(animated: true)
+    }
 }
