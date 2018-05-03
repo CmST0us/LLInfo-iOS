@@ -56,7 +56,8 @@ class SIFCardUpdater {
                     weakSelf.delegate?.updaterDidFinishUpdateCard(weakSelf, success: false)
                     return
                 }
-                
+                weakSelf.delegate?.updaterWillStartUpdateCardRoundImage(weakSelf)
+                SIFCacheHelper.shared.cacheAllRoundCardImage()
                 weakSelf.delegate?.updaterDidFinishUpdateCard(weakSelf, success: true)
             }
         })

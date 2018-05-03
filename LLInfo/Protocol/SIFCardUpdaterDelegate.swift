@@ -15,6 +15,7 @@ protocol SIFCardUpdaterDelegate: NSObjectProtocol {
     func updaterDidUpdateCard(_ updater: SIFCardUpdater, currentCardCount: Int, totalCardCount: Int)
     
     func updaterWillCancelByUser(_ updater: SIFCardUpdater)
+    func updaterWillStartUpdateCardRoundImage(_ updater: SIFCardUpdater)
     func updaterDidFinishUpdateCard(_ updater: SIFCardUpdater, success: Bool)
 
 }
