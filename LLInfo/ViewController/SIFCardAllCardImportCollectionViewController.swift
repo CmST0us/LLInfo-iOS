@@ -233,8 +233,13 @@ extension SIFCardAllCardImportCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initAllCardDataSource()
         self.view.addSubview(progressHud)
+        progressHud.show(animated: true)
+        DispatchQueue.global().async {
+            self.initAllCardDataSource()
+            self.progressHud.hideAsync(animated: true)
+            self.collectionView?.reloadDataAsync()
+        }
         
     }
     
