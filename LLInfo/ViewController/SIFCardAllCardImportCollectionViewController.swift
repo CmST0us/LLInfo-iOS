@@ -19,8 +19,6 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
         static let cardFilterSegue = "cardFilterSegue"
     }
     
-    private var checkAndUpdateCardWorkItem: DispatchWorkItem!
-    
     private var filteCardDataSource: [UserCardDataModel] {
         
         let p = cardFilterPredicates.map { (item) -> NSPredicate in
@@ -96,51 +94,6 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
             }
         }
         return false
-    }
-    
-    private func checkAndUpdateCard() {
-        self.progressHud.show(animated: true)
-            
-        self.checkAndUpdateCardWorkItem = DispatchWorkItem(block: { [weak self] in
-            
-            self?.progressHud.setLabelTextAsync(text: "检查卡片更新")
-            if let willUpdate = self?.checkCardUpdate() {
-                if willUpdate {
-                    self?.progressHud.setLabelTextAsync(text: "正在更新卡片")
-                    do {
-                        try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
-                            if let ws = self {
-                                if ws.checkAndUpdateCardWorkItem.isCancelled {
-                                    var error = SIFCacheHelperError()
-                                    error.code = .stopByUser
-                                    throw error
-                                }
-                                ws.progressHud.setLabelTextAsync(text: "正在更新卡片 \(String(current)) / \(String(total))")
-                            }
-                        })
-                        
-                    } catch let e as ApiRequestError {
-                        self?.progressHud.setLabelTextAsync(text: e.message)
-                        self?.initAllCardDataSource()
-                        self?.progressHud.hideAsync(animated: true, afterDelay: 1.0)
-                        return
-                    } catch {
-                        self?.progressHud.setLabelTextAsync(text: error.localizedDescription)
-                        self?.initAllCardDataSource()
-                        self?.progressHud.hideAsync(animated: true, afterDelay: 1.0)
-                        return
-                    }
-                }
-            }
-            self?.progressHud.setLabelTextAsync(text: "加载数据")
-            SIFCacheHelper.shared.cacheAllRoundCardImage()
-            
-            self?.initAllCardDataSource()
-            self?.progressHud.hideAsync(animated: true, afterDelay: 1.0)
-            self?.collectionView?.reloadDataAsync()
-        })
-        
-        DispatchQueue.global().async(execute: self.checkAndUpdateCardWorkItem)
     }
     
     // MARK: IBAction IBOutlet
@@ -283,7 +236,6 @@ extension SIFCardAllCardImportCollectionViewController {
         initAllCardDataSource()
         self.view.addSubview(progressHud)
         
-        checkAndUpdateCard()
     }
     
     override func didReceiveMemoryWarning() {
@@ -292,10 +244,6 @@ extension SIFCardAllCardImportCollectionViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        Logger.shared.console("disappear")
-        if let workItem = self.checkAndUpdateCardWorkItem {
-            self.checkAndUpdateCardWorkItem.cancel()
-        }
         self.progressHud.removeFromSuperview()
     }
 }

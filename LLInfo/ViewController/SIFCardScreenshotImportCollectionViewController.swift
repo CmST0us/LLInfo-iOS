@@ -107,38 +107,6 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
         self.cards = []
         
         scanWorkItem = DispatchWorkItem(block: { [weak self] in
-            var useCache = true
-            self?.progressHud.setLabelTextAsync(text: "检查卡片更新")
-            if let willUpdate = self?.checkCardUpdate() {
-                if willUpdate == true {
-                    self?.progressHud.setLabelTextAsync(text: "正在更新卡片")
-                    do {
-                        try SIFCacheHelper.shared.cacheCards(process: { (current, total) in
-                            if let ws = self {
-                                if ws.scanWorkItem.isCancelled {
-                                    var stopError = SIFCacheHelperError.init()
-                                    stopError.code = .stopByUser
-                                    throw stopError
-                                }
-                            }
-                            self?.progressHud.setLabelTextAsync(text: "正在更新卡片 \(String(current)) / \(String(total))")
-                        })
-                        useCache = false
-                    } catch let e as ApiRequestError {
-                        useCache = true
-                        self?.progressHud.setLabelTextAsync(text: e.message)
-                        self?.progressHud.hideAsync(animated: true, afterDelay: 1.0)
-                        return
-                    } catch {
-                        useCache = true
-                        self?.progressHud.setLabelTextAsync(text: error.localizedDescription)
-                        self?.progressHud.hideAsync(animated: true, afterDelay: 1.0)
-                        return
-                    }
-                }
-            }
-            self?.progressHud.setLabelTextAsync(text: "缓存图片数据")
-            self?.setupDetector(usePatternCache: useCache)
             self?.progressHud.setLabelTextAsync(text: "扫描中")
             
             if let weakSelf = self {

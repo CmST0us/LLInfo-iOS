@@ -596,6 +596,14 @@ extension SIFCardToolListViewController: SIFCardUpdaterDelegate {
         self.processHUD.setLabelTextAsync(text: "正在更新卡片数据 \(String(currentCardCount)) / \(String(totalCardCount))")
     }
     
+    func updaterWillCancelByUser(_ updater: SIFCardUpdater) {
+        self.processHUD.hideAsync(animated: true)
+    }
+    
+    func updaterWillStartUpdateCardRoundImage(_ updater: SIFCardUpdater) {
+        self.processHUD.setLabelTextAsync(text: "正在缓存图片数据")
+    }
+    
     func updaterDidFinishUpdateCard(_ updater: SIFCardUpdater, success: Bool) {
         if success {
             self.processHUD.setLabelTextAsync(text: "更新成功")
@@ -607,7 +615,5 @@ extension SIFCardToolListViewController: SIFCardUpdaterDelegate {
         
     }
     
-    func updaterWillCancelByUser(_ updater: SIFCardUpdater) {
-        self.processHUD.hideAsync(animated: true)
-    }
+    
 }
