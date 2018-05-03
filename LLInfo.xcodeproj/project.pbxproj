@@ -67,6 +67,8 @@
 		4F29D5C21FFFD33800DE4039 /* OfficialNewsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F29D5C11FFFD33800DE4039 /* OfficialNewsListTableViewController.swift */; };
 		4F29D5C41FFFD36700DE4039 /* OfficialNewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F29D5C31FFFD36700DE4039 /* OfficialNewsListTableViewCell.swift */; };
 		4F29D5C61FFFF7BE00DE4039 /* OfficialNewsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F29D5C51FFFF7BE00DE4039 /* OfficialNewsDataModel.swift */; };
+		4F42A567209B2FC400352231 /* SIFCardUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F42A566209B2FC400352231 /* SIFCardUpdater.swift */; };
+		4F42A569209B304600352231 /* SIFCardUpdaterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F42A568209B304600352231 /* SIFCardUpdaterDelegate.swift */; };
 		4F5F83742002206600696F72 /* informations.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F83722002206600696F72 /* informations.xcdatamodeld */; };
 		4F5F83762002257000696F72 /* InformationCacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F83752002257000696F72 /* InformationCacheHelper.swift */; };
 		4F5F83772002257000696F72 /* InformationCacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F83752002257000696F72 /* InformationCacheHelper.swift */; };
@@ -327,6 +329,8 @@
 		4F29D5C11FFFD33800DE4039 /* OfficialNewsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialNewsListTableViewController.swift; sourceTree = "<group>"; };
 		4F29D5C31FFFD36700DE4039 /* OfficialNewsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialNewsListTableViewCell.swift; sourceTree = "<group>"; };
 		4F29D5C51FFFF7BE00DE4039 /* OfficialNewsDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficialNewsDataModel.swift; sourceTree = "<group>"; };
+		4F42A566209B2FC400352231 /* SIFCardUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIFCardUpdater.swift; sourceTree = "<group>"; };
+		4F42A568209B304600352231 /* SIFCardUpdaterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SIFCardUpdaterDelegate.swift; sourceTree = "<group>"; };
 		4F5F836720021C3A00696F72 /* ChangeLog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ChangeLog.md; sourceTree = "<group>"; };
 		4F5F836A20021E0A00696F72 /* CoreDataTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTest.swift; sourceTree = "<group>"; };
 		4F5F83732002206600696F72 /* informations.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = informations.xcdatamodel; sourceTree = "<group>"; };
@@ -529,6 +533,7 @@
 				4F03B3292068B23A0050F0A1 /* SIFCardFilterPredicateEditorRowTemplate.swift */,
 				4F03B3272068B23A0050F0A1 /* SIFRoundIconDetector.swift */,
 				4F03B3282068B23A0050F0A1 /* SIFRoundIconDetectorConfiguration.swift */,
+				4F42A566209B2FC400352231 /* SIFCardUpdater.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -713,6 +718,7 @@
 				4FC397802003C0E500D7B7E7 /* CoreDataModelBridgeProtocol.swift */,
 				4FA3F9F52021714500DCCAA2 /* InfomationApiRequestParamProtocol.swift */,
 				4F67386B202B089200A6AFA7 /* InformationShareableProtocol.swift */,
+				4F42A568209B304600352231 /* SIFCardUpdaterDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1602,6 +1608,7 @@
 				4FE66CF5207CDB7A00D6E6E7 /* TapToZoomImageView.swift in Sources */,
 				4F03B31D2068B1BE0050F0A1 /* String+appendPathComponent.swift in Sources */,
 				4F03B31B2068B1B70050F0A1 /* String+Date.swift in Sources */,
+				4F42A567209B2FC400352231 /* SIFCardUpdater.swift in Sources */,
 				4F0E0D6A1FF6132800DDD242 /* InformationDetailViewController.swift in Sources */,
 				4F03B40C206921E70050F0A1 /* SIFCardFilterPredicateEditorValueTableViewCell.swift in Sources */,
 				4FC3A5C7206A0F47006F3555 /* SIFCardAllCardImportCollectionViewController.swift in Sources */,
@@ -1642,6 +1649,7 @@
 				4F03B3192068B1A70050F0A1 /* String+httpSchema.swift in Sources */,
 				4F03B40B206921E70050F0A1 /* SIFCardFilterAddTableViewCell.swift in Sources */,
 				4F03B3252068B1FC0050F0A1 /* UIColor+hex.swift in Sources */,
+				4F42A569209B304600352231 /* SIFCardUpdaterDelegate.swift in Sources */,
 				4F662AEA1FB96D1800FBEECC /* AppDelegate.swift in Sources */,
 				4F217D8420221A3600F0D876 /* UIViewController+ErrorAlert.swift in Sources */,
 			);
