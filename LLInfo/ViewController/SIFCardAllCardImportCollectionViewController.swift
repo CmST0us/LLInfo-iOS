@@ -79,7 +79,11 @@ class SIFCardAllCardImportCollectionViewController: UICollectionViewController {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             if let aDate = dateFormatter.date(from: aCard.releaseDate ?? "") {
                 if let bDate = dateFormatter.date(from: bCard.releaseDate ?? "") {
-                    return aDate > bDate
+                    if aDate == bDate {
+                        return a.cardId > b.cardId
+                    } else {
+                        return aDate > bDate
+                    }
                 }
             }
             return a.cardId > b.cardId
