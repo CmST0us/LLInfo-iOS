@@ -66,10 +66,10 @@ class ZoomImageView: UIScrollView {
     
     @objc
     private func setupImageViewFrame() {
-        let screenRadio = self.bounds.size.width / self.bounds.size.height
-        let imageRadio = imageView.image!.size.width / imageView.image!.size.height
+        let screenRatio = self.bounds.size.width / self.bounds.size.height
+        let imageRatio = imageView.image!.size.width / imageView.image!.size.height
         imageView.center = self.center
-        if  imageRadio > screenRadio {
+        if  imageRatio > screenRatio {
             imageView.frame.size.width = self.bounds.size.width
             imageView.frame.size.height = imageView.frame.width * (imageView.image!.size.height / imageView.image!.size.width)
         } else {

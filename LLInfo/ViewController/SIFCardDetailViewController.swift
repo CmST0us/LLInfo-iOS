@@ -221,12 +221,12 @@ extension SIFCardDetailViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let radio = 1025.0 / 720.0
+        let ratio = 1025.0 / 720.0
         var imageWidth = Double(self.collectionView.bounds.width)
         if imageWidth > 900 {
             imageWidth = 900
         }
-        let imageHeight = imageWidth / radio
+        let imageHeight = imageWidth / ratio
         let height = imageHeight + 8.0 + 29.0 + 8.0
         return CGSize(width: imageWidth, height: height)
     }

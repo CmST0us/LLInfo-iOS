@@ -182,9 +182,9 @@ class SIFRoundIconDetector {
                     if area < 80 * 80 {
                         continue
                     }
-                    let aspectRadio = Double(rect.size.width / rect.size.height)
-                    let aspectRadioThresh = 0.2
-                    if abs(aspectRadio - 1) > aspectRadioThresh {
+                    let aspectRatio = Double(rect.size.width / rect.size.height)
+                    let aspectRatioThresh = 0.2
+                    if abs(aspectRatio - 1) > aspectRatioThresh {
                         continue
                     }
                     

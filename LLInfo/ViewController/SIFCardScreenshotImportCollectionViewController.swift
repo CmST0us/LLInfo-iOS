@@ -61,7 +61,7 @@ class SIFCardScreenshotImportCollectionViewController: UICollectionViewControlle
     private func setupDetector(usePatternCache: Bool = true) {
         
         let cardCache = SIFCacheHelper.shared.cards
-        self.detectorConfiguration = SIFRoundIconDetectorConfiguration.defaultRoundIconConfiguration(radio: 0.5)
+        self.detectorConfiguration = SIFRoundIconDetectorConfiguration.defaultRoundIconConfiguration(ratio: 0.5)
         let patternImage = UIImage.init(contentsOfFile: SIFCacheHelper.shared.cacheDirectory.appendingPathComponent("pattern.png"))
         if patternImage != nil && usePatternCache {
             self.detector = SIFRoundIconDetector(withCards: cardCache, configuration: self.detectorConfiguration, roundCardImagePattern: patternImage!.mat)

@@ -17,15 +17,15 @@ struct SIFRoundIconDetectorConfiguration {
     var patternBottom = 1
     
     static var defaultRoundIconConfiguration: SIFRoundIconDetectorConfiguration {
-        return defaultRoundIconConfiguration(radio: 1)
+        return defaultRoundIconConfiguration(ratio: 1)
     }
     
-    static func defaultRoundIconConfiguration(radio: Double) -> SIFRoundIconDetectorConfiguration {
-        return SIFRoundIconDetectorConfiguration.init(patternWidth: Int(80.0 * radio), patternHeight: Int(80.0 * radio), patternLeft: Int(15.0 * radio), patternRight: Int(17.0 * radio), patternTop: Int(16.0 * radio), patternBottom: Int(15.0 * radio))
+    static func defaultRoundIconConfiguration(ratio: Double) -> SIFRoundIconDetectorConfiguration {
+        return SIFRoundIconDetectorConfiguration.init(patternWidth: Int(80.0 * ratio), patternHeight: Int(80.0 * ratio), patternLeft: Int(15.0 * ratio), patternRight: Int(17.0 * ratio), patternTop: Int(16.0 * ratio), patternBottom: Int(15.0 * ratio))
     }
     
-    static func advanceRoundIconConfiguration(radio: Double) -> SIFRoundIconDetectorConfiguration {
-        return SIFRoundIconDetectorConfiguration.init(patternWidth: Int(120.0 * radio), patternHeight: Int(120.0 * radio), patternLeft: Int(20.0 * radio), patternRight: Int(20.0 * radio), patternTop: Int(20.0 * radio), patternBottom: Int(20.0 * radio))
+    static func advanceRoundIconConfiguration(ratio: Double) -> SIFRoundIconDetectorConfiguration {
+        return SIFRoundIconDetectorConfiguration.init(patternWidth: Int(120.0 * ratio), patternHeight: Int(120.0 * ratio), patternLeft: Int(20.0 * ratio), patternRight: Int(20.0 * ratio), patternTop: Int(20.0 * ratio), patternBottom: Int(20.0 * ratio))
     }
     
     var patternSize: CGSize {
