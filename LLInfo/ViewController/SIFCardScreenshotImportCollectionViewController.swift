@@ -170,6 +170,7 @@ extension SIFCardScreenshotImportCollectionViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        setupDetector()
         scanScreenshot()
         
     }
