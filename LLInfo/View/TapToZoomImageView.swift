@@ -33,6 +33,12 @@ class TapToZoomImageView: UIImageView {
         zoomImageView.imageView.image = self.image
         if let window = UIApplication.shared.keyWindow?.subviews.last {
             window.addSubview(zoomImageView)
+            let animate = CABasicAnimation(keyPath: "opacity")
+            animate.fromValue = NSNumber(value: 0)
+            animate.fillMode = kCAFillModeBoth
+            animate.duration = 0.1
+            zoomImageView.layer.add(animate, forKey: nil)
+            
             zoomImageView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
